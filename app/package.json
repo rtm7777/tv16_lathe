@@ -1,0 +1,7 @@
+{
+  "name": "tv16_lathe",
+  "main": "index.html",
+  "window": {
+    "title": "node-webkit demo"
+   }
+}
