@@ -61,8 +61,6 @@
 	let menuBar = new _menu2.default();
 	menuBar.appendMenu(win);
 
-	win.showDevTools();
-
 /***/ },
 /* 1 */
 /***/ function(module, exports) {

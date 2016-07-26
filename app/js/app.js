@@ -6,4 +6,3 @@ const win = gui.Window.get();
 let menuBar = new MenuBar();
 menuBar.appendMenu(win);
 
-win.showDevTools();
