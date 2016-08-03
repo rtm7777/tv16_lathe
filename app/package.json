@@ -2,6 +2,9 @@
   "name": "tv16_lathe",
   "main": "index.html",
   "window": {
-    "title": "node-webkit demo"
+    "title": "TV-16",
+    "id": "main",
+    "min_width": 900,
+    "min_height": 650
    }
 }

@@ -1,33 +1,50 @@
+import { hashHistory } from 'react-router';
+
 class MenuBar {
-	constructor() {
-		this.mainMenu;
-		this.createMainMenu();
-		this.createSubmenu();
-	}
-
-	createMainMenu() {
+	constructor(gui) {
+		this.gui = gui;
 		this.mainMenu = new nw.Menu({ type: 'menubar' });
+		this.menu = {
+			File: [
+				{
+					label: 'GearBox',
+					click: () => hashHistory.push('/')
+				},
+				{
+					type: 'separator'
+				},
+				{
+					label: 'Exit',
+					click: () => this.gui.App.quit()
+				}
+
+			],
+			Info: [
+				{
+					label: 'Documentation',
+					click: () => hashHistory.push('/documentation/')
+				}
+			]
+		};
+
+		this.createMenu();
 	}
 
-	createSubmenu() {
-		this.subMenu = new nw.Menu();
-		this.subMenu.append(new nw.MenuItem({
-			label: 'Item A',
-			click: function() {
-				console.log("I'm clicked");
-			},
-		}));
-		this.subMenu.append(new nw.MenuItem({
-			label: 'Item B'
-		}));
+	createMenu() {
+		Object.keys(this.menu).forEach((key) => {
+			let subMenu = new nw.Menu();
+			this.menu[key].forEach((submenu) => {
+				subMenu.append(new nw.MenuItem(submenu));
+			});
+			this.mainMenu.append(new nw.MenuItem({
+				label: key,
+				submenu: subMenu
+			}));
+		});
 	}
 
-	appendMenu(win) {
-		this.mainMenu.append(new nw.MenuItem({
-			label: 'File',
-			submenu: this.subMenu
-		}));
-		win.menu = this.mainMenu;
+	appendMenu() {
+		this.gui.Window.get().menu = this.mainMenu;
 	}
 }
 

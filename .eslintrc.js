@@ -34,7 +34,7 @@ module.exports = {
     "react/wrap-multilines": 1,
     "strict": 0,
     "indent": ["error", "tab", { "SwitchCase": 1 }],
-    "quotes": 0,
+    "quotes": [2, "single", {"avoidEscape": true, "allowTemplateLiterals": true}],
     "key-spacing": 0,
     "no-console": 0,
     "eqeqeq": 0,
