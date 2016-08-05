@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 class GearBox extends React.Component {
 	constructor(props) {
@@ -9,7 +8,6 @@ class GearBox extends React.Component {
 	render() {
 		return (
 			<div>
-				<Link to="/documentation/">passport</Link>
 				gears
 			</div>
 		);

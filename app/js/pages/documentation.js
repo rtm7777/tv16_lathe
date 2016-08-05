@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 class Documentation extends React.Component {
 	constructor(props) {

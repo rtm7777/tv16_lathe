@@ -1,5 +1,6 @@
 module.exports = {
 	entry: './app/js/app.js',
+	devtool: 'source-map',
 	output: {
 		path: './app/public',
 		filename: 'main.js',
