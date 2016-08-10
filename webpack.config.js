@@ -1,16 +1,20 @@
 module.exports = {
 	entry: './app/js/app.js',
-	devtool: 'source-map',
+	devtool: 'inline-source-map',
+	watch: true,
+	cache: true,
 	output: {
-		path: './app/public',
 		filename: 'main.js',
 	},
 	target : 'node-webkit',
 	module: {
 		loaders: [{
 			test: /\.js$/,
+			loader: 'babel',
 			exclude: /node_modules/,
-			loader: 'babel'
+			query: {
+				cacheDirectory: true
+			}
 		}]
 	}
 };

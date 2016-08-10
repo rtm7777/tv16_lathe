@@ -2,7 +2,7 @@
 
 const gulp = require('gulp');
 const gutil = require('gulp-util');
-const webpack = require('webpack');
+const webpack = require('webpack-stream');
 const less = require('gulp-less');
 
 const webpackConfig = require('./webpack.config.js');
@@ -12,12 +12,14 @@ const onError = function(err) {
 	this.emit('end');
 };
 
-gulp.task('default', ['webpack', 'less', 'watch']);
+gulp.task('default', ['webpack:watch', 'less', 'watch']);
 
-gulp.task('webpack', function(callback) {
-	webpack(webpackConfig, function(err, stats) {
-		callback();
-	});
+gulp.task('webpack:watch', function(){
+	var watch = Object.create(webpackConfig);
+	watch.watch = true;
+	return gulp.src('app/js/app.js')
+		.pipe(webpack(watch))
+		.pipe(gulp.dest('app/public/'));
 });
 
 gulp.task('less', () => {
@@ -29,6 +31,5 @@ gulp.task('less', () => {
 });
 
 gulp.task('watch', () => {
-	gulp.watch(['config.json', 'app/js/**/*.js'], ['webpack']);
 	gulp.watch('app/less/**/*.less', ['less']);
 });
