@@ -1,17 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
+import { changeLocation } from '../location/locationActions';
 
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 
+@connect(
+	(state) => ({
+		location: state.locationReducer.location
+	}),
+	(dispatch) => ({
+		changeTitle: (location) => {
+			dispatch(changeLocation(location));
+		}
+	})
+)
 class Layout extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			open: false,
-			title: 'GearBox'
+			open: false
 		};
 		this.items = {
 			GearBox: '/',
@@ -21,16 +32,13 @@ class Layout extends React.Component {
 
 	openDrawer = () => {
 		this.setState({
-			open: true,
-			title: this.state.title
+			open: true
 		});
 	}
 
 	pageSelected = (e, value) => {
-		this.setState({
-			open: false,
-			title: value
-		});
+		this.props.changeTitle(value);
+		this.setState({open: false});
 		hashHistory.push(this.items[value]);
 	}
 
@@ -39,10 +47,7 @@ class Layout extends React.Component {
 			docked: false,
 			width: 200,
 			open: this.state.open,
-			onRequestChange: (open) => this.setState({
-				open,
-				title: this.state.title
-			})
+			onRequestChange: (open) => this.setState({open})
 		};
 
 		const items = Object.keys(this.items).map((key, i) => {
@@ -53,7 +58,7 @@ class Layout extends React.Component {
 
 		return (
 			<div>
-				<AppBar title={this.state.title} onLeftIconButtonTouchTap={this.openDrawer}/>
+				<AppBar title={this.props.location} onLeftIconButtonTouchTap={this.openDrawer}/>
 				<Drawer {...drawerProps}>
 					<Menu onChange={this.pageSelected}>
 						{items}

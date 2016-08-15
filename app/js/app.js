@@ -3,6 +3,10 @@ import React from 'react';
 import {render} from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './rootReducer';
+
 import {Router, hashHistory} from 'react-router';
 import routes from './routes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -17,12 +21,16 @@ injectTapEventPlugin();
 const menuBar = new MenuBar(gui);
 menuBar.appendMenu();
 
+let store = createStore(rootReducer);
+
 render((
 	<MuiThemeProvider>
-		<Layout>
-			<Router history={hashHistory}>
-				{routes}
-			</Router>
-		</Layout>
+		<Provider store={store}>
+			<Layout>
+				<Router history={hashHistory}>
+					{routes}
+				</Router>
+			</Layout>
+		</Provider>
 	</MuiThemeProvider>
 ), rootEl);
