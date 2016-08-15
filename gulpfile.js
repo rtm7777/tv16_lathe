@@ -15,10 +15,13 @@ const onError = function(err) {
 gulp.task('default', ['webpack:watch', 'less', 'watch']);
 
 gulp.task('webpack:watch', function(){
-	var watch = Object.create(webpackConfig);
-	watch.watch = true;
+	let webpackTask = webpack(Object.create(webpackConfig));
+
 	return gulp.src('app/js/app.js')
-		.pipe(webpack(watch))
+		.pipe(webpackTask)
+		.on('error', function handleError() {
+			this.emit('end'); // Recover from errors
+		})
 		.pipe(gulp.dest('app/public/'));
 });
 

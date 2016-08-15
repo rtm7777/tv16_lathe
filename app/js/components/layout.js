@@ -24,7 +24,7 @@ class Layout extends React.Component {
 		this.state = {
 			open: false
 		};
-		this.items = {
+		this.pages = {
 			GearBox: '/',
 			Documentation: '/documentation/'
 		};
@@ -39,7 +39,7 @@ class Layout extends React.Component {
 	pageSelected = (e, value) => {
 		this.props.changeTitle(value);
 		this.setState({open: false});
-		hashHistory.push(this.items[value]);
+		hashHistory.push(this.pages[value]);
 	}
 
 	render() {
@@ -50,7 +50,7 @@ class Layout extends React.Component {
 			onRequestChange: (open) => this.setState({open})
 		};
 
-		const items = Object.keys(this.items).map((key, i) => {
+		const items = Object.keys(this.pages).map((key, i) => {
 			return (
 				<MenuItem key={i} value={key}>{key}</MenuItem>
 			);

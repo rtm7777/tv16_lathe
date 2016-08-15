@@ -1,14 +1,19 @@
 import { hashHistory } from 'react-router';
+import { changeLocation } from '../location/locationActions';
 
 class MenuBar {
-	constructor(gui) {
+	constructor(gui, store) {
 		this.gui = gui;
+		this.store = store;
 		this.mainMenu = new nw.Menu({ type: 'menubar' });
 		this.menu = {
 			File: [
 				{
 					label: 'GearBox',
-					click: () => hashHistory.push('/')
+					click: () => {
+						hashHistory.push('/');
+						this.store.dispatch(changeLocation('GearBox'));
+					}
 				},
 				{
 					type: 'separator'
@@ -22,7 +27,10 @@ class MenuBar {
 			Info: [
 				{
 					label: 'Documentation',
-					click: () => hashHistory.push('/documentation/')
+					click: () => {
+						hashHistory.push('/documentation/');
+						this.store.dispatch(changeLocation('Documentation'));
+					}
 				}
 			]
 		};

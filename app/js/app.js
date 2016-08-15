@@ -16,12 +16,13 @@ import Layout from './components/layout';
 
 const rootEl = document.getElementById('app');
 
+const store = createStore(rootReducer);
+
 injectTapEventPlugin();
 
-const menuBar = new MenuBar(gui);
+const menuBar = new MenuBar(gui, store);
 menuBar.appendMenu();
 
-let store = createStore(rootReducer);
 
 render((
 	<MuiThemeProvider>
