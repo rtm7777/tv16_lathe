@@ -1,6 +1,8 @@
+import * as types from './locationConstants';
+
 export const changeLocation = (location) => {
 	return {
-		type: 'CHANGE_LOCATON',
+		type: types.CHANGE_LOCATON,
 		location
 	};
 };

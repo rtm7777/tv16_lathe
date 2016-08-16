@@ -1,4 +1,5 @@
 import React from 'react';
+import FontIcon from 'material-ui/FontIcon';
 
 class GearBox extends React.Component {
 	constructor(props) {
@@ -8,6 +9,7 @@ class GearBox extends React.Component {
 	render() {
 		return (
 			<div>
+				<FontIcon className="fa fa-cogs"/>
 				gears
 			</div>
 		);

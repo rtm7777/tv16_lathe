@@ -1,0 +1,1 @@
+export const CHANGE_LOCATON = 'CHANGE_LOCATON';

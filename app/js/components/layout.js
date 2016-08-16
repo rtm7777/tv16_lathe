@@ -4,13 +4,14 @@ import { hashHistory } from 'react-router';
 import { changeLocation } from '../location/locationActions';
 
 import Drawer from 'material-ui/Drawer';
+import FontIcon from 'material-ui/FontIcon';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 
 @connect(
 	(state) => ({
-		location: state.locationReducer.location
+		location: state.locationReducer.get('location')
 	}),
 	(dispatch) => ({
 		changeTitle: (location) => {
@@ -25,8 +26,16 @@ class Layout extends React.Component {
 			open: false
 		};
 		this.pages = {
-			GearBox: '/',
-			Documentation: '/documentation/'
+			gearBox: {
+				label: 'GearBox',
+				location: '/',
+				icon: 'fa-cogs'
+			},
+			documentation: {
+				label: 'Documentation',
+				location: '/documentation/',
+				icon: 'fa-file-text'
+			}
 		};
 	}
 
@@ -39,20 +48,25 @@ class Layout extends React.Component {
 	pageSelected = (e, value) => {
 		this.props.changeTitle(value);
 		this.setState({open: false});
-		hashHistory.push(this.pages[value]);
+		hashHistory.push(this.pages[value].location);
 	}
 
 	render() {
 		const drawerProps = {
 			docked: false,
-			width: 200,
+			width: 280,
 			open: this.state.open,
 			onRequestChange: (open) => this.setState({open})
 		};
 
 		const items = Object.keys(this.pages).map((key, i) => {
+			const itemProps = {
+				key: i,
+				value: key,
+				leftIcon: <FontIcon className={`fa ${this.pages[key].icon}`}/>
+			};
 			return (
-				<MenuItem key={i} value={key}>{key}</MenuItem>
+				<MenuItem {...itemProps}>{this.pages[key].label}</MenuItem>
 			);
 		});
 
