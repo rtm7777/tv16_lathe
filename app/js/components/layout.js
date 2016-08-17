@@ -46,8 +46,8 @@ class Layout extends React.Component {
 	}
 
 	pageSelected = (e, value) => {
-		this.props.changeTitle(value);
 		this.setState({open: false});
+		this.props.changeTitle(this.pages[value].label);
 		hashHistory.push(this.pages[value].location);
 	}
 
