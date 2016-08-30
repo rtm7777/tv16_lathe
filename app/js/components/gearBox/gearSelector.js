@@ -5,6 +5,7 @@ import {List, ListItem} from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
+import Toggle from 'material-ui/Toggle';
 
 import {metricGears, imperialGears} from '../../gearBox/gearboxConfig';
 
@@ -34,7 +35,6 @@ class GearSelector extends React.Component {
 				key: i,
 				primaryText: `z = ${gear}`,
 				leftCheckbox: <Checkbox />,
-				rightIcon: <FontIcon onClick={this.onClick} className={`fa fa-cogs`} />
 			};
 			return <ListItem {...itemProps} />;
 		});
