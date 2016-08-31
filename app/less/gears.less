@@ -14,6 +14,24 @@
 		height: 100%;
 		.control-content {
 			flex: 1;
+			.thread-config {
+				display: flex;
+				align-items: baseline;
+				float: right;
+				width: 40em;
+				.thread-type {
+					width: 40%;
+					& > div {
+						display: flex;
+					}
+				}
+				.config-summary {
+					display: flex;
+					justify-content: space-around;
+					align-items: baseline;
+					width: 60%;
+				}
+			}
 		}
 		.threads-table {
 			height: 60%;
@@ -22,6 +40,9 @@
 				& > div:last-child {
 					height: calc(~'100% - 50px') !important;
 				}
+			}
+			tr:hover {
+				background-color: gray;
 			}
 		}
 	}

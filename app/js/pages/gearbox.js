@@ -3,6 +3,7 @@ import FontIcon from 'material-ui/FontIcon';
 
 import GearSelector from '../components/gearBox/gearSelector';
 import ThreadsTable from '../components/gearBox/threadsTable';
+import GearsConfig from '../components/gearBox/gearsConfig';
 
 class Gearbox extends React.Component {
 	constructor(props) {
@@ -17,6 +18,7 @@ class Gearbox extends React.Component {
 				</div>
 				<div className='gearbox-control'>
 					<div className='control-content'>
+						<GearsConfig/>
 					</div>
 					<div className='threads-table'>
 						<ThreadsTable/>

@@ -37,7 +37,7 @@ class ThreadsTable extends React.Component {
 		}
 
 		return (
-			<Table fixedHeader style={{height: '100%'}}>
+			<Table fixedHeader selectable={false} style={{height: '100%'}}>
 				<TableHeader adjustForCheckbox={false} displaySelectAll={false}>
 					<TableRow>
 						<TableHeaderColumn style={gearColStyle}>a</TableHeaderColumn>
