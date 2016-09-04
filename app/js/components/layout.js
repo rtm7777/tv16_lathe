@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
-import { changeLocation } from '../location/locationActions';
+import {connect} from 'react-redux';
+import {hashHistory} from 'react-router';
+import {changeLocation} from '../location/locationActions';
 
 import Drawer from 'material-ui/Drawer';
 import FontIcon from 'material-ui/FontIcon';

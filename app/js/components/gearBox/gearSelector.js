@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 import {List, ListItem} from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
