@@ -1,9 +1,9 @@
 import React from 'react';
 import FontIcon from 'material-ui/FontIcon';
 
-import GearSelector from '../components/gearBox/gearSelector';
-import ThreadsTable from '../components/gearBox/threadsTable';
-import GearsConfig from '../components/gearBox/gearsConfig';
+import GearSelector from '../components/gearbox/gearSelector';
+import ThreadsTable from '../components/gearbox/threadsTable';
+import GearsConfig from '../components/gearbox/gearsConfig';
 
 class Gearbox extends React.Component {
 	constructor(props) {

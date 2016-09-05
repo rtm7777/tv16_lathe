@@ -3,8 +3,9 @@ import React from 'react';
 import {render} from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 
 import {Router, hashHistory} from 'react-router';
@@ -16,13 +17,15 @@ import Layout from './components/layout';
 
 const rootEl = document.getElementById('app');
 
-const store = createStore(rootReducer);
+const store = createStore(
+	rootReducer,
+	applyMiddleware(thunk)
+);
 
 injectTapEventPlugin();
 
 const menuBar = new MenuBar(gui, store);
 menuBar.appendMenu();
-
 
 render((
 	<MuiThemeProvider>

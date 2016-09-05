@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 import model from './model';
-import {metricGears, imperialGears, defaultDgears} from '../gearBox/gearboxConfig';
+import {metricGears, imperialGears, defaultDgears} from '../gearbox/gearboxConfig';
 
 class DataBase {
 	constructor() {
