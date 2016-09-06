@@ -16,20 +16,24 @@
 			flex: 1;
 			.thread-config {
 				display: flex;
-				align-items: baseline;
 				float: right;
 				width: 40em;
 				.thread-type {
-					width: 40%;
+					width: 20%;
 					& > div {
 						display: flex;
+						flex-direction: column;
 					}
 				}
 				.config-summary {
 					display: flex;
 					justify-content: space-around;
 					align-items: baseline;
-					width: 60%;
+					width: 80%;
+					& > div:first-child {
+						align-self: center;
+						padding-top: 22px;
+					}
 				}
 			}
 		}
@@ -41,8 +45,10 @@
 					height: calc(~'100% - 50px') !important;
 				}
 			}
-			tr:hover {
-				background-color: gray;
+			.table-body {
+				tr:hover {
+					background-color: rgba(0, 0, 0, 0.0980392);
+				}
 			}
 		}
 	}

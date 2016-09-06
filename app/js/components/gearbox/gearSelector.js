@@ -7,7 +7,7 @@ import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
 import Toggle from 'material-ui/Toggle';
 
-import {metricGears, imperialGears} from '../../gearbox/gearboxConfig';
+import { metricGears, imperialGears } from '../../gearbox/gearboxConfig';
 
 @connect(
 	state => ({})

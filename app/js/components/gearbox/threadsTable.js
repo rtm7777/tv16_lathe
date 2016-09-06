@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 @connect(
 	state => ({})
@@ -49,7 +49,7 @@ class ThreadsTable extends React.Component {
 						<TableHeaderColumn style={colStyle}>tpi</TableHeaderColumn>
 					</TableRow>
 				</TableHeader>
-				<TableBody displayRowCheckbox={false}>
+				<TableBody displayRowCheckbox={false} className='table-body'>
 					{lala}
 				</TableBody>
 			</Table>

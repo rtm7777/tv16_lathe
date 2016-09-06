@@ -1,14 +1,13 @@
 import gui from 'nw.gui';
+
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from './rootReducer';
+import { Provider } from 'react-redux';
+import store from './store';
 
-import {Router, hashHistory} from 'react-router';
+import { Router, hashHistory } from 'react-router';
 import routes from './routes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -16,11 +15,6 @@ import MenuBar from './menuBar/menu';
 import Layout from './components/layout';
 
 const rootEl = document.getElementById('app');
-
-const store = createStore(
-	rootReducer,
-	applyMiddleware(thunk)
-);
 
 injectTapEventPlugin();
 

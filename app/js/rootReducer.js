@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import locationReducer from './location/locationReducers';
-import gearboxReducer from './gearbox/gearboxReducers';
+import { gearboxReducer, gearboxConfigReducer } from './gearbox/gearboxReducers';
 
 const rootReducer = combineReducers({
 	locationReducer,
-	gearboxReducer
+	gearboxReducer,
+	gearboxConfigReducer
 });
 
 export default rootReducer;

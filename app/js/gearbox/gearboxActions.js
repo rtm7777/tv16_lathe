@@ -8,6 +8,19 @@ export const setGearsConfig = (data) => {
 	};
 };
 
+export const changeThreadType = (threadType) => {
+	return {
+		type: types.CHANGE_THREAD_TYPE,
+		threadType
+	};
+};
+
+export const toggleApprox = () => {
+	return {
+		type: types.TOGGLE_APPROX
+	};
+};
+
 export function getGearboxConfig(type, value, approx) {
 	return function (dispatch) {
 		return database.findConfigsByPmm(value, approx).then((data) => {

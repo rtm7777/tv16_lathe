@@ -6,12 +6,16 @@ const initialState = Map({
 	allGears: Set(gearboxConfig.allGears),
 	selectedGears: Set(gearboxConfig.selectedGears)
 });
+const initialConfigState = Map({
+	threadType: 'pmm',
+	approxChecked: false
+});
 
 localStorage.setItem('selectedGears', gearboxConfig.allGears);
 
 console.log(Set(localStorage.getItem('selectedGears').split(',')));
 
-const gearboxReducer = (state = initialState, action) => {
+export const gearboxReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case types.SET_GEARS_CONFIG:
 			console.log(action);
@@ -20,5 +24,15 @@ const gearboxReducer = (state = initialState, action) => {
 			return state;
 	}
 };
-
-export default gearboxReducer;
+export const gearboxConfigReducer = (state = initialConfigState, action) => {
+	switch (action.type) {
+		case types.CHANGE_THREAD_TYPE:
+			console.log(action);
+			return state.set('threadType', action.threadType);
+		case types.TOGGLE_APPROX:
+			console.log(action);
+			return state.set('approxChecked', !state.get('approxChecked'));
+		default:
+			return state;
+	}
+};
