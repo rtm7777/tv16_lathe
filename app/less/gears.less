@@ -13,10 +13,12 @@
 		flex: 1;
 		height: 100%;
 		.control-content {
+			display: flex;
+			flex-direction: column;
 			flex: 1;
 			.thread-config {
 				display: flex;
-				float: right;
+				align-self: flex-end;
 				width: 40em;
 				.thread-type {
 					width: 20%;
@@ -34,6 +36,14 @@
 						align-self: center;
 						padding-top: 22px;
 					}
+				}
+			}
+			.gears-filters {
+				margin-top: auto;
+				display: flex;
+				align-items: center;
+				& > p {
+					margin: 0 25px;
 				}
 			}
 		}

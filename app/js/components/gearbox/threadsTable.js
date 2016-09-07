@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 @connect(
-	state => ({})
+	state => ({
+		config: state.gearboxReducer.get('config'),
+	})
 )
 class ThreadsTable extends React.Component {
 	constructor(props) {
@@ -12,7 +14,6 @@ class ThreadsTable extends React.Component {
 	}
 
 	render() {
-		const lala = [];
 		const colStyle = {
 			height: '25px',
 			textAlign: 'center'
@@ -22,22 +23,22 @@ class ThreadsTable extends React.Component {
 			height: '25px',
 			textAlign: 'center'
 		};
-		for (var i = 100; i >= 0; i--) {
-			lala.push(
+		const rows = this.props.config.map((row, i) => {
+			return (
 				<TableRow key={i} style={{height: '25px'}}>
-					<TableRowColumn style={gearColStyle}>20</TableRowColumn>
-					<TableRowColumn style={gearColStyle}>75</TableRowColumn>
-					<TableRowColumn style={gearColStyle}>20</TableRowColumn>
-					<TableRowColumn style={gearColStyle}>100</TableRowColumn>
-					<TableRowColumn style={colStyle}>0.008</TableRowColumn>
-					<TableRowColumn style={colStyle}>0.1600</TableRowColumn>
-					<TableRowColumn style={colStyle}>158.750</TableRowColumn>
+					<TableRowColumn style={gearColStyle}>{row.a}</TableRowColumn>
+					<TableRowColumn style={gearColStyle}>{row.b}</TableRowColumn>
+					<TableRowColumn style={gearColStyle}>{row.c}</TableRowColumn>
+					<TableRowColumn style={gearColStyle}>{row.d}</TableRowColumn>
+					<TableRowColumn style={colStyle}>{row.feed}</TableRowColumn>
+					<TableRowColumn style={colStyle}>{row.pmm}</TableRowColumn>
+					<TableRowColumn style={colStyle}>{row.tpi}</TableRowColumn>
 				</TableRow>
 			);
-		}
+		});
 
 		return (
-			<Table fixedHeader selectable={false} style={{height: '100%'}}>
+			<Table fixedHeader selectable={false} style={{height: 'initial'}}>
 				<TableHeader adjustForCheckbox={false} displaySelectAll={false}>
 					<TableRow>
 						<TableHeaderColumn style={gearColStyle}>a</TableHeaderColumn>
@@ -50,7 +51,7 @@ class ThreadsTable extends React.Component {
 					</TableRow>
 				</TableHeader>
 				<TableBody displayRowCheckbox={false} className='table-body'>
-					{lala}
+					{rows}
 				</TableBody>
 			</Table>
 		);

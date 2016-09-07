@@ -58,7 +58,7 @@ class DataBase {
 		if (approx) {
 			return this.db.gearConfigs.where('tpi').between(value-0.25, value+0.25, true, true).toArray();
 		} else {
-			return this.db.gearConfigs.where('tpi').between(value-0.15, value+0.15, true, true).toArray();
+			return this.db.gearConfigs.where('tpi').between(value-0.10, value+0.10, true, true).toArray();
 		}
 	}
 }

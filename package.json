@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-eslint": "^6.0.0",

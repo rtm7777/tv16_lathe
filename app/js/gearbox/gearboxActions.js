@@ -23,8 +23,14 @@ export const toggleApprox = () => {
 
 export function getGearboxConfig(type, value, approx) {
 	return function (dispatch) {
-		return database.findConfigsByPmm(value, approx).then((data) => {
-			dispatch(setGearsConfig(data));
-		});
+		if (type === 'pmm') {
+			return database.findConfigsByPmm(value, approx).then((data) => {
+				dispatch(setGearsConfig(data));
+			});
+		} else {
+			return database.findConfigsByTpi(value, approx).then((data) => {
+				dispatch(setGearsConfig(data));
+			});
+		}
 	};
 }

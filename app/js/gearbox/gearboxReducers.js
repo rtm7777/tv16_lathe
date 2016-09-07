@@ -4,7 +4,8 @@ import * as gearboxConfig from './gearboxConfig';
 
 const initialState = Map({
 	allGears: Set(gearboxConfig.allGears),
-	selectedGears: Set(gearboxConfig.selectedGears)
+	selectedGears: Set(gearboxConfig.selectedGears),
+	config: []
 });
 const initialConfigState = Map({
 	threadType: 'pmm',
@@ -18,8 +19,7 @@ console.log(Set(localStorage.getItem('selectedGears').split(',')));
 export const gearboxReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case types.SET_GEARS_CONFIG:
-			console.log(action);
-			return state;
+			return state.set('config', action.data);
 		default:
 			return state;
 	}

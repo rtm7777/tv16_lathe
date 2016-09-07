@@ -21,6 +21,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 class GearsConfig extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state= {
+			inputValue: ''
+		};
 		this.pmmInputParams = {
 			min: 0.15,
 			max: 6,
@@ -36,11 +39,29 @@ class GearsConfig extends React.Component {
 	}
 
 	showConfig = () => {
-		this.props.showConfig('pmm', 1, false);
+		const value = this.refs.input.getValue();
+		if (value) {
+			this.props.showConfig(this.props.threadType, Number(value), this.props.approxChecked);
+		}
 	}
 
 	threadTypeChanded = (e, value) => {
 		this.props.changeThreadType(value);
+		this.setState({
+			inputValue: ''
+		});
+	}
+
+	inputChanged = (e) => {
+		this.setState({
+			inputValue: e.target.value
+		});
+	}
+
+	inputKeyPressed = (e) => {
+		if (e.key === 'Enter') {
+			this.showConfig();
+		}
 	}
 
 	render() {
@@ -65,7 +86,14 @@ class GearsConfig extends React.Component {
 						<Checkbox label='approx' checked={this.props.approxChecked} onCheck={this.props.toggleApprox} />
 					</div>
 					<div>
-						<TextField {...inputParams} ref='input' type='number' style={{width: '150px'}} />
+						<TextField {...inputParams}
+							value={this.state.inputValue}
+							onChange={this.inputChanged}
+							onKeyPress={this.inputKeyPressed}
+							ref='input'
+							type='number'
+							style={{width: '150px'}}
+						/>
 					</div>
 					<div>
 						<RaisedButton onClick={this.showConfig} label='Show config' primary />
