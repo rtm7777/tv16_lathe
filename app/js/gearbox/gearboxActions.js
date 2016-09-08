@@ -21,6 +21,12 @@ export const toggleApprox = () => {
 	};
 };
 
+export const toggleUniqueGears = () => {
+	return {
+		type: types.TOGGLE_UNIQUE_GEARS
+	};
+};
+
 export function getGearboxConfig(type, value, approx) {
 	return function (dispatch) {
 		if (type === 'pmm') {

@@ -4,17 +4,16 @@ import * as gearboxConfig from './gearboxConfig';
 
 const initialState = Map({
 	allGears: Set(gearboxConfig.allGears),
-	selectedGears: Set(gearboxConfig.selectedGears),
+	selectedGears: Set(localStorage.getItem('selectedGears').split(',')) || Set(gearboxConfig.allGears),
 	config: []
 });
 const initialConfigState = Map({
-	threadType: 'pmm',
-	approxChecked: false
+	threadType: localStorage.getItem('threadType') || 'pmm',
+	approxChecked: localStorage.getItem('approxChecked') === 'true' || false
 });
-
-localStorage.setItem('selectedGears', gearboxConfig.allGears);
-
-console.log(Set(localStorage.getItem('selectedGears').split(',')));
+const initialFiltersState = Map({
+	uniqueGearsChecked: localStorage.getItem('uniqueGearsChecked') === 'true' || false
+});
 
 export const gearboxReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -27,11 +26,22 @@ export const gearboxReducer = (state = initialState, action) => {
 export const gearboxConfigReducer = (state = initialConfigState, action) => {
 	switch (action.type) {
 		case types.CHANGE_THREAD_TYPE:
-			console.log(action);
+			localStorage.setItem('threadType', action.threadType);
 			return state.set('threadType', action.threadType);
 		case types.TOGGLE_APPROX:
-			console.log(action);
-			return state.set('approxChecked', !state.get('approxChecked'));
+			const approxChecked = state.get('approxChecked');
+			localStorage.setItem('approxChecked', !approxChecked);
+			return state.set('approxChecked', !approxChecked);
+		default:
+			return state;
+	}
+};
+export const gearboxFiltersReducer = (state = initialFiltersState, action) => {
+	switch (action.type) {
+		case types.TOGGLE_UNIQUE_GEARS:
+			const approxChecked = state.get('uniqueGearsChecked');
+			localStorage.setItem('uniqueGearsChecked', !approxChecked);
+			return state.set('uniqueGearsChecked', !approxChecked);
 		default:
 			return state;
 	}

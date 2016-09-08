@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {getGearboxConfig, changeThreadType, toggleApprox} from '../../gearbox/gearboxActions';
+import { connect } from 'react-redux';
+import { getGearboxConfig, changeThreadType, toggleApprox } from '../../gearbox/gearboxActions';
 
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import RaisedButton from 'material-ui/RaisedButton';
