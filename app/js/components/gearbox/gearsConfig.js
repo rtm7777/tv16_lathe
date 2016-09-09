@@ -21,7 +21,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 class GearsConfig extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state= {
+		this.state = {
 			inputValue: ''
 		};
 		this.pmmInputParams = {
@@ -96,7 +96,7 @@ class GearsConfig extends React.Component {
 						/>
 					</div>
 					<div>
-						<RaisedButton onClick={this.showConfig} label='Show config' primary />
+						<RaisedButton onTouchTap={this.showConfig} label='Show config' primary />
 					</div>
 				</div>
 			</div>

@@ -6,11 +6,22 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 @connect(
 	state => ({
 		config: state.gearboxReducer.get('config'),
+		uniqueGearsChecked: state.gearboxFiltersReducer.get('uniqueGearsChecked')
 	})
 )
 class ThreadsTable extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			config: []
+		};
+	}
+
+	filterConfig = () => {
+		if (this.props.uniqueGearsChecked) {
+			return this.props.config.filter((value) => { return value.a !== value.b && value.a !== value.c && value.b !== value.c; });
+		}
+		return this.props.config;
 	}
 
 	render() {
@@ -23,7 +34,7 @@ class ThreadsTable extends React.Component {
 			height: '25px',
 			textAlign: 'center'
 		};
-		const rows = this.props.config.map((row, i) => {
+		const rows = this.filterConfig().map((row, i) => {
 			return (
 				<TableRow key={i} style={{height: '25px'}}>
 					<TableRowColumn style={gearColStyle}>{row.a}</TableRowColumn>

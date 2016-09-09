@@ -8,7 +8,7 @@ import Checkbox from 'material-ui/Checkbox';
 
 @connect(
 	(state) => ({
-		uniqueGearsChecked: state.gearboxFiltersReducer.get('uniqueGearsChecked'),
+		uniqueGearsChecked: state.gearboxFiltersReducer.get('uniqueGearsChecked')
 	}),
 	(dispatch) => ({
 		toggleUniqueGears: () => dispatch(toggleUniqueGears())

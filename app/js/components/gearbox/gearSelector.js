@@ -5,7 +5,6 @@ import { List, ListItem } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
-import Toggle from 'material-ui/Toggle';
 
 import { metricGears, imperialGears } from '../../gearbox/gearboxConfig';
 

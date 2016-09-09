@@ -3,8 +3,14 @@
 	flex-direction: row;
 	height: calc(~'100vh - 80px');
 	.gear-selector {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		width: 15em;
-		overflow-y: auto;
+		.gears {
+			overflow-y: auto;
+			height: calc(~'100% - 46px')
+		}
 	}
 
 	.gearbox-control {
@@ -61,5 +67,13 @@
 				}
 			}
 		}
+	}
+}
+.add-gear {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-around;
+	p {
+		margin: 14px 0;
 	}
 }
