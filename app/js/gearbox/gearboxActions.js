@@ -27,6 +27,14 @@ export const toggleUniqueGears = () => {
 	};
 };
 
+export const gearSelected = (gear, value) => {
+	return {
+		type: types.SELECT_GEAR,
+		gear,
+		value
+	};
+};
+
 export function getGearboxConfig(type, value, approx) {
 	return function (dispatch) {
 		if (type === 'pmm') {

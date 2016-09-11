@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 @connect(
-	state => ({
+	(state) => ({
 		config: state.gearboxReducer.get('config'),
 		uniqueGearsChecked: state.gearboxFiltersReducer.get('uniqueGearsChecked')
 	})

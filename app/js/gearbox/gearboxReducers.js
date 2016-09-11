@@ -4,7 +4,7 @@ import * as gearboxConfig from './gearboxConfig';
 
 const initialState = Map({
 	allGears: Set(gearboxConfig.allGears),
-	selectedGears: Set(localStorage.getItem('selectedGears').split(',')) || Set(gearboxConfig.allGears),
+	selectedGears: Set(localStorage.getItem('selectedGears').split(',').map(Number)) || Set(gearboxConfig.allGears),
 	config: []
 });
 const initialConfigState = Map({
@@ -19,6 +19,9 @@ export const gearboxReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case types.SET_GEARS_CONFIG:
 			return state.set('config', action.data);
+		case types.SELECT_GEAR:
+			console.log(action);
+			return state;
 		default:
 			return state;
 	}

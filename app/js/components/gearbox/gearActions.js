@@ -10,7 +10,7 @@ import Checkbox from 'material-ui/Checkbox';
 import { metricGears, imperialGears } from '../../gearbox/gearboxConfig';
 
 @connect(
-	state => ({})
+	(state) => ({})
 )
 class GearSelector extends React.Component {
 	constructor(props) {
