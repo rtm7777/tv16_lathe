@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getGearboxConfig, changeThreadType, toggleApprox } from '../../gearbox/gearboxActions';
+import { setGearsConfig, getGearboxConfig, changeThreadType, toggleApprox } from '../../gearbox/gearboxActions';
 
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
@@ -10,10 +10,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 @connect(
 	(state) => ({
 		threadType: state.gearboxConfigReducer.get('threadType'),
-		approxChecked: state.gearboxConfigReducer.get('approxChecked')
+		approxChecked: state.gearboxConfigReducer.get('approxChecked'),
+		selectedGears: state.gearboxReducer.get('selectedGears')
 	}),
 	(dispatch) => ({
-		showConfig: (type, value, approx) => dispatch(getGearboxConfig(type, value, approx)),
+		showConfig: (type, value, gears, approx) => dispatch(getGearboxConfig(type, value, gears, approx)),
 		toggleApprox: () => dispatch(toggleApprox()),
 		changeThreadType: (type) => dispatch(changeThreadType(type))
 	})
@@ -41,7 +42,7 @@ class GearsConfig extends React.Component {
 	showConfig = () => {
 		const value = this.refs.input.getValue();
 		if (value) {
-			this.props.showConfig(this.props.threadType, Number(value), this.props.approxChecked);
+			this.props.showConfig(this.props.threadType, Number(value), this.props.selectedGears, this.props.approxChecked);
 		}
 	}
 

@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { gearSelected } from '../../gearbox/gearboxActions';
+import storage from '../../services/storage';
+import { setGearsConfig, gearSelected } from '../../gearbox/gearboxActions';
 
 import { List, ListItem } from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
 
-import { metricGears, imperialGears } from '../../gearbox/gearboxConfig';
+import { metricGears, imperialGears, allGears } from '../../gearbox/gearboxConfig';
 
 const GearSelectorItem = ({value, defaultChecked, onCheck}) => {
 	const itemProps = {
@@ -21,7 +22,7 @@ const GearSelectorItem = ({value, defaultChecked, onCheck}) => {
 
 @connect(
 	(state) => ({
-		selectedGears: state.gearboxReducer.get('selectedGears')
+
 	}),
 	(dispatch) => ({
 		gearSelected: (gear, value) => dispatch(gearSelected(gear, value))
@@ -30,6 +31,7 @@ const GearSelectorItem = ({value, defaultChecked, onCheck}) => {
 class GearSelector extends React.Component {
 	constructor(props) {
 		super(props);
+		this.initiallySelected = storage.getNumbersArray('selectedGears') || allGears;
 	}
 
 	onCheck = (e, value) => {
@@ -39,15 +41,15 @@ class GearSelector extends React.Component {
 	render() {
 		const customGears = [34, 32];
 		const metricGearsItems = metricGears.map((gear) => {
-			const checked = this.props.selectedGears.includes(gear);
+			const checked = this.initiallySelected.includes(gear);
 			return <GearSelectorItem key={gear} defaultChecked={checked} value={gear} onCheck={this.onCheck} />;
 		});
 		const imperialGearsItems = imperialGears.map((gear, i) => {
-			const checked = this.props.selectedGears.includes(gear);
+			const checked = this.initiallySelected.includes(gear);
 			return <GearSelectorItem key={gear} defaultChecked={checked} value={gear} onCheck={this.onCheck} />;
 		});
 		const customGearsItems = customGears.map((gear, i) => {
-			const checked = this.props.selectedGears.includes(gear);
+			const checked = this.initiallySelected.includes(gear);
 			return <GearSelectorItem key={gear} defaultChecked={checked} value={gear} onCheck={this.onCheck} />;
 		});
 

@@ -1,5 +1,6 @@
 import Dexie from 'dexie';
 import model from './model';
+import storage from '../services/storage';
 import { metricGears, imperialGears, defaultDgears } from '../gearbox/gearboxConfig';
 
 class DataBase {
@@ -7,7 +8,7 @@ class DataBase {
 		this.db = new Dexie('tv-16');
 		this.db.version(1).stores(model);
 		this.db.open();
-		if (localStorage.getItem('configGenerated') !== 'true') {
+		if (storage.get('configGenerated') !== 'true') {
 			this.initializeDB();
 		}
 	}
@@ -41,25 +42,37 @@ class DataBase {
 			});
 		});
 		this.db.gearConfigs.bulkAdd(gearConfigs).then(() => {
-			localStorage.setItem('configGenerated', 'true');
-			console.log('config added');
+			storage.set('configGenerated', 'true');
 		});
 	}
 
-	findConfigsByPmm(value, approx = false) {
+	addGear(z) {
+		let gearConfigs = [];
+
+	}
+
+	removeGear() {
+
+	}
+
+	findConfigsByPmm(value, gears, approx = false) {
 		if (approx) {
-			return this.db.gearConfigs.where('pmm').between(value-0.02, value+0.02, true, true).toArray();
+			return this.db.gearConfigs.where('pmm').between(value-0.02, value+0.02, true, true).and(item => this._includes(gears, item)).toArray();
 		} else {
-			return this.db.gearConfigs.where('pmm').equals(value).toArray();
+			return this.db.gearConfigs.where('pmm').equals(value).and(item => this._includes(gears, item)).toArray();
 		}
 	}
 
-	findConfigsByTpi(value, approx = false) {
+	findConfigsByTpi(value, gears, approx = false) {
 		if (approx) {
-			return this.db.gearConfigs.where('tpi').between(value-0.25, value+0.25, true, true).toArray();
+			return this.db.gearConfigs.where('tpi').between(value-0.25, value+0.25, true, true).and(item => this._includes(gears, item)).toArray();
 		} else {
-			return this.db.gearConfigs.where('tpi').between(value-0.10, value+0.10, true, true).toArray();
+			return this.db.gearConfigs.where('tpi').between(value-0.05, value+0.05, true, true).and(item => this._includes(gears, item)).toArray();
 		}
+	}
+
+	_includes(gears, {a, b, c, d}) {
+		return gears.includes(a) && gears.includes(b) && gears.includes(c) && gears.includes(d);
 	}
 }
 

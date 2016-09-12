@@ -8,7 +8,7 @@ export const setGearsConfig = (data) => {
 	};
 };
 
-export const changeThreadType = (threadType) => {
+export const changeThread = (threadType) => {
 	return {
 		type: types.CHANGE_THREAD_TYPE,
 		threadType
@@ -27,7 +27,7 @@ export const toggleUniqueGears = () => {
 	};
 };
 
-export const gearSelected = (gear, value) => {
+export const selectGear = (gear, value) => {
 	return {
 		type: types.SELECT_GEAR,
 		gear,
@@ -35,14 +35,28 @@ export const gearSelected = (gear, value) => {
 	};
 };
 
-export function getGearboxConfig(type, value, approx) {
-	return function (dispatch) {
+export function gearSelected(gear, value) {
+	return (dispatch) => {
+		dispatch(setGearsConfig([]));
+		dispatch(selectGear(gear, value));
+	};
+};
+
+export function changeThreadType(threadType) {
+	return (dispatch) => {
+		dispatch(setGearsConfig([]));
+		dispatch(changeThread(threadType));
+	};
+}
+
+export function getGearboxConfig(type, value, gears, approx) {
+	return (dispatch) => {
 		if (type === 'pmm') {
-			return database.findConfigsByPmm(value, approx).then((data) => {
+			database.findConfigsByPmm(value, gears, approx).then((data) => {
 				dispatch(setGearsConfig(data));
 			});
 		} else {
-			return database.findConfigsByTpi(value, approx).then((data) => {
+			database.findConfigsByTpi(value, gears, approx).then((data) => {
 				dispatch(setGearsConfig(data));
 			});
 		}
