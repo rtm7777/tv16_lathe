@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import model from './model';
 import storage from '../services/storage';
-import { metricGears, imperialGears, defaultDgears } from '../gearbox/gearboxConfig';
+import { metricGears, imperialGears, defaultDgears, dGears, allGears } from '../gearbox/gearboxConfig';
 
 class DataBase {
 	constructor() {
@@ -46,9 +46,39 @@ class DataBase {
 		});
 	}
 
-	addGear(z) {
+	addGear(z, asD = false) {
+		const newGear = Number(z);
+		let dGearsArray = dGears;
 		let gearConfigs = [];
-
+		let pmm = 0;
+		if (newGear && newGear > 15 && newGear < 100 && !allGears.includes(newGear)) {
+			const gears = allGears.concat(newGear);
+			if (asD) {
+				dGearsArray.push(newGear);
+			}
+			dGearsArray.forEach((d) => {
+				gears.forEach((c) => {
+					if (c !== d) {
+						gears.forEach((b) => {
+							if (b !== d) {
+								gears.forEach((a) => {
+									if (a <= 60 && a !== d && (a === newGear || b === newGear || c === newGear || d === newGear)) {
+										pmm = 3*(a/b)*(c/d);
+										gearConfigs.push({
+											a,b,c,d,pmm,
+											tpi: 25.4/pmm,
+											feed: pmm/20
+										});
+									}
+								});
+							}
+						});
+					}
+				});
+			});
+		}
+		console.log(gearConfigs);
+		return Promise.resolve();
 	}
 
 	removeGear() {

@@ -8,6 +8,14 @@ export const setGearsConfig = (data) => {
 	};
 };
 
+export const addGear = (z, asD) => {
+	return {
+		type: types.ADD_GEAR,
+		z,
+		asD
+	};
+};
+
 export const changeThread = (threadType) => {
 	return {
 		type: types.CHANGE_THREAD_TYPE,
@@ -60,5 +68,13 @@ export function getGearboxConfig(type, value, gears, approx) {
 				dispatch(setGearsConfig(data));
 			});
 		}
+	};
+}
+
+export function gererateGearConfigs(z, asD) {
+	return (dispatch) => {
+		database.addGear(z, asD).then(() => {
+			dispatch(addGear(z, asD));
+		});
 	};
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { gererateGearConfigs } from '../../gearbox/gearboxActions';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
@@ -10,7 +11,10 @@ import Checkbox from 'material-ui/Checkbox';
 import { metricGears, imperialGears } from '../../gearbox/gearboxConfig';
 
 @connect(
-	(state) => ({})
+	(state) => ({}),
+	(dispatch) => ({
+		gererateGearConfigs: (gear, asD) => dispatch(gererateGearConfigs(gear, asD))
+	})
 )
 class GearSelector extends React.Component {
 	constructor(props) {
@@ -28,6 +32,10 @@ class GearSelector extends React.Component {
 		this.setState({open: false});
 	};
 
+	handleAdd = () => {
+		this.props.gererateGearConfigs(this.refs.input.getValue(), this.refs.asD.isChecked());
+	}
+
 	render() {
 		const actions = [
 			<RaisedButton
@@ -39,7 +47,7 @@ class GearSelector extends React.Component {
 			<RaisedButton
 				label="Add"
 				primary
-				onTouchTap={this.handleClose}
+				onTouchTap={this.handleAdd}
 			/>,
 		];
 		const inputParams = {
@@ -56,7 +64,7 @@ class GearSelector extends React.Component {
 					<div className='add-gear'>
 						<p>z =</p>
 						<TextField {...inputParams} ref='input' style={{width: '150px'}} />
-						<Checkbox label='can be used as "d"' style={{width: '12.2em', margin: '10px 0'}} />
+						<Checkbox ref='asD' label='can be used as "d"' style={{width: '12.2em', margin: '10px 0'}} />
 					</div>
 				</Dialog>
 			</div>
