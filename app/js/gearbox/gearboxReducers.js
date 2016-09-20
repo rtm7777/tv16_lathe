@@ -31,8 +31,13 @@ export const gearboxReducer = (state = initialState, action) => {
 			storage.set('selectedGears', selected.toArray());
 			return state.set('selectedGears', selected);
 		case types.ADD_GEAR:
-			console.log(action);
-			return state;
+			let customGears = state.get('customGears').add(action.z);
+			storage.set('customGears', customGears.toArray());
+			return state.set('customGears', customGears);
+		case types.REMOVE_GEAR:
+			let customGears2 = state.get('customGears').delete(action.z);
+			storage.set('customGears', customGears2.toArray());
+			return state.set('customGears', customGears2);
 		default:
 			return state;
 	}

@@ -16,6 +16,13 @@ export const addGear = (z, asD) => {
 	};
 };
 
+export const removeGear = (z) => {
+	return {
+		type: types.REMOVE_GEAR,
+		z
+	};
+};
+
 export const changeThread = (threadType) => {
 	return {
 		type: types.CHANGE_THREAD_TYPE,
@@ -74,7 +81,17 @@ export function getGearboxConfig(type, value, gears, approx) {
 export function gererateGearConfigs(z, asD) {
 	return (dispatch) => {
 		database.addGear(z, asD).then(() => {
+			console.log('gear added');
 			dispatch(addGear(z, asD));
+		});
+	};
+}
+
+export function deleteGearConfigs(z) {
+	return (dispatch) => {
+		database.removeGear(z).then((deleteCount) => {
+			console.log('gear deleted' + deleteCount);
+			dispatch(removeGear(z));
 		});
 	};
 }

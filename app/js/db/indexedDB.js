@@ -58,9 +58,9 @@ class DataBase {
 			}
 			dGearsArray.forEach((d) => {
 				gears.forEach((c) => {
-					if (c !== d) {
+					if (c !== d &&  c < 100) {
 						gears.forEach((b) => {
-							if (b !== d) {
+							if (b !== d &&  b < 100) {
 								gears.forEach((a) => {
 									if (a <= 60 && a !== d && (a === newGear || b === newGear || c === newGear || d === newGear)) {
 										pmm = 3*(a/b)*(c/d);
@@ -77,12 +77,22 @@ class DataBase {
 				});
 			});
 		}
-		console.log(gearConfigs);
+		if (gearConfigs.length) {
+			return this.db.gearConfigs.bulkAdd(gearConfigs);
+		}
 		return Promise.resolve();
 	}
 
-	removeGear() {
-
+	removeGear(z) {
+		const gearToRemove = Number(z);
+		if (gearToRemove && ![].concat(metricGears, imperialGears).includes(gearToRemove)) {
+			return this.db.gearConfigs.where('a').equals(gearToRemove)
+			.or('b').equals(gearToRemove)
+			.or('c').equals(gearToRemove)
+			.or('d').equals(gearToRemove)
+			.delete();
+		}
+		return Promise.resolve();
 	}
 
 	findConfigsByPmm(value, gears, approx = false) {
