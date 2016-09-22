@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 import model from './model';
 import storage from '../services/storage';
-import { metricGears, imperialGears, defaultDgears, dGears, allGears } from '../gearbox/gearboxConfig';
+import { metricGears, imperialGears, defaultDgears, dGears } from '../gearbox/gearboxConfig';
 
 class DataBase {
 	constructor() {
@@ -48,6 +48,7 @@ class DataBase {
 
 	addGear(z, asD = false) {
 		const newGear = Number(z);
+		const allGears = [].concat(metricGears, imperialGears, (storage.getNumbersArray('customGears') || []));
 		let dGearsArray = dGears;
 		let gearConfigs = [];
 		let pmm = 0;

@@ -50,6 +50,20 @@ export const selectGear = (gear, value) => {
 	};
 };
 
+export const setTableLoader = (loader) => {
+	return {
+		type: types.SET_TABLE_LOADER,
+		loader
+	};
+};
+
+export const setSelectorLoader = (loader) => {
+	return {
+		type: types.SET_SELECTOR_LOADER,
+		loader
+	};
+};
+
 export function gearSelected(gear, value) {
 	return (dispatch) => {
 		dispatch(setGearsConfig([]));
@@ -66,13 +80,16 @@ export function changeThreadType(threadType) {
 
 export function getGearboxConfig(type, value, gears, approx) {
 	return (dispatch) => {
+		dispatch(setTableLoader(true));
 		if (type === 'pmm') {
 			database.findConfigsByPmm(value, gears, approx).then((data) => {
 				dispatch(setGearsConfig(data));
+				dispatch(setTableLoader(false));
 			});
 		} else {
 			database.findConfigsByTpi(value, gears, approx).then((data) => {
 				dispatch(setGearsConfig(data));
+				dispatch(setTableLoader(false));
 			});
 		}
 	};
@@ -80,18 +97,23 @@ export function getGearboxConfig(type, value, gears, approx) {
 
 export function gererateGearConfigs(z, asD) {
 	return (dispatch) => {
+		dispatch(setSelectorLoader(true));
+		dispatch(setGearsConfig([]));
 		database.addGear(z, asD).then(() => {
-			console.log('gear added');
 			dispatch(addGear(z, asD));
+			dispatch(setSelectorLoader(false));
 		});
 	};
 }
 
 export function deleteGearConfigs(z) {
 	return (dispatch) => {
+		dispatch(setSelectorLoader(true));
+		dispatch(setGearsConfig([]));
 		database.removeGear(z).then((deleteCount) => {
-			console.log('gear deleted' + deleteCount);
 			dispatch(removeGear(z));
+			dispatch(selectGear(z, false));
+			dispatch(setSelectorLoader(false));
 		});
 	};
 }

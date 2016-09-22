@@ -16,6 +16,10 @@ const initialConfigState = Map({
 const initialFiltersState = Map({
 	uniqueGearsChecked: storage.get('uniqueGearsChecked') === 'true' || false
 });
+const initialLoaderState = Map({
+	tableLoader: false,
+	selectorLoader: false
+});
 
 export const gearboxReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -61,6 +65,16 @@ export const gearboxFiltersReducer = (state = initialFiltersState, action) => {
 			const approxChecked = state.get('uniqueGearsChecked');
 			storage.set('uniqueGearsChecked', !approxChecked);
 			return state.set('uniqueGearsChecked', !approxChecked);
+		default:
+			return state;
+	}
+};
+export const loaderReducer = (state = initialLoaderState, action) => {
+	switch (action.type) {
+		case types.SET_TABLE_LOADER:
+			return state.set('tableLoader', action.loader);
+		case types.SET_SELECTOR_LOADER:
+			return state.set('selectorLoader', action.loader);
 		default:
 			return state;
 	}
