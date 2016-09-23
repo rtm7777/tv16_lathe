@@ -6,6 +6,7 @@ import GearActions from '../components/gearbox/gearActions';
 import ThreadsTable from '../components/gearbox/threadsTable';
 import GearsConfig from '../components/gearbox/gearsConfig';
 import GearsFilters from '../components/gearbox/gearsFilters';
+import GearsHelper from '../components/gearbox/gearsHelper';
 
 import FontIcon from 'material-ui/FontIcon';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -45,6 +46,7 @@ class Gearbox extends React.Component {
 				<div className='gearbox-control'>
 					<div className='control-content'>
 						<GearsConfig/>
+						<GearsHelper/>
 						<GearsFilters/>
 					</div>
 					<div className='threads-table'>

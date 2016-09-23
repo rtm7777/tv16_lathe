@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { toggleUniqueGears } from '../../gearbox/gearboxActions';
 
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
-// import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 
 @connect(

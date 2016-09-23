@@ -34,6 +34,7 @@ class GearSelector extends React.Component {
 
 	handleAdd = () => {
 		this.props.gererateGearConfigs(Number(this.refs.input.getValue()), this.refs.asD.isChecked());
+		this.handleClose();
 	}
 
 	render() {
