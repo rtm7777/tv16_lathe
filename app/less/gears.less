@@ -89,3 +89,24 @@
 		margin: 14px 0;
 	}
 }
+
+.thread-calculator {
+	display: flex;
+	.input-fields {
+		display: flex;
+		& > div {
+			display: flex;
+			flex-direction: column;
+		}
+		span {
+			width: 2em;
+		}
+	}
+	.calculator-results {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: flex-end;
+		width: 100%;
+	}
+}

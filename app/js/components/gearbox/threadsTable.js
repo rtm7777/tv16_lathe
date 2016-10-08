@@ -41,9 +41,9 @@ class ThreadsTable extends React.Component {
 					<TableRowColumn style={gearColStyle}>{row.b}</TableRowColumn>
 					<TableRowColumn style={gearColStyle}>{row.c}</TableRowColumn>
 					<TableRowColumn style={gearColStyle}>{row.d}</TableRowColumn>
-					<TableRowColumn style={colStyle}>{row.feed}</TableRowColumn>
-					<TableRowColumn style={colStyle}>{row.pmm}</TableRowColumn>
-					<TableRowColumn style={colStyle}>{row.tpi}</TableRowColumn>
+					<TableRowColumn style={colStyle}>{row.feed.toFixed(6)}</TableRowColumn>
+					<TableRowColumn style={colStyle}>{row.pmm.toFixed(6)}</TableRowColumn>
+					<TableRowColumn style={colStyle}>{row.tpi.toFixed(6)}</TableRowColumn>
 				</TableRow>
 			);
 		});
