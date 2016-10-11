@@ -5,6 +5,7 @@
     "title": "TV-16",
     "id": "main",
     "min_width": 900,
-    "min_height": 650
+    "min_height": 650,
+    "icon": "public/gearIcon.png"
    }
 }
