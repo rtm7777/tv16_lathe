@@ -98,9 +98,11 @@ export function getGearboxConfig(type, value, gears, approx) {
 export function gererateGearConfigs(z, asD) {
 	return (dispatch) => {
 		dispatch(setSelectorLoader(true));
-		dispatch(setGearsConfig([]));
 		database.addGear(z, asD).then(() => {
+			dispatch(setGearsConfig([]));
 			dispatch(addGear(z, asD));
+			dispatch(setSelectorLoader(false));
+		}).catch(() => {
 			dispatch(setSelectorLoader(false));
 		});
 	};

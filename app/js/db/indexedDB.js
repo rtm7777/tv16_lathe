@@ -50,10 +50,10 @@ class DataBase {
 		const newGear = Number(z);
 		const allGears = [].concat(metricGears, imperialGears, (storage.getNumbersArray('customGears') || []));
 		let dGearsArray = dGears;
-		let gearConfigs = [];
-		let pmm = 0;
 		if (newGear && newGear > 15 && newGear < 100 && !allGears.includes(newGear)) {
 			const gears = allGears.concat(newGear);
+			let gearConfigs = [];
+			let pmm = 0;
 			if (asD) {
 				dGearsArray.push(newGear);
 			}
@@ -77,11 +77,10 @@ class DataBase {
 					}
 				});
 			});
-		}
-		if (gearConfigs.length) {
 			return this.db.gearConfigs.bulkAdd(gearConfigs);
+		} else {
+			return Promise.reject();
 		}
-		return Promise.resolve();
 	}
 
 	removeGear(z) {

@@ -1,24 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {  } from '../../gearbox/gearboxActions';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import Chip from 'material-ui/Chip';
 
-@connect(
-	(state) => ({
-
-	}),
-	(dispatch) => ({
-
-	})
-)
 class GearsFilters extends React.Component {
 	constructor(props) {
 		super(props);
 		this.dialogsState = {
+			a: '',
+			b: '',
+			c: '',
+			d: '',
 			gears: false,
 			calculator: false,
 			feed: 0,
@@ -42,7 +36,6 @@ class GearsFilters extends React.Component {
 	};
 
 	openCalculator = () => {
-		this.resetCalculator();
 		this.dialogsState.calculator = true;
 		this.updateState();
 	};
@@ -61,7 +54,9 @@ class GearsFilters extends React.Component {
 	getValues() {
 		let values = {};
 		['a', 'b', 'c', 'd'].forEach((gear) => {
-			let value = Number(this.refs[gear].getValue());
+			let inputValue = this.refs[gear].getValue();
+			let value = Number(inputValue);
+			this.dialogsState[gear] = inputValue;
 			if (value && value <= 100 && value > 15) {
 				values[gear] = value;
 			} else {
@@ -91,13 +86,40 @@ class GearsFilters extends React.Component {
 					<div className='thread-calculator'>
 						<div className='input-fields'>
 							<div>
-								<TextField onChange={this.calculateThread} ref='a' type='number' floatingLabelText='a' style={{width: '50px'}} />
-								<TextField onChange={this.calculateThread} ref='b' type='number' floatingLabelText='b' style={{width: '50px'}} />
+								<TextField
+									value={this.state.a}
+									onChange={this.calculateThread}
+									ref='a' type='number'
+									floatingLabelText='a'
+									style={{width: '50px'}}
+								/>
+								<TextField
+									value={this.state.b}
+									onChange={this.calculateThread}
+									ref='b'
+									type='number'
+									floatingLabelText='b'
+									style={{width: '50px'}}
+								/>
 							</div>
 							<span/>
 							<div>
-								<TextField onChange={this.calculateThread} ref='c' type='number' floatingLabelText='c' style={{width: '50px'}} />
-								<TextField onChange={this.calculateThread} ref='d' type='number' floatingLabelText='d' style={{width: '50px'}} />
+								<TextField
+									value={this.state.c}
+									onChange={this.calculateThread}
+									ref='c'
+									type='number'
+									floatingLabelText='c'
+									style={{width: '50px'}}
+								/>
+								<TextField
+									value={this.state.d}
+									onChange={this.calculateThread}
+									ref='d'
+									type='number'
+									floatingLabelText='d'
+									style={{width: '50px'}}
+								/>
 							</div>
 						</div>
 						<div className='calculator-results'>

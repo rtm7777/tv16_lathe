@@ -9,7 +9,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
 
-import { metricGears, imperialGears, allGears } from '../../gearbox/gearboxConfig';
+import { metricGears, imperialGears } from '../../gearbox/gearboxConfig';
 
 const GearSelectorItem = ({value, defaultChecked, onCheck, rightIconButton}) => {
 	const itemProps = {
@@ -26,7 +26,8 @@ const GearSelectorItem = ({value, defaultChecked, onCheck, rightIconButton}) => 
 
 @connect(
 	(state) => ({
-		customGears: state.gearboxReducer.get('customGears')
+		customGears: state.gearboxReducer.get('customGears'),
+		selectedGears: state.gearboxReducer.get('selectedGears')
 	}),
 	(dispatch) => ({
 		gearSelected: (gear, value) => dispatch(gearSelected(gear, value)),
@@ -36,7 +37,6 @@ const GearSelectorItem = ({value, defaultChecked, onCheck, rightIconButton}) => 
 class GearSelector extends React.Component {
 	constructor(props) {
 		super(props);
-		this.initiallySelected = storage.getNumbersArray('selectedGears') || allGears;
 	}
 
 	onCheck = (e, value) => {
@@ -49,15 +49,15 @@ class GearSelector extends React.Component {
 
 	render() {
 		const metricGearsItems = metricGears.map((gear) => {
-			const checked = this.initiallySelected.includes(gear);
+			const checked = this.props.selectedGears.includes(gear);
 			return <GearSelectorItem key={gear} defaultChecked={checked} value={gear} onCheck={this.onCheck} />;
 		});
 		const imperialGearsItems = imperialGears.map((gear) => {
-			const checked = this.initiallySelected.includes(gear);
+			const checked = this.props.selectedGears.includes(gear);
 			return <GearSelectorItem key={gear} defaultChecked={checked} value={gear} onCheck={this.onCheck} />;
 		});
 		const customGearsItems = this.props.customGears.map((gear) => {
-			const checked = this.initiallySelected.includes(gear);
+			const checked = this.props.selectedGears.includes(gear);
 			return (<GearSelectorItem
 				key={gear}
 				defaultChecked={checked}
