@@ -12,7 +12,9 @@ const onError = function(err) {
 	this.emit('end');
 };
 
-gulp.task('default', ['webpack:watch', 'less', 'watch']);
+const sourceFiles = [ 'app/fonts/**/*', 'app/images/*.*' ];
+
+gulp.task('default', ['webpack:watch', 'copy', 'less', 'watch']);
 
 gulp.task('webpack:watch', function(){
 	let webpackTask = webpack(Object.create(webpackConfig));
@@ -22,6 +24,11 @@ gulp.task('webpack:watch', function(){
 		.on('error', function handleError() {
 			this.emit('end'); // Recover from errors
 		})
+		.pipe(gulp.dest('app/public/'));
+});
+
+gulp.task('copy', () => {
+	return gulp.src(sourceFiles)
 		.pipe(gulp.dest('app/public/'));
 });
 

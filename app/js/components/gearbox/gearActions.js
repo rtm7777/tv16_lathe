@@ -19,7 +19,7 @@ import { metricGears, imperialGears } from '../../gearbox/gearboxConfig';
 class GearSelector extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state={
+		this.state = {
 			open: false
 		};
 	}
