@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import { Router, hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux'
 import routes from './routes';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -21,11 +22,13 @@ injectTapEventPlugin();
 const menuBar = new MenuBar(gui, store);
 menuBar.appendMenu();
 
+const history = syncHistoryWithStore(hashHistory, store)
+
 render((
 	<MuiThemeProvider>
 		<Provider store={store}>
 			<Layout>
-				<Router history={hashHistory}>
+				<Router history={history}>
 					{routes}
 				</Router>
 			</Layout>

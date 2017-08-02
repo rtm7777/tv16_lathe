@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux'
 import locationReducer from './location/locationReducers';
 import { gearboxReducer, gearboxConfigReducer, gearboxFiltersReducer, loaderReducer } from './gearbox/gearboxReducers';
 
@@ -7,7 +8,8 @@ const rootReducer = combineReducers({
 	gearboxReducer,
 	gearboxConfigReducer,
 	gearboxFiltersReducer,
-	loaderReducer
+	loaderReducer,
+	routing: routerReducer
 });
 
 export default rootReducer;
