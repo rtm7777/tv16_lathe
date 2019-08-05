@@ -20,7 +20,7 @@ const theme = createMuiTheme({
     MuiDrawer: {
       paper: {
         width: 58,
-        marginTop: 48,
+        overflowX: 'hidden',
       },
     },
   },

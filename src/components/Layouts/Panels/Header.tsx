@@ -1,55 +1,53 @@
 import React, { ReactElement } from 'react'
+import { withRouter, RouteComponentProps } from 'react-router'
+import clsx from 'clsx'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import { FormattedMessage } from 'react-intl'
 
-const drawerWidth = 270
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
     },
     menuButton: {
       marginRight: 36,
     },
-    hide: {
-      display: 'none',
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap',
-    },
   }),
 )
 
-const Header = (): ReactElement => {
+interface SideBarProps {
+  open: boolean
+  onClick(open: boolean): void
+}
+
+const Header = ({ open, onClick, ...props }: RouteComponentProps & SideBarProps): ReactElement => {
   const classes = useStyles({})
+  const id = props.location.pathname
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
-      <Toolbar variant="dense">
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={() => onClick(!open)}
+          edge="start"
+          className={clsx(classes.menuButton)}
+        >
+          {open ? <ChevronLeftIcon /> : <MenuIcon />}
+        </IconButton>
         <Typography variant="h6" noWrap>
-          Header
+          <FormattedMessage id={`pages.${id.slice(1)}`} />
         </Typography>
       </Toolbar>
     </AppBar>
   )
 }
 
-export default Header
+export default withRouter(Header)

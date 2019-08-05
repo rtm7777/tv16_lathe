@@ -6,7 +6,10 @@ export interface MessagesLocale {
 
 const messages: MessagesLocale = {
   'en-US': {
-    hello: 'Hello',
+    pages: {
+      gearbox: 'Gearbox',
+      documentation: 'Documentation',
+    },
   },
 }
 

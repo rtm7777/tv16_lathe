@@ -10,6 +10,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
+    "clsx": "^1.0.4",
     "dexie": "^2.0.4",
     "eslint": "latest",
     "react": "latest",

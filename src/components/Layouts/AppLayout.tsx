@@ -1,17 +1,55 @@
 import React, { FC } from 'react'
+import clsx from 'clsx'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+
 import SideBar from '@/components/Layouts/Panels/Sidebar'
 import Header from '@/components/Layouts/Panels/Header'
 
-const AppLayout = <P extends object>(ComposedComponent: FC<P>): FC<P> => (props: P) => {
-  const WrappedComponent = (
-    <div className="app">
-      <Header />
-      <SideBar />
-      <div className="app-main">
-        <ComposedComponent {...props} />
-      </div>
+const useStyles = makeStyles((theme: Theme) => {
+  const { width } = theme.overrides.MuiDrawer.paper as {} & { width: string }
 
-      <div className="app-footer">footer is here</div>
+  return createStyles({
+    app: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+      display: 'flex',
+      flexDirection: 'column',
+      flexGrow: 1,
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      marginLeft: 0,
+    },
+    contentShift: {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: width,
+    },
+  })
+})
+
+const AppLayout: FC = ({ children }) => {
+  const classes = useStyles({})
+  const [open, setOpen] = React.useState(false)
+  const WrappedComponent = (
+    <div className={classes.app}>
+      <Header open={open} onClick={setOpen} />
+      <SideBar open={open} />
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.toolbar} />
+        {children}
+      </main>
     </div>
   )
   return WrappedComponent
