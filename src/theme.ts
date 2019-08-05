@@ -16,6 +16,14 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  overrides: {
+    MuiDrawer: {
+      paper: {
+        width: 58,
+        marginTop: 48,
+      },
+    },
+  },
 })
 
 export default theme

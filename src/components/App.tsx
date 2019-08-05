@@ -1,9 +1,11 @@
-import * as React from 'react'
+import React, { FC } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/styles'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
+
+import Router from '@/components/Router'
 import { FlattenMessages } from '@/utils/flat'
 
 export interface AppProps {
@@ -13,13 +15,13 @@ export interface AppProps {
   messages: FlattenMessages
 }
 
-const App: React.FC<AppProps> = ({ store, locale, theme, messages }: AppProps) => (
+const App: FC<AppProps> = ({ store, locale, theme, messages }: AppProps) => (
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
     <Provider store={store}>
       <IntlProvider locale={locale} messages={messages}>
-        <div>Hello world</div>
+        <Router />
       </IntlProvider>
     </Provider>
   </ThemeProvider>

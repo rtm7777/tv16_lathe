@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "esModuleInterop": true,
     "jsx": "react",
-    "paths": {
-      "@/*": ["src/*"]
-    },
     "module": "commonjs",
     "noImplicitAny": true,
     "outDir": "dist/",
+    "paths": {
+      "@/*": ["src/*"],
+    },
     "sourceMap": true,
     "target": "es6"
   },
   "exclude": [
     "dist",
-    "node_modules"
-  ]
+    "node_modules",
+  ],
 }

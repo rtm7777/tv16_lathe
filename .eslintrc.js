@@ -1,6 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-  plugins: ["@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "prettier"],
   extends: [
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
@@ -16,7 +16,8 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/explicit-function-return-type": ["error", {
-      "allowTypedFunctionExpressions": true
+      "allowTypedFunctionExpressions": true,
+      "allowExpressions": true,
     }],
   },
   settings: {

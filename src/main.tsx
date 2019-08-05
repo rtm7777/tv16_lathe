@@ -1,7 +1,7 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { addLocaleData } from 'react-intl'
-import * as en from 'react-intl/locale-data/en'
+import en from 'react-intl/locale-data/en'
 
 import App from '@/components/App'
 
