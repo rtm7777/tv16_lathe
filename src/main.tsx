@@ -14,6 +14,8 @@ import messages from '@/messages'
 addLocaleData(en)
 const locale = (window.navigator.languages && window.navigator.languages[0]) || window.navigator.language || 'en-US'
 
+declare let module: any // eslint-disable-line
+
 ReactDOM.render(
   <App
     store={store}
@@ -23,3 +25,7 @@ ReactDOM.render(
   />,
   document.querySelector('#root'),
 )
+
+if (module.hot) {
+  module.hot.accept()
+}

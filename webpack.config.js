@@ -20,6 +20,7 @@ module.exports = {
     path: outPath,
     filename: isProduction ? '[contenthash].js' : '[hash].js',
     chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
@@ -36,12 +37,13 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: [
-          !isProduction && {
-            loader: 'babel-loader',
-            options: { plugins: ['react-hot-loader/babel'] },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
           },
-          'ts-loader',
-        ].filter(Boolean),
+        ],
       },
       {
         test: /\.less$/,
@@ -99,6 +101,7 @@ module.exports = {
       filename: '[hash].css',
       disable: !isProduction,
     }),
+    new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/]),
     new HtmlWebpackPlugin({
       template: 'index.html',
       minify: {
@@ -116,6 +119,7 @@ module.exports = {
         title: 'TV-16',
       },
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     contentBase: sourcePath,
@@ -126,6 +130,7 @@ module.exports = {
     },
     stats: 'minimal',
     clientLogLevel: 'warning',
+    publicPath: '/',
   },
   // https://webpack.js.org/configuration/devtool/
   devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
