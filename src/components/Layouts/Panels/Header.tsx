@@ -12,12 +12,8 @@ import { FormattedMessage } from 'react-intl'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-    },
-    menuButton: {
-      marginRight: 36,
-    },
+    appBar: { zIndex: theme.zIndex.drawer + 1 },
+    menuButton: { marginRight: 36 },
   }),
 )
 
@@ -26,9 +22,8 @@ interface SideBarProps {
   onClick(open: boolean): void
 }
 
-const Header = ({ open, onClick, ...props }: RouteComponentProps & SideBarProps): ReactElement => {
+const Header = ({ open, onClick, location: { pathname } }: RouteComponentProps & SideBarProps): ReactElement => {
   const classes = useStyles({})
-  const id = props.location.pathname
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -43,7 +38,7 @@ const Header = ({ open, onClick, ...props }: RouteComponentProps & SideBarProps)
           {open ? <ChevronLeftIcon /> : <MenuIcon />}
         </IconButton>
         <Typography variant="h6" noWrap>
-          <FormattedMessage id={`pages.${id.slice(1)}`} />
+          <FormattedMessage id={`pages.${pathname.slice(1)}`} />
         </Typography>
       </Toolbar>
     </AppBar>

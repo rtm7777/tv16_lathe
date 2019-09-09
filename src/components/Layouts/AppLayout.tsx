@@ -9,15 +9,11 @@ const useStyles = makeStyles((theme: Theme) => {
   const { width } = theme.overrides.MuiDrawer.paper as {} & { width: string }
 
   return createStyles({
-    app: {
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-    },
     toolbar: theme.mixins.toolbar,
     content: {
       display: 'flex',
       flexDirection: 'column',
+      height: '100vh',
       flexGrow: 1,
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
@@ -39,7 +35,7 @@ const AppLayout: FC = ({ children }) => {
   const classes = useStyles({})
   const [open, setOpen] = React.useState(false)
   const WrappedComponent = (
-    <div className={classes.app}>
+    <>
       <Header open={open} onClick={setOpen} />
       <SideBar open={open} />
       <main
@@ -50,7 +46,7 @@ const AppLayout: FC = ({ children }) => {
         <div className={classes.toolbar} />
         {children}
       </main>
-    </div>
+    </>
   )
   return WrappedComponent
 }
