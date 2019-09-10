@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme: Theme) => {
       [theme.breakpoints.up('md')]: {
         display: 'flex',
         height: '100%',
+        width: '200px',
         overflow: 'auto',
       },
     },
@@ -35,10 +36,10 @@ const GearboxPage: FC = () => {
 
   return (
     <Grid direction="row" container className={classes.root}>
-      <Grid item xs={12} md={2} className={classes.gears}>
+      <Grid item className={classes.gears}>
         <GearSelector />
       </Grid>
-      <Grid item xs={12} md={10}>
+      <Grid item xs={12} md="auto">
         gearbox page content
       </Grid>
       <SpeedDial open={false} ariaLabel="SpeedDial example" icon={<SpeedDialIcon />} className={classes.dial} />

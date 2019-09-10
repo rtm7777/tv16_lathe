@@ -10,6 +10,11 @@ const messages: MessagesLocale = {
       gearbox: 'Gearbox',
       documentation: 'Documentation',
     },
+    gearSelector: {
+      metric: 'Metric gears',
+      imperial: 'Imperial gears',
+      custom: 'Custom gears',
+    },
   },
 }
 
