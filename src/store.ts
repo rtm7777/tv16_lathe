@@ -7,6 +7,6 @@ const composeEnhancers =
   (typeof window !== 'undefined' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose // eslint-disable-line
 
 // Create store
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk.withExtraArgument({ a: 'b' }))))
 
 export default store

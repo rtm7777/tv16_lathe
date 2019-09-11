@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux'
 
-const rootReducer = combineReducers({})
+import gearbox from '@/redux/gearbox'
+
+const rootReducer = combineReducers({
+  gearbox,
+})
+
+export type AppState = ReturnType<typeof rootReducer>
 
 export default rootReducer
