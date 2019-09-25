@@ -42,7 +42,12 @@ const GearboxPage: FC = () => {
       <Grid item xs={12} md="auto">
         gearbox page content
       </Grid>
-      <SpeedDial open={false} ariaLabel="SpeedDial example" icon={<SpeedDialIcon />} className={classes.dial} />
+      <SpeedDial
+        open={false}
+        ariaLabel="SpeedDial example"
+        icon={<SpeedDialIcon />}
+        className={classes.dial}
+      />
     </Grid>
   )
 }

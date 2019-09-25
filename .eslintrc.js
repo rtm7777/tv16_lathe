@@ -25,7 +25,19 @@ module.exports = {
       "allowTypedFunctionExpressions": true,
       "allowExpressions": true,
     }],
+    "@typescript-eslint/semi": ["error", "never"],
+    "@typescript-eslint/member-delimiter-style": ["error", {
+      "multiline": {
+          "delimiter": "none",
+          "requireLast": false,
+      },
+      "singleline": {
+          "delimiter": "comma",
+          "requireLast": false,
+      },
+    }],
     "react-hooks/rules-of-hooks": "error",
+    "react/jsx-max-props-per-line": [2, {"maximum": 3, "when": "always" }],
   },
   settings: {
     react: {

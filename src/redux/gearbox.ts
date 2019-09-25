@@ -51,9 +51,16 @@ const initialState: GearboxState = {
   selectedGears: [],
 }
 
-export default (state = initialState, { type }: GearboxActionTypes): GearboxState => {
+export default (state = initialState, { type, payload }: GearboxActionTypes): GearboxState => {
   switch (type) {
     case TOGGLE_GEAR:
+      return {
+        ...state,
+        selectedGears: state.selectedGears.includes(payload)
+          ? state.selectedGears.filter(g => g !== payload)
+          : [...state.selectedGears, payload],
+      }
+
     default:
       return state
   }
