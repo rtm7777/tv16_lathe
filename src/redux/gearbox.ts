@@ -36,6 +36,14 @@ export const addGear = (gear: number): ThunkResult<void> => async dispatch => {
   })
 }
 
+export const loadGears = (): ThunkResult<void> => async dispatch => {
+
+  dispatch({
+    type: REMOVE_GEAR,
+    payload: gear,
+  })
+}
+
 export const removeGear = (gear: number): RemoveGearAction => ({
   type: REMOVE_GEAR,
   payload: gear,

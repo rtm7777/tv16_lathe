@@ -11,9 +11,6 @@ class DataBase {
     this.db = new Dexie(name)
     this.db.version(1).stores(modelObj)
     this.db.open()
-    if (storage.get('configGenerated') !== 'true') {
-      this.initializeDB()
-    }
   }
 
   getInstance = (): {} => this.db
@@ -47,10 +44,9 @@ class DataBase {
       })
     })
     await this.db.gearConfigs.bulkAdd(gearConfigs)
-    storage.set('configGenerated', 'true')
   }
 
-  addGear(newGear: number, customGears: number[], asD = false): Promise<void> {
+  addGear = (newGear: number, customGears: number[], asD = false): Promise<void> => {
     const allGears = [...metricGears, ...imperialGears, ...customGears]
     const dGearsArray = [...dGears, ...(asD ? [newGear] : [])]
 

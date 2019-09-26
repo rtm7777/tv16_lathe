@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router'
+import { useLocation } from 'react-router'
 import clsx from 'clsx'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -22,8 +22,9 @@ interface SideBarProps {
   onClick(open: boolean): void
 }
 
-const Header = ({ open, onClick, location: { pathname } }: RouteComponentProps & SideBarProps): ReactElement => {
+const Header = ({ open, onClick }: SideBarProps): ReactElement => {
   const classes = useStyles({})
+  const { pathname } = useLocation()
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -45,4 +46,4 @@ const Header = ({ open, onClick, location: { pathname } }: RouteComponentProps &
   )
 }
 
-export default withRouter(Header)
+export default Header

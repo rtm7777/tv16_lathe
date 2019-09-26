@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react'
 import clsx from 'clsx'
-import { withRouter, RouteComponentProps } from 'react-router'
+import { useLocation } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { makeStyles } from '@material-ui/core/styles'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
@@ -37,8 +38,10 @@ interface SideBarProps {
   open: boolean
 }
 
-const SideBar = ({ open, location: { pathname } }: RouteComponentProps & SideBarProps): ReactElement => {
+const SideBar = ({ open }: SideBarProps): ReactElement => {
   const classes = useStyles({})
+  const { pathname } = useLocation()
+  const { formatMessage } = useIntl()
 
   return (
     <Drawer
@@ -58,7 +61,7 @@ const SideBar = ({ open, location: { pathname } }: RouteComponentProps & SideBar
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <Tooltip title="Gearbox" placement="right">
+        <Tooltip title={formatMessage({ id: 'sidebar.gearbox' })} placement="right">
           <ListItem button selected={pathname === '/gearbox'}>
             <NavLink to="/gearbox">
               <ListItemIcon>
@@ -67,7 +70,7 @@ const SideBar = ({ open, location: { pathname } }: RouteComponentProps & SideBar
             </NavLink>
           </ListItem>
         </Tooltip>
-        <Tooltip title="Documentation" placement="right">
+        <Tooltip title={formatMessage({ id: 'sidebar.documentation' })} placement="right">
           <ListItem button selected={pathname === '/documentation'}>
             <Link to="/documentation">
               <ListItemIcon>
@@ -79,7 +82,7 @@ const SideBar = ({ open, location: { pathname } }: RouteComponentProps & SideBar
       </List>
       <Divider />
       <List>
-        <Tooltip title="Info" placement="right">
+        <Tooltip title={formatMessage({ id: 'sidebar.info' })} placement="right">
           <ListItem button>
             <ListItemIcon>
               <InfoIcon />
@@ -91,4 +94,4 @@ const SideBar = ({ open, location: { pathname } }: RouteComponentProps & SideBar
   )
 }
 
-export default withRouter(SideBar)
+export default SideBar

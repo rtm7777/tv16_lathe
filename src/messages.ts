@@ -15,6 +15,11 @@ const messages: MessagesLocale = {
       imperial: 'Imperial gears',
       custom: 'Custom gears',
     },
+    sidebar: {
+      gearbox: 'Gearbox',
+      documentation: 'Documentation',
+      info: 'Info',
+    },
   },
 }
 
