@@ -5,6 +5,7 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon'
 import Grid from '@material-ui/core/Grid'
 
 import GearSelector from '@/components/gearbox/GearSelector'
+import GearboxContent from '@/components/gearbox/GearboxContent'
 
 const useStyles = makeStyles((theme: Theme) => {
   const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as {} & { minHeight: number }
@@ -23,6 +24,12 @@ const useStyles = makeStyles((theme: Theme) => {
         overflow: 'auto',
       },
     },
+    content: {
+      [theme.breakpoints.up('md')]: {
+        width: 'calc(100% - 200px)',
+        height: '100%',
+      },
+    },
     dial: {
       position: 'fixed',
       bottom: '25px',
@@ -39,8 +46,8 @@ const GearboxPage: FC = () => {
       <Grid item className={classes.gears}>
         <GearSelector />
       </Grid>
-      <Grid item xs={12} md="auto">
-        gearbox page content
+      <Grid item className={classes.content}>
+        <GearboxContent />
       </Grid>
       <SpeedDial
         open={false}

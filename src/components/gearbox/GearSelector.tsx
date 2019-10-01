@@ -9,13 +9,14 @@ import CollapsableList from '@/components/gearbox/CollapsableList'
 import CheckboxListItem from '@/components/gearbox/CheckboxListItem'
 
 import { toggleGear } from '@/redux/gearbox'
+import { AppState } from '@/redux/types'
 
 import { metricGears, imperialGears } from '@/constants'
 
 const GearSelector: FC = () => {
   const { formatMessage } = useIntl()
   const dispatch = useDispatch()
-  const selectedGears = useSelector(state => state.gearbox.selectedGears)
+  const selectedGears = useSelector(({ gearbox }: AppState) => gearbox.selectedGears)
 
   const WrappedComponent = (
     <List subheader={<ListSubheader>Gears</ListSubheader>}>

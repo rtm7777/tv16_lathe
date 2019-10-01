@@ -1,32 +1,5 @@
-import { ThunkAction } from 'redux-thunk'
-
-export const ADD_GEAR = 'ADD_GEAR'
-export const REMOVE_GEAR = 'REMOVE_GEAR'
-export const TOGGLE_GEAR = 'TOGGLE_GEAR'
-
-interface AddGearAction {
-  type: typeof ADD_GEAR
-  payload: number
-}
-
-interface RemoveGearAction {
-  type: typeof REMOVE_GEAR
-  payload: number
-}
-
-interface ToggleGearAction {
-  type: typeof TOGGLE_GEAR
-  payload: number
-}
-
-type GearboxActionTypes = ToggleGearAction | AddGearAction | RemoveGearAction
-
-interface GearboxState {
-  customGears: number[]
-  selectedGears: number[]
-}
-
-type ThunkResult<R> = ThunkAction<R, GearboxState, undefined, GearboxActionTypes>
+import { ADD_GEAR, REMOVE_GEAR, TOGGLE_GEAR, GearboxActionTypes, GearboxState } from '@/redux/gearboxTypes'
+import { ThunkResult } from '@/redux/types'
 
 export const addGear = (gear: number): ThunkResult<void> => async dispatch => {
   const gear2 = gear
@@ -37,19 +10,18 @@ export const addGear = (gear: number): ThunkResult<void> => async dispatch => {
 }
 
 export const loadGears = (): ThunkResult<void> => async dispatch => {
-
   dispatch({
     type: REMOVE_GEAR,
-    payload: gear,
+    payload: 23,
   })
 }
 
-export const removeGear = (gear: number): RemoveGearAction => ({
+export const removeGear = (gear: number): GearboxActionTypes => ({
   type: REMOVE_GEAR,
   payload: gear,
 })
 
-export const toggleGear = (gear: number): ToggleGearAction => ({
+export const toggleGear = (gear: number): GearboxActionTypes => ({
   type: TOGGLE_GEAR,
   payload: gear,
 })

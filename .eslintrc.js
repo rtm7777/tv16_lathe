@@ -38,6 +38,7 @@ module.exports = {
     }],
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-max-props-per-line": [2, {"maximum": 3, "when": "always" }],
+    "import/no-unresolved": 0,
   },
   settings: {
     react: {

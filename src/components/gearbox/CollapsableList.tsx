@@ -21,7 +21,7 @@ const CollapsableList: FC<CollapsableListProps> = ({ children, text }) => {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List dense component="div" disablePadding>
           {children}
         </List>
       </Collapse>

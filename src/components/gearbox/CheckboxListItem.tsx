@@ -19,7 +19,12 @@ const CheckboxListItem: FC<CheckboxListItemProps> = ({ checked, onClick, text })
   const WrappedComponent = (
     <ListItem button className={classes.nested} onClick={onClick}>
       <ListItemIcon>
-        <Checkbox checked={checked} edge="start" tabIndex={-1} disableRipple />
+        <Checkbox
+          checked={checked}
+          edge="start"
+          tabIndex={-1}
+          disableRipple
+        />
       </ListItemIcon>
       <ListItemText primary={text} />
     </ListItem>
