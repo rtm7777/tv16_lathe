@@ -1,92 +1,64 @@
 import Dexie from 'dexie'
 
-import model, { DBModel } from '@/db/model'
-import { metricGears, imperialGears, defaultDgears, dGears } from '@/constants'
+import model, { GearConfig } from '@/db/gearConfig'
+import { generateGearConfigs } from '@/utils/gears'
+import { metricGears, imperialGears, defaultDgears } from '@/constants'
 
-const includes = (gears: number[], { a, b, c, d }: DBModel): boolean =>
+const dGears: number[] = []
+
+const includes = (gears: number[], { a, b, c, d }: GearConfig): boolean =>
   gears.includes(a) && gears.includes(b) && gears.includes(c) && gears.includes(d)
 
-class DataBase {
-  constructor(name: string, modelObj: {}) {
-    this.db = new Dexie(name)
-    this.db.version(1).stores(modelObj)
-    this.db.open()
+export class DataBase extends Dexie {
+  gearConfigs: Dexie.Table<GearConfig, number>
+
+  constructor(name: string) {
+    super(name)
+    this.version(1).stores(model)
+
+    // this.open()
+    this.gearConfigs.mapToClass(GearConfig)
   }
 
-  getInstance = (): {} => this.db
+  getInstance = (): Dexie => this
 
-  initializeDB = async (): Promise<void> => {
+  initializeGears = (): Dexie.Promise<number> => {
     const gears = [...metricGears, ...imperialGears]
-    const gearConfigs: DBModel[] = []
-    let pmm = 0
-    defaultDgears.forEach(d => {
-      gears.forEach(c => {
-        if (c !== d && c < 100) {
-          gears.forEach(b => {
-            if (b !== d && b < 100) {
-              gears.forEach(a => {
-                if (a <= 60) {
-                  pmm = 3 * (a / b) * (c / d)
-                  gearConfigs.push({
-                    a,
-                    b,
-                    c,
-                    d,
-                    pmm,
-                    tpi: 25.4 / pmm,
-                    feed: pmm / 20,
-                  })
-                }
-              })
-            }
-          })
-        }
-      })
+    const gearConfigs: GearConfig[] = []
+
+    generateGearConfigs(gears, defaultDgears, config => {
+      gearConfigs.push(new GearConfig(config))
     })
-    await this.db.gearConfigs.bulkAdd(gearConfigs)
+
+    return this.gearConfigs.bulkAdd(gearConfigs)
   }
 
-  addGear = (newGear: number, customGears: number[], asD = false): Promise<void> => {
+  addGear = (newGear: number, customGears: number[], asD = false): Dexie.Promise<number> => {
     const allGears = [...metricGears, ...imperialGears, ...customGears]
     const dGearsArray = [...dGears, ...(asD ? [newGear] : [])]
 
     if (newGear && newGear > 15 && newGear < 100 && !allGears.includes(newGear)) {
       const gears = [...allGears, newGear]
-      const gearConfigs: DBModel[] = []
-      let pmm = 0
+      const gearConfigs: GearConfig[] = []
 
-      dGearsArray.forEach(d => {
-        gears.forEach(c => {
-          if (c !== d && c < 100) {
-            gears.forEach(b => {
-              if (b !== d && b < 100) {
-                gears.forEach(a => {
-                  if (a <= 60 && a !== d && (a === newGear || b === newGear || c === newGear || d === newGear)) {
-                    pmm = 3 * (a / b) * (c / d)
-                    gearConfigs.push({
-                      a,
-                      b,
-                      c,
-                      d,
-                      pmm,
-                      tpi: 25.4 / pmm,
-                      feed: pmm / 20,
-                    })
-                  }
-                })
-              }
-            })
-          }
-        })
-      })
-      return this.db.gearConfigs.bulkAdd(gearConfigs)
+      generateGearConfigs(
+        gears,
+        dGearsArray,
+        config => {
+          gearConfigs.push(new GearConfig(config))
+        },
+        newGear,
+      )
+
+      return this.gearConfigs.bulkAdd(gearConfigs)
     }
-    return Promise.reject()
+    // return Dexie.Promise.reject(0)
+    throw new Error('gear_err')
   }
 
   removeGear = async (gearToRemove: number): Promise<void> => {
     if (![...metricGears, imperialGears].includes(gearToRemove)) {
-      await this.db.gearConfigs
+      await this.gearConfigs
         .where('a')
         .equals(gearToRemove)
         .or('b')
@@ -99,37 +71,37 @@ class DataBase {
     }
   }
 
-  findConfigsByPmm(value: number, gears: number[], approx = false): {}[] {
+  findConfigsByPmm(value: number, gears: number[], approx = false): Dexie.Promise<GearConfig[]> {
     if (approx) {
-      return this.db.gearConfigs
+      return this.gearConfigs
         .where('pmm')
         .between(value - 0.02, value + 0.02, true, true)
-        .and((item: DBModel) => includes(gears, item))
+        .and((item: GearConfig) => includes(gears, item))
         .toArray()
     }
-    return this.db.gearConfigs
+    return this.gearConfigs
       .where('pmm')
       .equals(value)
-      .and((item: DBModel) => includes(gears, item))
+      .and((item: GearConfig) => includes(gears, item))
       .toArray()
   }
 
-  findConfigsByTpi(value: number, gears: number[], approx = false): {}[] {
+  findConfigsByTpi(value: number, gears: number[], approx = false): Dexie.Promise<GearConfig[]> {
     if (approx) {
-      return this.db.gearConfigs
+      return this.gearConfigs
         .where('tpi')
         .between(value - 0.25, value + 0.25, true, true)
-        .and((item: DBModel) => includes(gears, item))
+        .and((item: GearConfig) => includes(gears, item))
         .toArray()
     }
-    return this.db.gearConfigs
+    return this.gearConfigs
       .where('tpi')
       .between(value - 0.05, value + 0.05, true, true)
-      .and((item: DBModel) => includes(gears, item))
+      .and((item: GearConfig) => includes(gears, item))
       .toArray()
   }
 }
 
-const db = new DataBase('TV-16', model)
+const db = new DataBase('TV-16')
 
 export default db
