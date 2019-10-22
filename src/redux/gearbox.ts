@@ -1,9 +1,15 @@
-import { ADD_GEAR, REMOVE_GEAR, TOGGLE_GEAR, GearboxActionTypes, GearboxState } from '@/redux/gearboxTypes'
+import {
+  ADD_GEAR,
+  REMOVE_GEAR,
+  TOGGLE_GEAR,
+  GearboxActionTypes,
+  GearboxState,
+} from '@/redux/gearboxTypes'
 import { ThunkResult } from '@/redux/types'
 
 export const addGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
   try {
-    await db.addGear(gear, [], false)
+    await db.addGear(gear, false)
     dispatch({
       type: ADD_GEAR,
       payload: gear,
@@ -13,7 +19,8 @@ export const addGear = (gear: number): ThunkResult<void> => async (dispatch, _, 
   }
 }
 
-export const loadGears = (): ThunkResult<void> => async dispatch => {
+export const loadGears = (): ThunkResult<void> => async (dispatch, _, db) => {
+  db.initializeGears()
   dispatch({
     type: REMOVE_GEAR,
     payload: 23,

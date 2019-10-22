@@ -10,12 +10,10 @@ import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { FormattedMessage } from 'react-intl'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: { zIndex: theme.zIndex.drawer + 1 },
-    menuButton: { marginRight: 36 },
-  }),
-)
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  appBar: { zIndex: theme.zIndex.drawer + 1 },
+  menuButton: { marginRight: 36 },
+}))
 
 interface SideBarProps {
   open: boolean

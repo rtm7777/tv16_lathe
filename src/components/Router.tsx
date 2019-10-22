@@ -1,19 +1,20 @@
 import React, { useState, FC, useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loadGears } from '@/redux/gearbox'
 
 import AppLayout from '@/components/Layouts/AppLayout'
 import DocumentationPage from '@/components/pages/DocumentationPage'
 import GearboxPage from '@/components/pages/GearboxPage'
 
-const loadApp = (): Promise<void> => Promise.resolve() // todo add reducer
-
 const Router: FC = () => {
   const [isLoading, setLoading] = useState(true)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const load = async (): Promise<void> => {
       try {
-        await loadApp()
+        await dispatch(loadGears())
         setLoading(false)
       } catch (err) {
         console.log(err)

@@ -1,4 +1,4 @@
-import { GearConfigType } from '@/db/gearConfig'
+import GearConfig, { GearConfigType } from '@/db/gearConfig'
 
 export const generateGearConfigs = (
   gears: number[],
@@ -14,7 +14,13 @@ export const generateGearConfigs = (
         gears.forEach(b => {
           if (b !== d && b < 100) {
             gears.forEach(a => {
-              if (a <= 60 && newGear && a !== d && (a === newGear || b === newGear || c === newGear || d === newGear)) {
+              if (
+                a <= 60
+                && (
+                  !newGear
+                  || (a !== d && (a === newGear || b === newGear || c === newGear || d === newGear))
+                )
+              ) {
                 pmm = 3 * (a / b) * (c / d)
                 fn({
                   a,
@@ -34,4 +40,11 @@ export const generateGearConfigs = (
   })
 }
 
-export const a = 42
+export const includes = (
+  gears: number[], {
+    a,
+    b,
+    c,
+    d,
+  }: GearConfig,
+): boolean => gears.includes(a) && gears.includes(b) && gears.includes(c) && gears.includes(d)

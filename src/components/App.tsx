@@ -15,7 +15,12 @@ export interface AppProps {
   messages: FlattenMessages
 }
 
-const App: FC<AppProps> = ({ store, locale, theme, messages }: AppProps) => (
+const App: FC<AppProps> = ({
+  store,
+  locale,
+  theme,
+  messages,
+}: AppProps) => (
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />

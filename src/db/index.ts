@@ -1,75 +1,100 @@
 import Dexie from 'dexie'
 
-import model, { GearConfig } from '@/db/gearConfig'
-import { generateGearConfigs } from '@/utils/gears'
-import { metricGears, imperialGears, defaultDgears } from '@/constants'
+import schema from '@/db/schema'
+import Gear from '@/db/gear'
+import DGear from '@/db/dGear'
+import GearConfig from '@/db/gearConfig'
+
+import { generateGearConfigs, includes } from '@/utils/gears'
+import {
+  metricGears,
+  imperialGears,
+  defaultGears,
+  defaultDgears,
+  DEFAULT_GEARS_PARAMS,
+} from '@/constants'
 
 const dGears: number[] = []
 
-const includes = (gears: number[], { a, b, c, d }: GearConfig): boolean =>
-  gears.includes(a) && gears.includes(b) && gears.includes(c) && gears.includes(d)
-
 export class DataBase extends Dexie {
+  /* eslint-disable lines-between-class-members */
+  gears: Dexie.Table<Gear, number>
+  dGears: Dexie.Table<DGear, number>
   gearConfigs: Dexie.Table<GearConfig, number>
+  /* eslint-enable lines-between-class-members */
 
   constructor(name: string) {
     super(name)
-    this.version(1).stores(model)
+    this.version(1).stores(schema)
 
-    // this.open()
+    this.gears.mapToClass(Gear)
+    this.dGears.mapToClass(DGear)
     this.gearConfigs.mapToClass(GearConfig)
   }
 
-  getInstance = (): Dexie => this
+  initializeGears = (): Dexie.Promise<void> =>
+    this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
+      const gearsCount = await this.gears.count()
 
-  initializeGears = (): Dexie.Promise<number> => {
-    const gears = [...metricGears, ...imperialGears]
-    const gearConfigs: GearConfig[] = []
+      if (!gearsCount) {
+        await this.gearConfigs.clear()
 
-    generateGearConfigs(gears, defaultDgears, config => {
-      gearConfigs.push(new GearConfig(config))
+        this.gears.bulkAdd(metricGears.map(gear => new Gear({ z: gear, active: 1 })))
+        this.gears.bulkAdd(imperialGears.map(gear => new Gear({ z: gear, active: 0 })))
+        this.dGears.bulkAdd(defaultDgears.map(gear => new DGear({ z: gear })))
+
+        const gearConfigs: GearConfig[] = []
+
+        generateGearConfigs(defaultGears, defaultDgears, config => {
+          gearConfigs.push(new GearConfig(config))
+        })
+
+        this.gearConfigs.bulkAdd(gearConfigs)
+      }
     })
 
-    return this.gearConfigs.bulkAdd(gearConfigs)
-  }
+  addGear = (newGear: number, asD = false): Dexie.Promise<void> =>
+    this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
+      const dGearsArray = [...dGears, ...(asD ? [newGear] : [])]
 
-  addGear = (newGear: number, customGears: number[], asD = false): Dexie.Promise<number> => {
-    const allGears = [...metricGears, ...imperialGears, ...customGears]
-    const dGearsArray = [...dGears, ...(asD ? [newGear] : [])]
+      if (newGear > DEFAULT_GEARS_PARAMS.minZ && newGear < DEFAULT_GEARS_PARAMS.maxZ) {
+        await this.gears.add(new Gear({ z: newGear, active: 1 }))
 
-    if (newGear && newGear > 15 && newGear < 100 && !allGears.includes(newGear)) {
-      const gears = [...allGears, newGear]
-      const gearConfigs: GearConfig[] = []
+        if (asD) this.dGears.add(new DGear({ z: newGear }))
 
-      generateGearConfigs(
-        gears,
-        dGearsArray,
-        config => {
-          gearConfigs.push(new GearConfig(config))
-        },
-        newGear,
-      )
+        const gears = await this.gears.toArray()
+        const gearConfigs: GearConfig[] = []
 
-      return this.gearConfigs.bulkAdd(gearConfigs)
-    }
-    // return Dexie.Promise.reject(0)
-    throw new Error('gear_err')
-  }
+        generateGearConfigs(
+          gears.map(g => g.z),
+          dGearsArray,
+          config => {
+            gearConfigs.push(new GearConfig(config))
+          },
+          newGear,
+        )
 
-  removeGear = async (gearToRemove: number): Promise<void> => {
-    if (![...metricGears, imperialGears].includes(gearToRemove)) {
-      await this.gearConfigs
-        .where('a')
-        .equals(gearToRemove)
-        .or('b')
-        .equals(gearToRemove)
-        .or('c')
-        .equals(gearToRemove)
-        .or('d')
-        .equals(gearToRemove)
-        .delete()
-    }
-  }
+        this.gearConfigs.bulkAdd(gearConfigs)
+        return
+      }
+      throw new Error('gear_add_error')
+    })
+
+  removeGear = (gearToRemove: number): Promise<void> =>
+    this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
+      if (!defaultGears.includes(gearToRemove)) {
+        this.gearConfigs
+          .where('a')
+          .equals(gearToRemove)
+          .or('b')
+          .equals(gearToRemove)
+          .or('c')
+          .equals(gearToRemove)
+          .or('d')
+          .equals(gearToRemove)
+          .delete()
+      }
+    })
 
   findConfigsByPmm(value: number, gears: number[], approx = false): Dexie.Promise<GearConfig[]> {
     if (approx) {

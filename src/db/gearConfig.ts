@@ -8,12 +8,8 @@ export interface GearConfigType {
   feed: number
 }
 
-export default {
-  gearConfigs: '++,a,b,c,d,pmm,tpi,feed',
-}
-
-/* eslint-disable lines-between-class-members */
-export class GearConfig {
+export default class GearConfig {
+  /* eslint-disable lines-between-class-members */
   a: number
   b: number
   c: number
@@ -21,8 +17,17 @@ export class GearConfig {
   pmm: number
   tpi: number
   feed: number
+  /* eslint-enable lines-between-class-members */
 
-  constructor({ a, b, c, d, pmm, tpi, feed }: GearConfigType) {
+  constructor({
+    a,
+    b,
+    c,
+    d,
+    pmm,
+    tpi,
+    feed,
+  }: GearConfigType) {
     this.a = a
     this.b = b
     this.c = c

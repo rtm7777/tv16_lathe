@@ -113,7 +113,7 @@ module.exports = {
         collapseInlineTagWhitespace: true,
       },
       append: {
-        head: `<script src="//cdn.polyfill.io/v3/polyfill.min.js"></script>`,
+        head: '<script src="//cdn.polyfill.io/v3/polyfill.min.js"></script>',
       },
       meta: {
         title: 'TV-16',

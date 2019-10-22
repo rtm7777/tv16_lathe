@@ -6,20 +6,18 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    table: {
-      tableLayout: 'fixed',
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  table: {
+    tableLayout: 'fixed',
+  },
+  gearCell: {
+    [theme.breakpoints.up('xs')]: {
+      width: 35,
+      padding: '6px 1px 6px 1px;',
     },
-    gearCell: {
-      [theme.breakpoints.up('xs')]: {
-        width: 35,
-        padding: '6px 1px 6px 1px;',
-      },
-      [theme.breakpoints.up('md')]: { width: 70 },
-    },
-  }),
-)
+    [theme.breakpoints.up('md')]: { width: 70 },
+  },
+}))
 
 interface TableRow {
   a: number
