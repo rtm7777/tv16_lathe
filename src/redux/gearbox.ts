@@ -1,3 +1,5 @@
+import Dexie from 'dexie'
+
 import {
   ADD_GEAR,
   REMOVE_GEAR,
@@ -14,7 +16,7 @@ export const addGear = (gear: number): ThunkResult<void> => async (dispatch, _, 
       type: ADD_GEAR,
       payload: gear,
     })
-  } catch (error) {
+  } catch (err) {
     throw new Error('add gear err')
   }
 }
@@ -27,15 +29,35 @@ export const loadGears = (): ThunkResult<void> => async (dispatch, _, db) => {
   })
 }
 
-export const removeGear = (gear: number): GearboxActionTypes => ({
-  type: REMOVE_GEAR,
-  payload: gear,
-})
+export const removeGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
+  try {
+    await db.removeGear(gear)
+    dispatch({
+      type: REMOVE_GEAR,
+      payload: gear,
+    })
+  } catch (err) {
+    throw new Error('add gear err')
+  }
+}
 
-export const toggleGear = (gear: number): GearboxActionTypes => ({
-  type: TOGGLE_GEAR,
-  payload: gear,
-})
+export const toggleGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
+  try {
+    await db.toggleGear(gear)
+    dispatch({
+      type: TOGGLE_GEAR,
+      payload: gear,
+    })
+  } catch (err) {
+    if (err instanceof Dexie.ModifyError) {
+      console.error(err.failures)
+      throw err
+    } else {
+      // Rethrow error of other types to ensure transaction is cancelled.
+      throw err
+    }
+  }
+}
 
 const initialState: GearboxState = {
   customGears: [],

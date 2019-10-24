@@ -75,12 +75,11 @@ export class DataBase extends Dexie {
         )
 
         this.gearConfigs.bulkAdd(gearConfigs)
-        return
       }
       throw new Error('gear_add_error')
     })
 
-  removeGear = (gearToRemove: number): Promise<void> =>
+  removeGear = (gearToRemove: number): Dexie.Promise<void> =>
     this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
       if (!defaultGears.includes(gearToRemove)) {
         this.gearConfigs
@@ -93,8 +92,18 @@ export class DataBase extends Dexie {
           .or('d')
           .equals(gearToRemove)
           .delete()
+        this.gears.where('z').equals(gearToRemove).delete()
+        this.dGears.where('z').equals(gearToRemove).delete()
       }
     })
+
+  toggleGear = (z: number): Dexie.Promise<void> =>
+    this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
+      const gear = await this.gears.where('z').equals(z).first()
+      if (gear) this.gears.where('z').equals(z).modify({ active: gear.active ? 0 : 1 })
+    })
+
+  findActiveGears = (): Dexie.Promise<Gear[]> => this.gears.where('active').equals('1').toArray()
 
   findConfigsByPmm(value: number, gears: number[], approx = false): Dexie.Promise<GearConfig[]> {
     if (approx) {
