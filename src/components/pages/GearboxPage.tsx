@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid'
 
 import GearSelector from '@/components/gearbox/GearSelector'
 import GearboxContent from '@/components/gearbox/GearboxContent'
+import { useDialogs } from '@/components/providers/DialogsProvider'
 
 const useStyles = makeStyles((theme: Theme) => {
   const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as {} & { minHeight: number }
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
 const GearboxPage: FC = () => {
   const classes = useStyles({})
+  const { open } = useDialogs()
 
   return (
     <Grid direction="row" container className={classes.root}>
@@ -51,6 +53,7 @@ const GearboxPage: FC = () => {
       </Grid>
       <SpeedDial
         open={false}
+        onClick={() => open('addGear')}
         ariaLabel="SpeedDial example"
         icon={<SpeedDialIcon />}
         className={classes.dial}

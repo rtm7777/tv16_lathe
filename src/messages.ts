@@ -6,6 +6,16 @@ export interface MessagesLocale {
 
 const messages: MessagesLocale = {
   'en-US': {
+    dialogs: {
+      addGear: {
+        header: 'Add Gear',
+        content: 'Please enter your custom gear \'z\' value, it should be between {minZ} and {maxZ}.',
+        cancel: 'cancel',
+        add: 'add gear',
+        useAsD: '- this gear can be used as "d"',
+        zLabel: 'z = {minZ} ... {maxZ}',
+      },
+    },
     pages: {
       gearbox: 'Gearbox',
       documentation: 'Documentation',

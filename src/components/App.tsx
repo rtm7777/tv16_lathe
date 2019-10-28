@@ -5,6 +5,7 @@ import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
 
+import Providers from '@/components/Providers'
 import Router from '@/components/Router'
 import { FlattenMessages } from '@/utils/flat'
 
@@ -26,7 +27,9 @@ const App: FC<AppProps> = ({
     <CssBaseline />
     <Provider store={store}>
       <IntlProvider locale={locale} messages={messages}>
-        <Router />
+        <Providers>
+          <Router />
+        </Providers>
       </IntlProvider>
     </Provider>
   </ThemeProvider>

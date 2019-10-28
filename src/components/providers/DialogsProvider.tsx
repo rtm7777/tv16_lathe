@@ -6,26 +6,26 @@ import React, {
   useMemo,
 } from 'react'
 
-import Modal from '@/components/dialogs/addGear'
+import AddGearDialog from '@/components/dialogs/addGear'
 
 interface DialogsType {
   [key: string]: FC<{[key: string]: {}}>
 }
-interface ContextProps {
+export interface DialogsContextProps {
   opened: DialogsType
-  open: (name: string, props: {}) => void
+  open: (name: string, props?: {}) => void
   close: (name: string) => void
 }
 
-export const DialogsContext = React.createContext<ContextProps>({
+export const DialogsContext = React.createContext<DialogsContextProps>({
   opened: {},
   open: () => {},
   close: () => {},
 })
-export const useDialogs = (): ContextProps => useContext(DialogsContext)
+export const useDialogs = (): DialogsContextProps => useContext(DialogsContext)
 
 const DIALOGS: DialogsType = {
-  add: Modal,
+  addGear: AddGearDialog,
 }
 const dialogs = Object.keys(DIALOGS)
 
