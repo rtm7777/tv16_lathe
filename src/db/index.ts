@@ -4,6 +4,7 @@ import schema from '@/db/schema'
 import Gear from '@/db/gear'
 import DGear from '@/db/dGear'
 import GearConfig from '@/db/gearConfig'
+import GearFilter from '@/db/gearFilter'
 
 import { generateGearConfigs, includes } from '@/utils/gears'
 import {
@@ -21,6 +22,7 @@ export class DataBase extends Dexie {
   gears: Dexie.Table<Gear, number>
   dGears: Dexie.Table<DGear, number>
   gearConfigs: Dexie.Table<GearConfig, number>
+  gearFilters: Dexie.Table<GearFilter, number>
   /* eslint-enable lines-between-class-members */
 
   constructor(name: string) {
@@ -30,6 +32,7 @@ export class DataBase extends Dexie {
     this.gears.mapToClass(Gear)
     this.dGears.mapToClass(DGear)
     this.gearConfigs.mapToClass(GearConfig)
+    this.gearFilters.mapToClass(GearFilter)
   }
 
   initializeGears = (): Dexie.Promise<void> =>
@@ -98,12 +101,19 @@ export class DataBase extends Dexie {
     })
 
   toggleGear = (z: number): Dexie.Promise<void> =>
-    this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
+    this.transaction('rw', this.gears, async () => {
       const gear = await this.gears.where('z').equals(z).first()
       if (gear) this.gears.where('z').equals(z).modify({ active: gear.active ? 0 : 1 })
     })
 
   findActiveGears = (): Dexie.Promise<Gear[]> => this.gears.where('active').equals('1').toArray()
+
+  loadFilters = (): Dexie.Promise<GearFilter[]> => this.gearFilters.toArray()
+
+  loadGears = (): Dexie.Promise<Gear[]> => this.gears.toArray()
+
+  setFilter = (filter: string, value: string | boolean): Dexie.Promise<number> =>
+    this.gearFilters.put({ filter, value })
 
   findConfigsByPmm(value: number, gears: number[], approx = false): Dexie.Promise<GearConfig[]> {
     if (approx) {

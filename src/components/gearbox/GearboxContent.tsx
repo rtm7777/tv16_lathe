@@ -1,18 +1,20 @@
 import React, { FC } from 'react'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+
 import GearsTable from '@/components/gearbox/GearsTable'
+import GearboxFilter from '@/components/gearbox/GearboxFilter'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     [theme.breakpoints.up('md')]: { height: '100%' },
   },
   controls: {
-    [theme.breakpoints.up('md')]: { height: '150px' },
+    [theme.breakpoints.up('sm')]: { height: '100px' },
   },
   table: {
-    [theme.breakpoints.up('md')]: {
-      height: 'calc(100% - 150px)',
+    [theme.breakpoints.up('sm')]: {
+      height: 'calc(100% - 100px)',
       overflow: 'auto',
     },
   },
@@ -24,7 +26,7 @@ const GearboxContent: FC = () => {
   return (
     <Grid className={classes.container} container>
       <Grid className={classes.controls} item xs={12}>
-        lldfhd
+        <GearboxFilter />
       </Grid>
       <Grid className={classes.table} item xs={12}>
         <GearsTable

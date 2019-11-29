@@ -1,5 +1,8 @@
 import React, {
-  FC, useState, useCallback, ChangeEvent,
+  ChangeEvent,
+  FC,
+  useCallback,
+  useState,
 } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Button from '@material-ui/core/Button'
@@ -66,13 +69,11 @@ const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }) => {
                 checked={isDChecked}
                 onChange={handleCheckbox}
                 disabled={dDisabled}
-                value="checkedB"
                 color="primary"
               />
             )}
             label={formatMessage({ id: 'dialogs.addGear.useAsD' })}
           />
-
         </FormGroup>
       </DialogContent>
       <DialogActions>

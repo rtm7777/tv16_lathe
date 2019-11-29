@@ -53,7 +53,7 @@ const GearsTable: FC<GearsTableProps> = ({ data }) => {
             d
           </TableCell>
           <TableCell align="center">feed</TableCell>
-          <TableCell align="center">pitch / mm</TableCell>
+          <TableCell align="center">pitch</TableCell>
           <TableCell align="center">tpi</TableCell>
         </TableRow>
       </TableHead>

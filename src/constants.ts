@@ -8,3 +8,14 @@ export const DEFAULT_GEARS_PARAMS = {
   maxZ: 100,
   minD: 60,
 }
+
+export const FILTERS = {
+  system: 'system',
+  approx: 'approx',
+  unique: 'unique',
+}
+
+export const SYSTEMS = {
+  pmm: 'pmm',
+  tpi: 'tpi',
+}

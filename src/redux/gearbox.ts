@@ -2,12 +2,17 @@ import Dexie from 'dexie'
 
 import {
   ADD_GEAR,
-  REMOVE_GEAR,
+  LOAD_FILTERS_SUCCESS,
+  LOAD_GEARS_SUCCESS,
+  REMOVE_GEAR_SUCCESS,
+  SET_FILTER_SUCCESS,
   TOGGLE_GEAR,
   GearboxActionTypes,
   GearboxState,
 } from '@/redux/gearboxTypes'
 import { ThunkResult } from '@/redux/types'
+
+import { defaultGears, SYSTEMS } from '@/constants'
 
 export const addGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
   try {
@@ -21,23 +26,52 @@ export const addGear = (gear: number): ThunkResult<void> => async (dispatch, _, 
   }
 }
 
+export const loadFilters = (): ThunkResult<void> => async (dispatch, _, db) => {
+  try {
+    const filters = await db.loadFilters()
+    dispatch({
+      type: LOAD_FILTERS_SUCCESS,
+      payload: filters,
+    })
+  } catch (err) {
+    throw new Error('load filters err')
+  }
+}
+
 export const loadGears = (): ThunkResult<void> => async (dispatch, _, db) => {
-  db.initializeGears()
-  dispatch({
-    type: REMOVE_GEAR,
-    payload: 23,
-  })
+  try {
+    const gears = await db.loadGears()
+    dispatch({
+      type: LOAD_GEARS_SUCCESS,
+      payload: gears,
+    })
+  } catch (err) {
+    throw new Error('load gears err')
+  }
 }
 
 export const removeGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
   try {
     await db.removeGear(gear)
     dispatch({
-      type: REMOVE_GEAR,
+      type: REMOVE_GEAR_SUCCESS,
       payload: gear,
     })
   } catch (err) {
-    throw new Error('add gear err')
+    throw new Error('remove gear err')
+  }
+}
+
+export const setFilter = (filter: string, value: string | boolean): ThunkResult<void> => async (dispatch, _, db) => {
+  try {
+    await db.setFilter(filter, value)
+    dispatch({
+      type: SET_FILTER_SUCCESS,
+      payload: { [filter]: value },
+    })
+  } catch (err) {
+    console.log(err)
+    throw new Error('set filter err')
   }
 }
 
@@ -62,16 +96,46 @@ export const toggleGear = (gear: number): ThunkResult<void> => async (dispatch, 
 const initialState: GearboxState = {
   customGears: [],
   selectedGears: [],
+  filters: {
+    system: SYSTEMS.pmm,
+    approx: false,
+    unique: false,
+  },
 }
 
-export default (state = initialState, { type, payload }: GearboxActionTypes): GearboxState => {
-  switch (type) {
+export default (state = initialState, action: GearboxActionTypes): GearboxState => {
+  switch (action.type) {
     case TOGGLE_GEAR:
       return {
         ...state,
-        selectedGears: state.selectedGears.includes(payload)
-          ? state.selectedGears.filter(g => g !== payload)
-          : [...state.selectedGears, payload],
+        selectedGears: state.selectedGears.includes(action.payload)
+          ? state.selectedGears.filter(g => g !== action.payload)
+          : [...state.selectedGears, action.payload],
+      }
+
+    case LOAD_FILTERS_SUCCESS:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          ...Object.assign({}, ...action.payload.map(({ filter, value }) => ({ [filter]: value }))),
+        }
+      }
+
+    case LOAD_GEARS_SUCCESS:
+      return {
+        ...state,
+        customGears: action.payload.filter(({ z }) => !defaultGears.includes(z)).map(({ z }) => z),
+        selectedGears: action.payload.filter(({ active }) => active).map(({ z }) => z),
+      }
+
+    case SET_FILTER_SUCCESS:
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          ...action.payload,
+        }
       }
 
     default:

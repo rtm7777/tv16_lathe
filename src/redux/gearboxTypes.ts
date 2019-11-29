@@ -1,5 +1,11 @@
+import GearFilter from '@/db/gearFilter'
+import Gear from '@/db/gear'
+
 export const ADD_GEAR = 'ADD_GEAR'
-export const REMOVE_GEAR = 'REMOVE_GEAR'
+export const LOAD_FILTERS_SUCCESS = 'LOAD_FILTERS_SUCCESS'
+export const LOAD_GEARS_SUCCESS = 'LOAD_GEARS_SUCCESS'
+export const REMOVE_GEAR_SUCCESS = 'REMOVE_GEAR_SUCCESS'
+export const SET_FILTER_SUCCESS = 'SET_FILTER_SUCCESS'
 export const TOGGLE_GEAR = 'TOGGLE_GEAR'
 
 interface AddGearAction {
@@ -7,9 +13,24 @@ interface AddGearAction {
   payload: number
 }
 
+interface LoadFiltersSuccessAction {
+  type: typeof LOAD_FILTERS_SUCCESS
+  payload: GearFilter[]
+}
+
+interface LoadGearsSuccessAction {
+  type: typeof LOAD_GEARS_SUCCESS
+  payload: Gear[]
+}
+
 interface RemoveGearAction {
-  type: typeof REMOVE_GEAR
+  type: typeof REMOVE_GEAR_SUCCESS
   payload: number
+}
+
+interface SetFilterSucessAction {
+  type: typeof SET_FILTER_SUCCESS
+  payload: { [key: string]: string | boolean }
 }
 
 interface ToggleGearAction {
@@ -17,9 +38,11 @@ interface ToggleGearAction {
   payload: number
 }
 
-export type GearboxActionTypes = ToggleGearAction | AddGearAction | RemoveGearAction
+export type GearboxActionTypes = AddGearAction | LoadFiltersSuccessAction | LoadGearsSuccessAction
+  | RemoveGearAction | SetFilterSucessAction | ToggleGearAction
 
 export interface GearboxState {
   customGears: number[]
   selectedGears: number[]
+  filters: {[key: string]: string | boolean}
 }

@@ -16,6 +16,14 @@ const messages: MessagesLocale = {
         zLabel: 'z = {minZ} ... {maxZ}',
       },
     },
+    filters: {
+      approx: 'approx',
+      system: {
+        pmm: 'pitch',
+        tpi: 'tpi',
+      },
+      unique: 'unique',
+    },
     pages: {
       gearbox: 'Gearbox',
       documentation: 'Documentation',

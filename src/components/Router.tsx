@@ -1,7 +1,7 @@
 import React, { useState, FC, useEffect } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { loadGears } from '@/redux/gearbox'
+import { loadGears, loadFilters } from '@/redux/gearbox'
 
 import AppLayout from '@/components/Layouts/AppLayout'
 import DocumentationPage from '@/components/pages/DocumentationPage'
@@ -15,6 +15,7 @@ const Router: FC = () => {
     const load = async (): Promise<void> => {
       try {
         await dispatch(loadGears())
+        await dispatch(loadFilters())
         setLoading(false)
       } catch (err) {
         console.log(err)
