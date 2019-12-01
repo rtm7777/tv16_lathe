@@ -10,6 +10,7 @@ export interface GearConfigType {
 
 export default class GearConfig {
   /* eslint-disable lines-between-class-members */
+  id: number
   a: number
   b: number
   c: number

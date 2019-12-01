@@ -13,5 +13,3 @@ export const flattenMessages = (nestedMessages: Messages, prefix = ''): FlattenM
     if (typeof value === 'string') return { ...messages, [prefixedKey]: value }
     return { ...messages, ...flattenMessages(value, prefixedKey) }
   }, {})
-
-export const answer = 42

@@ -6,6 +6,8 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 
+import GearConfig from '@/db/gearConfig'
+
 const useStyles = makeStyles((theme: Theme) => createStyles({
   table: {
     tableLayout: 'fixed',
@@ -19,18 +21,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
 }))
 
-interface TableRow {
-  a: number
-  b: number
-  c: number
-  d: number
-  feed: number
-  pmm: number
-  tpi: number
-}
-
 export interface GearsTableProps {
-  data: TableRow[]
+  data: GearConfig[]
 }
 
 const GearsTable: FC<GearsTableProps> = ({ data }) => {
@@ -59,7 +51,7 @@ const GearsTable: FC<GearsTableProps> = ({ data }) => {
       </TableHead>
       <TableBody>
         {data.map(row => (
-          <TableRow key={row.a}>
+          <TableRow key={row.id} hover>
             <TableCell className={classes.gearCell} align="center">
               {row.a}
             </TableCell>

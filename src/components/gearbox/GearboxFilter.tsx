@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
 
-import { setFilter } from '@/redux/gearbox'
+import { findConfigs, setFilter } from '@/redux/gearbox'
 import { AppState } from '@/redux/types'
 
 import { FILTERS, SYSTEMS } from '@/constants'
@@ -89,6 +89,7 @@ const GearboxFilter: FC = () => {
           label="value"
           type="number"
           margin="normal"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(findConfigs(e.target.value))}
         />
       </Grid>
     </Grid>

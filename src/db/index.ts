@@ -1,18 +1,22 @@
-import Dexie from 'dexie'
+import Dexie, { Collection } from 'dexie'
 
 import schema from '@/db/schema'
-import Gear from '@/db/gear'
 import DGear from '@/db/dGear'
+import Gear from '@/db/gear'
 import GearConfig from '@/db/gearConfig'
 import GearFilter from '@/db/gearFilter'
 
 import { generateGearConfigs, includes } from '@/utils/gears'
+import { inBetween } from '@/utils/filters'
 import {
-  metricGears,
-  imperialGears,
-  defaultGears,
   defaultDgears,
+  defaultGears,
+  imperialGears,
+  metricGears,
   DEFAULT_GEARS_PARAMS,
+  FILTERS,
+  DEFAULT_RANGES,
+  SYSTEMS,
 } from '@/constants'
 
 const dGears: number[] = []
@@ -106,7 +110,7 @@ export class DataBase extends Dexie {
       if (gear) this.gears.where('z').equals(z).modify({ active: gear.active ? 0 : 1 })
     })
 
-  findActiveGears = (): Dexie.Promise<Gear[]> => this.gears.where('active').equals('1').toArray()
+  findActiveGears = (): Dexie.Promise<Gear[]> => this.gears.where('active').equals(1).toArray()
 
   loadFilters = (): Dexie.Promise<GearFilter[]> => this.gearFilters.toArray()
 
@@ -115,35 +119,33 @@ export class DataBase extends Dexie {
   setFilter = (filter: string, value: string | boolean): Dexie.Promise<number> =>
     this.gearFilters.put({ filter, value })
 
-  findConfigsByPmm(value: number, gears: number[], approx = false): Dexie.Promise<GearConfig[]> {
-    if (approx) {
-      return this.gearConfigs
-        .where('pmm')
-        .between(value - 0.02, value + 0.02, true, true)
-        .and((item: GearConfig) => includes(gears, item))
-        .toArray()
-    }
-    return this.gearConfigs
-      .where('pmm')
-      .equals(value)
-      .and((item: GearConfig) => includes(gears, item))
-      .toArray()
-  }
+  findConfigs = (draftValue: string): Dexie.Promise<GearConfig[]> =>
+    this.transaction('r', this.gears, this.gearConfigs, this.gearFilters, async () => {
+      const [
+        activeGears,
+        { value: system = SYSTEMS.pmm} = {},
+        { value: approx = false } = {},
+        { value: unique = false} = {},
+      ]  = await Promise.all([
+        this.findActiveGears(),
+        this.gearFilters.where('filter').equals(FILTERS.system).first(),
+        this.gearFilters.where('filter').equals(FILTERS.approx).first(),
+        this.gearFilters.where('filter').equals(FILTERS.unique).first(),
+      ])
 
-  findConfigsByTpi(value: number, gears: number[], approx = false): Dexie.Promise<GearConfig[]> {
-    if (approx) {
-      return this.gearConfigs
-        .where('tpi')
-        .between(value - 0.25, value + 0.25, true, true)
-        .and((item: GearConfig) => includes(gears, item))
-        .toArray()
-    }
-    return this.gearConfigs
-      .where('tpi')
-      .between(value - 0.05, value + 0.05, true, true)
-      .and((item: GearConfig) => includes(gears, item))
-      .toArray()
-  }
+      const value = Number(draftValue)
+      if (!value || !inBetween(system as string, value)) return []
+
+      const range = DEFAULT_RANGES[system as string][approx ? 'approx' : 'default']
+      const query = (): Collection => this.gearConfigs
+        .where(system as string)
+        .between(value - range, value + range, true, true)
+        .and((item) => includes(activeGears.map(({ z }) => z), item))
+
+      if (unique) return query().and(({ a, b, c }) => a !== b && a !== c && b !== c).toArray()
+
+      return query().toArray()
+    })
 }
 
 const db = new DataBase('TV-16')

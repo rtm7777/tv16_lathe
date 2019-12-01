@@ -19,3 +19,19 @@ export const SYSTEMS = {
   pmm: 'pmm',
   tpi: 'tpi',
 }
+
+export const DEFAULT_RANGES: { [key: string]: {[key: string]: number} } = {
+  pmm: {
+    default: 0,
+    approx: 0.02,
+  },
+  tpi: {
+    default: 0.05,
+    approx: 0.25,
+  },
+}
+
+export const INPUT_RANGES: { [key: string]: number[] } = {
+  pmm: [0.15, 6],
+  tpi: [4, 160],
+}

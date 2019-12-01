@@ -2,6 +2,7 @@ import Dexie from 'dexie'
 
 import {
   ADD_GEAR,
+  FIND_CONFIGS_SUCCESS,
   LOAD_FILTERS_SUCCESS,
   LOAD_GEARS_SUCCESS,
   REMOVE_GEAR_SUCCESS,
@@ -26,6 +27,19 @@ export const addGear = (gear: number): ThunkResult<void> => async (dispatch, _, 
   }
 }
 
+export const findConfigs = (value: string): ThunkResult<void> => async (dispatch, _, db) => {
+  try {
+    const configs = await db.findConfigs(value)
+    dispatch({
+      type: FIND_CONFIGS_SUCCESS,
+      payload: configs,
+    })
+  } catch (err) {
+    console.log(err)
+    throw new Error('load filters err')
+  }
+}
+
 export const loadFilters = (): ThunkResult<void> => async (dispatch, _, db) => {
   try {
     const filters = await db.loadFilters()
@@ -40,6 +54,7 @@ export const loadFilters = (): ThunkResult<void> => async (dispatch, _, db) => {
 
 export const loadGears = (): ThunkResult<void> => async (dispatch, _, db) => {
   try {
+    await db.initializeGears()
     const gears = await db.loadGears()
     dispatch({
       type: LOAD_GEARS_SUCCESS,
@@ -70,7 +85,6 @@ export const setFilter = (filter: string, value: string | boolean): ThunkResult<
       payload: { [filter]: value },
     })
   } catch (err) {
-    console.log(err)
     throw new Error('set filter err')
   }
 }
@@ -94,23 +108,22 @@ export const toggleGear = (gear: number): ThunkResult<void> => async (dispatch, 
 }
 
 const initialState: GearboxState = {
+  configs: [],
   customGears: [],
-  selectedGears: [],
   filters: {
     system: SYSTEMS.pmm,
     approx: false,
     unique: false,
   },
+  selectedGears: [],
 }
 
 export default (state = initialState, action: GearboxActionTypes): GearboxState => {
   switch (action.type) {
-    case TOGGLE_GEAR:
+    case FIND_CONFIGS_SUCCESS:
       return {
         ...state,
-        selectedGears: state.selectedGears.includes(action.payload)
-          ? state.selectedGears.filter(g => g !== action.payload)
-          : [...state.selectedGears, action.payload],
+        configs: action.payload,
       }
 
     case LOAD_FILTERS_SUCCESS:
@@ -136,6 +149,14 @@ export default (state = initialState, action: GearboxActionTypes): GearboxState 
           ...state.filters,
           ...action.payload,
         }
+      }
+
+    case TOGGLE_GEAR:
+      return {
+        ...state,
+        selectedGears: state.selectedGears.includes(action.payload)
+          ? state.selectedGears.filter(g => g !== action.payload)
+          : [...state.selectedGears, action.payload],
       }
 
     default:

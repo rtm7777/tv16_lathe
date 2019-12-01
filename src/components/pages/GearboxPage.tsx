@@ -54,7 +54,7 @@ const GearboxPage: FC = () => {
       <SpeedDial
         open={false}
         onClick={() => open('addGear')}
-        ariaLabel="SpeedDial example"
+        ariaLabel="Add Gear"
         icon={<SpeedDialIcon />}
         className={classes.dial}
       />
