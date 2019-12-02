@@ -1,4 +1,11 @@
-import React, { FC, ChangeEvent } from 'react'
+import React, {
+  FC,
+  ChangeEvent,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useIntl } from 'react-intl'
 import { Theme, makeStyles } from '@material-ui/core/styles'
@@ -14,7 +21,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 import { findConfigs, setFilter } from '@/redux/gearbox'
 import { AppState } from '@/redux/types'
 
-import { FILTERS, SYSTEMS } from '@/constants'
+import { FILTERS, INPUTS, SYSTEMS } from '@/constants'
 
 const useStyles = makeStyles((theme: Theme) => ({
   filter: {
@@ -23,6 +30,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('xs')]: { width: '100%' },
     [theme.breakpoints.up('sm')]: { width: '150px' },
     [theme.breakpoints.up('md')]: { width: '200px' },
+  },
+  input: {
+    width: '150px',
   },
   group: {
     flexDirection: 'row',
@@ -35,6 +45,11 @@ const GearboxFilter: FC = () => {
   const { formatMessage } = useIntl()
   const dispatch = useDispatch()
   const { system, approx, unique } = useSelector(({ gearbox }: AppState) => gearbox.filters)
+  const [value, setValue] = useState('')
+  const findConfigsCallback = useCallback((e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value), [setValue])
+  const inputProps = useMemo(() => INPUTS[system as string], [system])
+  useEffect(() => { dispatch(findConfigs(value)) }, [approx, unique, value])
+  useEffect(() => setValue(''), [system])
 
   const WrappedComponent = (
     <Grid direction="row" container>
@@ -86,10 +101,13 @@ const GearboxFilter: FC = () => {
       </Grid>
       <Grid item className={classes.filter}>
         <TextField
-          label="value"
+          className={classes.input}
+          label={`${formatMessage({ id: `filters.system.${system}` })}: ${inputProps.min} ... ${inputProps.max}`}
           type="number"
           margin="normal"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(findConfigs(e.target.value))}
+          inputProps={inputProps}
+          value={value}
+          onChange={findConfigsCallback}
         />
       </Grid>
     </Grid>
