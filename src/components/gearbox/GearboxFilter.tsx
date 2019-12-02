@@ -2,8 +2,6 @@ import React, {
   FC,
   ChangeEvent,
   useEffect,
-  useState,
-  useCallback,
   useMemo
 } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,7 +16,7 @@ import TextField from '@material-ui/core/TextField'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormGroup from '@material-ui/core/FormGroup'
 
-import { findConfigs, setFilter } from '@/redux/gearbox'
+import { findConfigs, setFilter, setInput } from '@/redux/gearbox'
 import { AppState } from '@/redux/types'
 
 import { FILTERS, INPUTS, SYSTEMS } from '@/constants'
@@ -45,11 +43,10 @@ const GearboxFilter: FC = () => {
   const { formatMessage } = useIntl()
   const dispatch = useDispatch()
   const { system, approx, unique } = useSelector(({ gearbox }: AppState) => gearbox.filters)
-  const [value, setValue] = useState('')
-  const findConfigsCallback = useCallback((e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value), [setValue])
+  const inputValue = useSelector(({ gearbox }: AppState) => gearbox.inputValue)
   const inputProps = useMemo(() => INPUTS[system as string], [system])
-  useEffect(() => { dispatch(findConfigs(value)) }, [approx, unique, value])
-  useEffect(() => setValue(''), [system])
+  useEffect(() => { dispatch(findConfigs()) }, [approx, unique, inputValue])
+  useEffect(() => { dispatch(setInput('')) }, [system])
 
   const WrappedComponent = (
     <Grid direction="row" container>
@@ -106,8 +103,8 @@ const GearboxFilter: FC = () => {
           type="number"
           margin="normal"
           inputProps={inputProps}
-          value={value}
-          onChange={findConfigsCallback}
+          value={inputValue}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setInput(e.target.value))}
         />
       </Grid>
     </Grid>

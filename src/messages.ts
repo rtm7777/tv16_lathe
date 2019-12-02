@@ -8,10 +8,10 @@ const messages: MessagesLocale = {
   'en-US': {
     dialogs: {
       addGear: {
-        header: 'Add Gear',
-        content: 'Please enter your custom gear \'z\' value, it should be between {minZ} and {maxZ}.',
-        cancel: 'cancel',
         add: 'add gear',
+        cancel: 'cancel',
+        content: 'Please enter your custom gear \'z\' value, it should be between {minZ} and {maxZ}.',
+        header: 'Add Gear',
         useAsD: '- this gear can be used as "d"',
         zLabel: 'z = {minZ} ... {maxZ}',
       },
@@ -25,17 +25,18 @@ const messages: MessagesLocale = {
       unique: 'unique',
     },
     pages: {
-      gearbox: 'Gearbox',
       documentation: 'Documentation',
+      gearbox: 'Gearbox',
     },
     gearSelector: {
-      metric: 'Metric gears',
-      imperial: 'Imperial gears',
       custom: 'Custom gears',
+      imperial: 'Imperial gears',
+      metric: 'Metric gears',
+      noGears: 'No custom gears'
     },
     sidebar: {
-      gearbox: 'Gearbox',
       documentation: 'Documentation',
+      gearbox: 'Gearbox',
       info: 'Info',
     },
   },

@@ -7,6 +7,7 @@ import {
   LOAD_GEARS_SUCCESS,
   REMOVE_GEAR_SUCCESS,
   SET_FILTER_SUCCESS,
+  SET_INPUT,
   TOGGLE_GEAR,
   GearboxActionTypes,
   GearboxState,
@@ -15,21 +16,24 @@ import { ThunkResult } from '@/redux/types'
 
 import { defaultGears, SYSTEMS } from '@/constants'
 
-export const addGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
+export const addGear = (gear: number, asD = false): ThunkResult<void> => async (dispatch, _, db) => {
   try {
-    await db.addGear(gear, false)
+    await db.addGear(gear, asD)
     dispatch({
       type: ADD_GEAR,
       payload: gear,
     })
   } catch (err) {
-    throw new Error('add gear err')
+    console.log(err)
+    throw err
   }
 }
 
-export const findConfigs = (value: string): ThunkResult<void> => async (dispatch, _, db) => {
+export const findConfigs = (): ThunkResult<void> => async (dispatch, getState, db) => {
+  const { inputValue } = getState().gearbox
+
   try {
-    const configs = await db.findConfigs(value)
+    const configs = await db.findConfigs(inputValue)
     dispatch({
       type: FIND_CONFIGS_SUCCESS,
       payload: configs,
@@ -89,6 +93,11 @@ export const setFilter = (filter: string, value: string | boolean): ThunkResult<
   }
 }
 
+export const setInput = (value: string): GearboxActionTypes => ({
+  type: SET_INPUT,
+  payload: value,
+})
+
 export const toggleGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
   try {
     await db.toggleGear(gear)
@@ -115,11 +124,18 @@ const initialState: GearboxState = {
     approx: false,
     unique: false,
   },
+  inputValue: '',
   selectedGears: [],
 }
 
 export default (state = initialState, action: GearboxActionTypes): GearboxState => {
   switch (action.type) {
+    case ADD_GEAR:
+      return {
+        ...state,
+        customGears: [...state.customGears, action.payload],
+        selectedGears: [...state.selectedGears, action.payload],
+      }
     case FIND_CONFIGS_SUCCESS:
       return {
         ...state,
@@ -149,6 +165,12 @@ export default (state = initialState, action: GearboxActionTypes): GearboxState 
           ...state.filters,
           ...action.payload,
         }
+      }
+
+    case SET_INPUT:
+      return {
+        ...state,
+        inputValue: action.payload,
       }
 
     case TOGGLE_GEAR:

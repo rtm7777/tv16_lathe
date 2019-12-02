@@ -19,8 +19,6 @@ import {
   SYSTEMS,
 } from '@/constants'
 
-const dGears: number[] = []
-
 export class DataBase extends Dexie {
   /* eslint-disable lines-between-class-members */
   gears: Dexie.Table<Gear, number>
@@ -60,28 +58,28 @@ export class DataBase extends Dexie {
       }
     })
 
-  addGear = (newGear: number, asD = false): Dexie.Promise<void> =>
+  addGear = (newGear: number, asD = false): Dexie.Promise<number> =>
     this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
-      const dGearsArray = [...dGears, ...(asD ? [newGear] : [])]
-
       if (newGear > DEFAULT_GEARS_PARAMS.minZ && newGear < DEFAULT_GEARS_PARAMS.maxZ) {
         await this.gears.add(new Gear({ z: newGear, active: 1 }))
+        if (asD) await this.dGears.add(new DGear({ z: newGear }))
 
-        if (asD) this.dGears.add(new DGear({ z: newGear }))
-
-        const gears = await this.gears.toArray()
+        const [gears, dGears] = await Promise.all([
+          this.gears.toArray(),
+          this.dGears.toArray(),
+        ])
         const gearConfigs: GearConfig[] = []
 
         generateGearConfigs(
           gears.map(g => g.z),
-          dGearsArray,
+          dGears.map(g => g.z),
           config => {
             gearConfigs.push(new GearConfig(config))
           },
           newGear,
         )
 
-        this.gearConfigs.bulkAdd(gearConfigs)
+        return this.gearConfigs.bulkAdd(gearConfigs)
       }
       throw new Error('gear_add_error')
     })
