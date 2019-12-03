@@ -4,14 +4,15 @@ import { useLocation } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { makeStyles } from '@material-ui/core/styles'
+
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
-import SettingsIcon from '@material-ui/icons/Settings'
 import InfoIcon from '@material-ui/icons/Info'
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks'
+import SettingsIcon from '@material-ui/icons/Settings'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const useStyles = makeStyles(theme => ({

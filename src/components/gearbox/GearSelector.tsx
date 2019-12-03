@@ -1,25 +1,28 @@
 import React, { FC, useCallback } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
+import { Theme, makeStyles } from '@material-ui/core/styles'
 
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
 
-import CollapsableList from '@/components/gearbox/CollapsableList'
 import CheckboxListItem from '@/components/gearbox/CheckboxListItem'
+import CollapsableList from '@/components/gearbox/CollapsableList'
 
 import { findConfigs, toggleGear } from '@/redux/gearbox'
 import { AppState } from '@/redux/types'
 
 import { metricGears, imperialGears } from '@/constants'
 
-const useStyles = makeStyles(() => ({
-  list: {
-    width: '150%',
-  },
+const useStyles = makeStyles((theme: Theme) => ({
+  list: { width: '100%' },
+  subHeader: {
+    backgroundColor: 'white',
+    [theme.breakpoints.up('xs')]: { display: 'none' },
+    [theme.breakpoints.up('sm')]: { display: 'inherit' },
+  }
 }))
 
 const GearSelector: FC = () => {
@@ -34,24 +37,28 @@ const GearSelector: FC = () => {
   }, [dispatch])
 
   const WrappedComponent = (
-    <List className={classes.list} subheader={<ListSubheader>Gears</ListSubheader>}>
+    <List className={classes.list} subheader={(
+      <ListSubheader className={classes.subHeader}>
+        <FormattedMessage id="gearSelector.gearConfiguration" />
+      </ListSubheader>
+    )}>
       <CollapsableList text={formatMessage({ id: 'gearSelector.metric' })}>
         {metricGears.map(gear => (
           <CheckboxListItem
-            key={gear}
             checked={selectedGears.includes(gear)}
-            text={`z = ${gear}`}
+            key={gear}
             onClick={handleGearSelect(gear)}
+            text={`z = ${gear}`}
           />
         ))}
       </CollapsableList>
       <CollapsableList text={formatMessage({ id: 'gearSelector.imperial' })}>
         {imperialGears.map(gear => (
           <CheckboxListItem
-            key={gear}
             checked={selectedGears.includes(gear)}
-            text={`z = ${gear}`}
+            key={gear}
             onClick={handleGearSelect(gear)}
+            text={`z = ${gear}`}
           />
         ))}
       </CollapsableList>
@@ -63,10 +70,10 @@ const GearSelector: FC = () => {
         )}
         {customGears.map(gear => (
           <CheckboxListItem
-            key={gear}
             checked={selectedGears.includes(gear)}
-            text={`z = ${gear}`}
+            key={gear}
             onClick={handleGearSelect(gear)}
+            text={`z = ${gear}`}
           />
         ))}
       </CollapsableList>

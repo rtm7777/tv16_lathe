@@ -1,12 +1,13 @@
 import React, { FC } from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider } from '@material-ui/styles'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
+import { ThemeProvider } from '@material-ui/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 import Providers from '@/components/Providers'
 import Router from '@/components/Router'
+
 import { FlattenMessages } from '@/utils/flat'
 
 export interface AppProps {

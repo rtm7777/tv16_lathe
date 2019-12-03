@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useIntl } from 'react-intl'
 import { Theme, makeStyles } from '@material-ui/core/styles'
 
+import Checkbox from '@material-ui/core/Checkbox'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormGroup from '@material-ui/core/FormGroup'
 import Grid from '@material-ui/core/Grid'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import TextField from '@material-ui/core/TextField'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormGroup from '@material-ui/core/FormGroup'
 
 import { findConfigs, setFilter, setInput } from '@/redux/gearbox'
 import { AppState } from '@/redux/types'
@@ -59,14 +59,14 @@ const GearboxFilter: FC = () => {
           value={system}
         >
           <FormControlLabel
-            value={SYSTEMS.pmm}
             control={<Radio color="primary" />}
             label={formatMessage({ id: 'filters.system.pmm' })}
+            value={SYSTEMS.pmm}
           />
           <FormControlLabel
-            value={SYSTEMS.tpi}
             control={<Radio color="primary" />}
             label={formatMessage({ id: 'filters.system.tpi' })}
+            value={SYSTEMS.tpi}
           />
         </RadioGroup>
       </Grid>
@@ -76,9 +76,9 @@ const GearboxFilter: FC = () => {
             value="top"
             control={(
               <Checkbox
+                checked={approx as boolean}
                 color="primary"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setFilter(FILTERS.approx, e.target.checked))}
-                checked={approx as boolean}
               />
             )}
             label={formatMessage({ id: 'filters.approx' })}
@@ -87,9 +87,9 @@ const GearboxFilter: FC = () => {
             value="start"
             control={(
               <Checkbox
+                checked={unique as boolean}
                 color="primary"
                 onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setFilter(FILTERS.unique, e.target.checked))}
-                checked={unique as boolean}
               />
             )}
             label={formatMessage({ id: 'filters.unique' })}
@@ -99,12 +99,12 @@ const GearboxFilter: FC = () => {
       <Grid item className={classes.filter}>
         <TextField
           className={classes.input}
-          label={`${formatMessage({ id: `filters.system.${system}` })}: ${inputProps.min} ... ${inputProps.max}`}
-          type="number"
-          margin="normal"
           inputProps={inputProps}
-          value={inputValue}
+          label={`${formatMessage({ id: `filters.system.${system}` })}: ${inputProps.min} ... ${inputProps.max}`}
+          margin="normal"
           onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setInput(e.target.value))}
+          type="number"
+          value={inputValue}
         />
       </Grid>
     </Grid>

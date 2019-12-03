@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
+import Checkbox from '@material-ui/core/Checkbox'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Checkbox from '@material-ui/core/Checkbox'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({ nested: { paddingLeft: theme.spacing(4) } }))
 
@@ -21,9 +21,9 @@ const CheckboxListItem: FC<CheckboxListItemProps> = ({ checked, onClick, text })
       <ListItemIcon>
         <Checkbox
           checked={checked}
+          disableRipple
           edge="start"
           tabIndex={-1}
-          disableRipple
         />
       </ListItemIcon>
       <ListItemText primary={text} />

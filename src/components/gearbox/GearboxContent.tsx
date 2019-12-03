@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 
-import GearsTable from '@/components/gearbox/GearsTable'
 import GearboxFilter from '@/components/gearbox/GearboxFilter'
+import GearsTable from '@/components/gearbox/GearsTable'
 
 import { AppState } from '@/redux/types'
 

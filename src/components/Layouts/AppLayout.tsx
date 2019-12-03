@@ -2,18 +2,20 @@ import React, { FC } from 'react'
 import clsx from 'clsx'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
-import SideBar from '@/components/Layouts/Panels/Sidebar'
 import Header from '@/components/Layouts/Panels/Header'
+import SideBar from '@/components/Layouts/Panels/Sidebar'
 
 const useStyles = makeStyles((theme: Theme) => {
   const { width } = theme.overrides.MuiDrawer.paper as {} & { width: string }
+  const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as {} & { minHeight: number }
 
   return createStyles({
     toolbar: theme.mixins.toolbar,
     content: {
       display: 'flex',
       flexDirection: 'column',
-      height: '100vh',
+      height: `calc(100vh - ${minHeight}px)`,
+      [theme.breakpoints.up('md')]: { height: '100vh' },
       flexGrow: 1,
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,

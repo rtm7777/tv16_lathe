@@ -8,14 +8,14 @@ import { useDispatch } from 'react-redux'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormGroup from '@material-ui/core/FormGroup'
 import TextField from '@material-ui/core/TextField'
 
 import { DialogsContextProps } from '@/components/providers/DialogsProvider'
@@ -65,23 +65,23 @@ const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }) => {
         </DialogContentText>
         <FormGroup>
           <TextField
+            inputProps={{ min: DEFAULT_GEARS_PARAMS.minZ, max: DEFAULT_GEARS_PARAMS.maxZ, step: 1 }}
             label={formatMessage(
               { id: 'dialogs.addGear.zLabel' },
               { minZ: DEFAULT_GEARS_PARAMS.minZ, maxZ: DEFAULT_GEARS_PARAMS.maxZ },
             )}
-            type="number"
-            inputProps={{ min: 15, max: 99, step: 1 }}
-            onChange={handleChange}
             margin="normal"
+            onChange={handleChange}
+            type="number"
             value={zValue}
           />
           <FormControlLabel
             control={(
               <Checkbox
                 checked={isDChecked}
-                onChange={handleCheckbox}
-                disabled={dDisabled}
                 color="primary"
+                disabled={dDisabled}
+                onChange={handleCheckbox}
               />
             )}
             label={formatMessage({ id: 'dialogs.addGear.useAsD' })}

@@ -1,12 +1,13 @@
 import React, {
   FC,
-  useContext,
-  useState,
   useCallback,
+  useContext,
   useMemo,
+  useState,
 } from 'react'
 
 import AddGearDialog from '@/components/dialogs/addGear'
+import GearSelectorDialog from '@/components/dialogs/gearSelector'
 
 interface DialogsType {
   [key: string]: FC<{[key: string]: {}}>
@@ -26,6 +27,7 @@ export const useDialogs = (): DialogsContextProps => useContext(DialogsContext)
 
 const DIALOGS: DialogsType = {
   addGear: AddGearDialog,
+  gearSelector: GearSelectorDialog,
 }
 const dialogs = Object.keys(DIALOGS)
 

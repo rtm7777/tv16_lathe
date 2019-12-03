@@ -31,6 +31,7 @@ const messages: MessagesLocale = {
     gearSelector: {
       custom: 'Custom gears',
       imperial: 'Imperial gears',
+      gearConfiguration: 'Gears Configuration',
       metric: 'Metric gears',
       noGears: 'No custom gears'
     },

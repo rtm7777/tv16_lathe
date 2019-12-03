@@ -1,12 +1,13 @@
 import React, { FC } from 'react'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
+
+import Grid from '@material-ui/core/Grid'
 import SpeedDial from '@material-ui/lab/SpeedDial'
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon'
-import Grid from '@material-ui/core/Grid'
 
-import GearSelector from '@/components/gearbox/GearSelector'
-import GearboxContent from '@/components/gearbox/GearboxContent'
 import { useDialogs } from '@/components/providers/DialogsProvider'
+import GearboxContent from '@/components/gearbox/GearboxContent'
+import GearSelector from '@/components/gearbox/GearSelector'
 
 const useStyles = makeStyles((theme: Theme) => {
   const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as {} & { minHeight: number }
@@ -52,11 +53,11 @@ const GearboxPage: FC = () => {
         <GearboxContent />
       </Grid>
       <SpeedDial
-        open={false}
-        onClick={() => open('addGear')}
         ariaLabel="Add Gear"
-        icon={<SpeedDialIcon />}
         className={classes.dial}
+        icon={<SpeedDialIcon />}
+        onClick={() => open('addGear')}
+        open={false}
       />
     </Grid>
   )
