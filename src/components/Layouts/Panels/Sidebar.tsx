@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { FC } from 'react'
 import clsx from 'clsx'
 import { useLocation } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
@@ -15,7 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Tooltip from '@material-ui/core/Tooltip'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   drawerOpen: {
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -39,7 +39,7 @@ interface SideBarProps {
   open: boolean
 }
 
-const SideBar = ({ open }: SideBarProps): ReactElement => {
+const SideBar: FC<SideBarProps> = ({ open }: SideBarProps) => {
   const classes = useStyles({})
   const { pathname } = useLocation()
   const { formatMessage } = useIntl()

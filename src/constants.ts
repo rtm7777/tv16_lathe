@@ -20,7 +20,7 @@ export const SYSTEMS = {
   tpi: 'tpi',
 }
 
-export const INPUTS: { [key: string]: { [key: string]: number } }  = {
+export const INPUTS: { [key: string]: { [key: string]: number } } = {
   pmm: {
     min: 0.15,
     max: 6,

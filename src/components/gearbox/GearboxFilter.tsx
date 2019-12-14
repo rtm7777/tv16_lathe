@@ -2,7 +2,7 @@ import React, {
   FC,
   ChangeEvent,
   useEffect,
-  useMemo
+  useMemo,
 } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useIntl } from 'react-intl'
@@ -17,7 +17,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 
 import { findConfigs, setFilter, setInput } from '@/redux/gearbox'
-import { AppState } from '@/redux/types'
+import { AppState } from '../../redux/types'
 
 import { FILTERS, INPUTS, SYSTEMS } from '@/constants'
 
@@ -48,7 +48,7 @@ const GearboxFilter: FC = () => {
   useEffect(() => { dispatch(findConfigs()) }, [approx, unique, inputValue])
   useEffect(() => { dispatch(setInput('')) }, [system])
 
-  const WrappedComponent = (
+  return (
     <Grid direction="row" container>
       <Grid item className={classes.filter}>
         <RadioGroup
@@ -109,7 +109,6 @@ const GearboxFilter: FC = () => {
       </Grid>
     </Grid>
   )
-  return WrappedComponent
 }
 
 export default GearboxFilter

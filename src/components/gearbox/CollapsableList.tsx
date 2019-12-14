@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { useState, FC, ReactNode } from 'react'
 
 import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
@@ -8,13 +8,14 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 export interface CollapsableListProps {
+  children: ReactNode
   text: string
 }
 
-const CollapsableList: FC<CollapsableListProps> = ({ children, text }) => {
+const CollapsableList: FC<CollapsableListProps> = ({ children, text }: CollapsableListProps) => {
   const [open, setOpen] = useState(true)
 
-  const WrappedComponent = (
+  return (
     <>
       <ListItem button onClick={() => setOpen(!open)}>
         <ListItemText primary={text} />
@@ -27,7 +28,6 @@ const CollapsableList: FC<CollapsableListProps> = ({ children, text }) => {
       </Collapse>
     </>
   )
-  return WrappedComponent
 }
 
 export default CollapsableList

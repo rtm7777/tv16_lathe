@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'white',
     [theme.breakpoints.up('xs')]: { display: 'none' },
     [theme.breakpoints.up('sm')]: { display: 'inherit' },
-  }
+  },
 }))
 
 const GearSelector: FC = () => {
@@ -36,14 +36,17 @@ const GearSelector: FC = () => {
     dispatch(findConfigs())
   }, [dispatch])
 
-  const WrappedComponent = (
-    <List className={classes.list} subheader={(
-      <ListSubheader className={classes.subHeader}>
-        <FormattedMessage id="gearSelector.gearConfiguration" />
-      </ListSubheader>
-    )}>
+  return (
+    <List
+      className={classes.list}
+      subheader={(
+        <ListSubheader className={classes.subHeader}>
+          <FormattedMessage id="gearSelector.gearConfiguration" />
+        </ListSubheader>
+      )}
+    >
       <CollapsableList text={formatMessage({ id: 'gearSelector.metric' })}>
-        {metricGears.map(gear => (
+        {metricGears.map((gear) => (
           <CheckboxListItem
             checked={selectedGears.includes(gear)}
             key={gear}
@@ -53,7 +56,7 @@ const GearSelector: FC = () => {
         ))}
       </CollapsableList>
       <CollapsableList text={formatMessage({ id: 'gearSelector.imperial' })}>
-        {imperialGears.map(gear => (
+        {imperialGears.map((gear) => (
           <CheckboxListItem
             checked={selectedGears.includes(gear)}
             key={gear}
@@ -68,7 +71,7 @@ const GearSelector: FC = () => {
             <ListItemText primary={formatMessage({ id: 'gearSelector.noGears' })} />
           </ListItem>
         )}
-        {customGears.map(gear => (
+        {customGears.map((gear) => (
           <CheckboxListItem
             checked={selectedGears.includes(gear)}
             key={gear}
@@ -79,8 +82,6 @@ const GearSelector: FC = () => {
       </CollapsableList>
     </List>
   )
-
-  return WrappedComponent
 }
 
 export default GearSelector

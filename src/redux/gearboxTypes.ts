@@ -52,7 +52,7 @@ interface ToggleGearAction {
 }
 
 export type GearboxActionTypes = AddGearAction | GetConfigsSuccessAction | LoadFiltersSuccessAction
-  | LoadGearsSuccessAction | RemoveGearAction | SetFilterSucessAction | SetInputAction | ToggleGearAction
+| LoadGearsSuccessAction | RemoveGearAction | SetFilterSucessAction | SetInputAction | ToggleGearAction
 
 export interface GearboxState {
   configs: GearConfig[]

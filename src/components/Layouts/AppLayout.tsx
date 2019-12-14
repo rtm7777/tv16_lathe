@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import clsx from 'clsx'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
@@ -33,10 +33,14 @@ const useStyles = makeStyles((theme: Theme) => {
   })
 })
 
-const AppLayout: FC = ({ children }) => {
+export interface AppLayoutProps {
+  children: ReactNode
+}
+
+const AppLayout: FC = ({ children }: AppLayoutProps) => {
   const classes = useStyles({})
   const [open, setOpen] = React.useState(false)
-  const WrappedComponent = (
+  return (
     <>
       <Header open={open} onClick={setOpen} />
       <SideBar open={open} />
@@ -50,7 +54,6 @@ const AppLayout: FC = ({ children }) => {
       </main>
     </>
   )
-  return WrappedComponent
 }
 
 export default AppLayout

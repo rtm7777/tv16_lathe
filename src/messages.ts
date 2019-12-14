@@ -15,6 +15,9 @@ const messages: MessagesLocale = {
         useAsD: '- this gear can be used as "d"',
         zLabel: 'z = {minZ} ... {maxZ}',
       },
+      calculator: {
+        header: 'Thread Calculator',
+      },
     },
     filters: {
       approx: 'approx',
@@ -24,16 +27,19 @@ const messages: MessagesLocale = {
       },
       unique: 'unique',
     },
+    gearSelector: {
+      custom: 'Custom gears',
+      gearConfiguration: 'Gears Configuration',
+      imperial: 'Imperial gears',
+      metric: 'Metric gears',
+      noGears: 'No custom gears',
+    },
+    header: {
+      calculator: 'Calculator',
+    },
     pages: {
       documentation: 'Documentation',
       gearbox: 'Gearbox',
-    },
-    gearSelector: {
-      custom: 'Custom gears',
-      imperial: 'Imperial gears',
-      gearConfiguration: 'Gears Configuration',
-      metric: 'Metric gears',
-      noGears: 'No custom gears'
     },
     sidebar: {
       documentation: 'Documentation',

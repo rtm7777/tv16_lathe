@@ -30,7 +30,7 @@ export interface AddGearDialogProps {
 
 const re = /^[0-9\b]{1,2}$/
 
-const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }) => {
+const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }: AddGearDialogProps) => {
   const { formatMessage } = useIntl()
   const dispatch = useDispatch()
   const [zValue, setZValue] = useState('')
@@ -53,7 +53,7 @@ const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }) => {
 
   const handleCheckbox = useCallback((e: ChangeEvent<HTMLInputElement>): void => setDChecked(e.target.checked), [])
 
-  const WrappedComponent = (
+  return (
     <Dialog open onClose={() => close('addGear')} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title"><FormattedMessage id="dialogs.addGear.header" /></DialogTitle>
       <DialogContent>
@@ -98,8 +98,6 @@ const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }) => {
       </DialogActions>
     </Dialog>
   )
-
-  return WrappedComponent
 }
 
 export default AddGearDialog

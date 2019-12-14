@@ -8,12 +8,12 @@ export const generateGearConfigs = (
 ): void => {
   let pmm = 0
 
-  dGears.forEach(d => {
-    gears.forEach(c => {
+  dGears.forEach((d) => {
+    gears.forEach((c) => {
       if (c !== d && c < 100) {
-        gears.forEach(b => {
+        gears.forEach((b) => {
           if (b !== d && b < 100) {
-            gears.forEach(a => {
+            gears.forEach((a) => {
               if (
                 a <= 60
                 && (

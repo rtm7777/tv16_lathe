@@ -1,16 +1,17 @@
 
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import DialogsProvider from '@/components/providers/DialogsProvider'
 
-const Providers: FC = ({ children }) => {
-  const WrappedComponent = (
-    <DialogsProvider>
-      {children}
-    </DialogsProvider>
-  )
-
-  return WrappedComponent
+export interface ProvidersProps {
+  children: ReactNode
 }
+
+
+const Providers: FC = ({ children }: ProvidersProps) => (
+  <DialogsProvider>
+    {children}
+  </DialogsProvider>
+)
 
 export default Providers

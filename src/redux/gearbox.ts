@@ -148,7 +148,7 @@ export default (state = initialState, action: GearboxActionTypes): GearboxState 
         filters: {
           ...state.filters,
           ...Object.assign({}, ...action.payload.map(({ filter, value }) => ({ [filter]: value }))),
-        }
+        },
       }
 
     case LOAD_GEARS_SUCCESS:
@@ -164,7 +164,7 @@ export default (state = initialState, action: GearboxActionTypes): GearboxState 
         filters: {
           ...state.filters,
           ...action.payload,
-        }
+        },
       }
 
     case SET_INPUT:
@@ -177,7 +177,7 @@ export default (state = initialState, action: GearboxActionTypes): GearboxState 
       return {
         ...state,
         selectedGears: state.selectedGears.includes(action.payload)
-          ? state.selectedGears.filter(g => g !== action.payload)
+          ? state.selectedGears.filter((g) => g !== action.payload)
           : [...state.selectedGears, action.payload],
       }
 

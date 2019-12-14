@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { FC } from 'react'
 import clsx from 'clsx'
 import { useLocation } from 'react-router'
 import { FormattedMessage } from 'react-intl'
@@ -9,10 +9,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Toolbar from '@material-ui/core/Toolbar'
-import TuneIcon from '@material-ui/icons/Tune'
 import Typography from '@material-ui/core/Typography'
 
-import { useDialogs } from '@/components/providers/DialogsProvider'
+import HeaderActions from '@/components/gearbox/HeaderActions'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   appBar: { zIndex: theme.zIndex.drawer + 1 },
@@ -28,10 +27,9 @@ interface SideBarProps {
   onClick(open: boolean): void
 }
 
-const Header = ({ open, onClick }: SideBarProps): ReactElement => {
+const Header: FC<SideBarProps> = ({ open, onClick }: SideBarProps) => {
   const classes = useStyles({})
   const { pathname } = useLocation()
-  const dialogs = useDialogs()
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -49,13 +47,7 @@ const Header = ({ open, onClick }: SideBarProps): ReactElement => {
           <FormattedMessage id={`pages.${pathname.slice(1)}`} />
         </Typography>
         <div className={classes.grow} />
-        {pathname === '/gearbox' && (
-          <div className={classes.mobileSection}>
-            <IconButton aria-label="change gears" color="inherit" onClick={() => dialogs.open('gearSelector')}>
-              <TuneIcon />
-            </IconButton>
-          </div>
-        )}
+        {pathname === '/gearbox' && <HeaderActions />}
       </Toolbar>
     </AppBar>
   )

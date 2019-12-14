@@ -23,10 +23,10 @@ export interface GearSelectorDialogProps {
   dialogs: DialogsContextProps
 }
 
-const GearSelectorDialog: FC<GearSelectorDialogProps> = ({ dialogs: { close } }) => {
+const GearSelectorDialog: FC<GearSelectorDialogProps> = ({ dialogs: { close } }: GearSelectorDialogProps) => {
   const classes = useStyles({})
 
-  const WrappedComponent = (
+  return (
     <Dialog
       aria-labelledby="form-dialog-title"
       fullScreen
@@ -51,8 +51,6 @@ const GearSelectorDialog: FC<GearSelectorDialogProps> = ({ dialogs: { close } })
       <GearSelector />
     </Dialog>
   )
-
-  return WrappedComponent
 }
 
 export default GearSelectorDialog

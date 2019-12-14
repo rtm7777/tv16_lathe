@@ -44,13 +44,13 @@ export class DataBase extends Dexie {
       if (!gearsCount) {
         await this.gearConfigs.clear()
 
-        this.gears.bulkAdd(metricGears.map(gear => new Gear({ z: gear, active: 1 })))
-        this.gears.bulkAdd(imperialGears.map(gear => new Gear({ z: gear, active: 0 })))
-        this.dGears.bulkAdd(defaultDgears.map(gear => new DGear({ z: gear })))
+        this.gears.bulkAdd(metricGears.map((gear) => new Gear({ z: gear, active: 1 })))
+        this.gears.bulkAdd(imperialGears.map((gear) => new Gear({ z: gear, active: 0 })))
+        this.dGears.bulkAdd(defaultDgears.map((gear) => new DGear({ z: gear })))
 
         const gearConfigs: GearConfig[] = []
 
-        generateGearConfigs(defaultGears, defaultDgears, config => {
+        generateGearConfigs(defaultGears, defaultDgears, (config) => {
           gearConfigs.push(new GearConfig(config))
         })
 
@@ -71,9 +71,9 @@ export class DataBase extends Dexie {
         const gearConfigs: GearConfig[] = []
 
         generateGearConfigs(
-          gears.map(g => g.z),
-          dGears.map(g => g.z),
-          config => {
+          gears.map((g) => g.z),
+          dGears.map((g) => g.z),
+          (config) => {
             gearConfigs.push(new GearConfig(config))
           },
           newGear,
@@ -121,10 +121,10 @@ export class DataBase extends Dexie {
     this.transaction('r', this.gears, this.gearConfigs, this.gearFilters, async () => {
       const [
         activeGears,
-        { value: system = SYSTEMS.pmm} = {},
+        { value: system = SYSTEMS.pmm } = {},
         { value: approx = false } = {},
-        { value: unique = false} = {},
-      ]  = await Promise.all([
+        { value: unique = false } = {},
+      ] = await Promise.all([
         this.findActiveGears(),
         this.gearFilters.where('filter').equals(FILTERS.system).first(),
         this.gearFilters.where('filter').equals(FILTERS.approx).first(),

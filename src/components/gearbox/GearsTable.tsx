@@ -25,10 +25,10 @@ export interface GearsTableProps {
   data: GearConfig[]
 }
 
-const GearsTable: FC<GearsTableProps> = ({ data }) => {
+const GearsTable: FC<GearsTableProps> = ({ data }: GearsTableProps) => {
   const classes = useStyles({})
 
-  const WrappedComponent = (
+  return (
     <Table className={classes.table} stickyHeader size="small">
       <TableHead>
         <TableRow>
@@ -50,7 +50,7 @@ const GearsTable: FC<GearsTableProps> = ({ data }) => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map(row => (
+        {data.map((row) => (
           <TableRow key={row.id} hover>
             <TableCell className={classes.gearCell} align="center">
               {row.a}
@@ -72,7 +72,6 @@ const GearsTable: FC<GearsTableProps> = ({ data }) => {
       </TableBody>
     </Table>
   )
-  return WrappedComponent
 }
 
 export default GearsTable

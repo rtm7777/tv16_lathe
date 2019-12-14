@@ -14,9 +14,10 @@ export interface CheckboxListItemProps {
   text: string
 }
 
-const CheckboxListItem: FC<CheckboxListItemProps> = ({ checked, onClick, text }) => {
+const CheckboxListItem: FC<CheckboxListItemProps> = ({ checked, onClick, text }: CheckboxListItemProps) => {
   const classes = useStyles({})
-  const WrappedComponent = (
+
+  return (
     <ListItem button className={classes.nested} onClick={onClick}>
       <ListItemIcon>
         <Checkbox
@@ -29,8 +30,6 @@ const CheckboxListItem: FC<CheckboxListItemProps> = ({ checked, onClick, text })
       <ListItemText primary={text} />
     </ListItem>
   )
-
-  return WrappedComponent
 }
 
 export default CheckboxListItem
