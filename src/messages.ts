@@ -17,6 +17,10 @@ const messages: MessagesLocale = {
       },
       calculator: {
         header: 'Thread Calculator',
+        a: 'a gear',
+        b: 'b gear',
+        c: 'c gear',
+        d: 'd gear',
       },
     },
     filters: {
@@ -26,6 +30,11 @@ const messages: MessagesLocale = {
         tpi: 'tpi',
       },
       unique: 'unique',
+    },
+    table: {
+      feed: 'feed',
+      pmm: 'pitch',
+      tpi: 'tpi',
     },
     gearSelector: {
       custom: 'Custom gears',
