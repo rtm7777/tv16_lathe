@@ -2,8 +2,8 @@ import React, {
   ChangeEvent,
   FC,
   useCallback,
-  useState,
   useEffect,
+  useState,
 } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Theme, makeStyles } from '@material-ui/core/styles'
@@ -17,21 +17,34 @@ import TextField from '@material-ui/core/TextField'
 
 import { DialogsContextProps } from '@/components/providers/DialogsProvider'
 
-import { DEFAULT_GEARS_PARAMS } from '@/constants'
-
 export interface CalculatorDialogProps {
   dialogs: DialogsContextProps
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   inputsWrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'space-evenly',
+    marginBottom: '10px',
   },
   displayWrapper: {
-    justifyContent: 'space-evenly',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    '& > div': {
+      width: '80%',
+      marginTop: '5px',
+      marginBottom: '10px',
+    },
   },
   input: {
-    width: '150px',
+    [theme.breakpoints.down('sm')]: {
+      flexBasis: '80%',
+      margin: '10px 0 10px 0',
+    },
+    flexBasis: 'calc(50% - 30px)',
+    margin: '5px 15px 10px 15px',
   },
 }))
 
@@ -76,11 +89,8 @@ const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }) => 
             { inputs.map((i) => (
               <TextField
                 className={classes.input}
-                inputProps={{ min: DEFAULT_GEARS_PARAMS.minZ, max: DEFAULT_GEARS_PARAMS.maxZ, step: 1 }}
-                label={formatMessage(
-                  { id: `dialogs.calculator.${i}` },
-                  { minZ: DEFAULT_GEARS_PARAMS.minZ, maxZ: DEFAULT_GEARS_PARAMS.maxZ },
-                )}
+                inputProps={{ step: 1 }}
+                label={formatMessage({ id: `dialogs.calculator.${i}` })}
                 key={i}
                 margin="normal"
                 onChange={handleChange(i)}
@@ -94,9 +104,9 @@ const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }) => 
             xs={12}
             sm={4}
           >
-            <Chip label={`${formatMessage({ id: 'table.feed' })} = ${pitch / 20}`} />
-            <Chip label={`${formatMessage({ id: 'table.pmm' })} = ${pitch}`} />
-            <Chip label={`${formatMessage({ id: 'table.tpi' })} = ${25.4 / pitch}`} />
+            <Chip label={`${formatMessage({ id: 'table.feed' })} = ${(pitch / 20).toFixed(4)}`} />
+            <Chip label={`${formatMessage({ id: 'table.pmm' })} = ${pitch.toFixed(4)}`} />
+            <Chip label={`${formatMessage({ id: 'table.tpi' })} = ${(25.4 / pitch).toFixed(4)}`} />
           </Grid>
         </Grid>
       </DialogContent>
