@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import SpeedDial from '@material-ui/lab/SpeedDial'
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon'
 
-import { useDialogs } from '@/components/providers/DialogsProvider'
+import { useDialogs } from '@/components/providers/dialogs/DialogsProvider'
 import GearboxContent from '@/components/gearbox/GearboxContent'
 import GearSelector from '@/components/gearbox/GearSelector'
 

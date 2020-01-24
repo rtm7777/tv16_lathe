@@ -15,7 +15,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 
-import { DialogsContextProps } from '@/components/providers/DialogsProvider'
+import { DialogsContextProps } from '@/components/providers/dialogs/DialogsProvider'
 
 export interface CalculatorDialogProps {
   dialogs: DialogsContextProps

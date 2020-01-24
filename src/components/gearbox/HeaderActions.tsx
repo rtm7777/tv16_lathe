@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 import FunctionsIcon from '@material-ui/icons/Functions'
 import TuneIcon from '@material-ui/icons/Tune'
 
-import { useDialogs } from '@/components/providers/DialogsProvider'
+import { useDialogs } from '@/components/providers/dialogs/DialogsProvider'
 
 
 const useStyles = makeStyles((theme: Theme) => ({

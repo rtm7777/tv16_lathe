@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import CloseIcon from '@material-ui/icons/Close'
 
-import { DialogsContextProps } from '@/components/providers/DialogsProvider'
+import { DialogsContextProps } from '@/components/providers/dialogs/DialogsProvider'
 import GearSelector from '@/components/gearbox/GearSelector'
 
 const useStyles = makeStyles((theme: Theme) => ({

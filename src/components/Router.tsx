@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { loadGears, loadFilters } from '@/redux/gearbox'
 
 import AppLayout from '@/components/Layouts/AppLayout'
+import DialogsRenderer from '@/components/providers/dialogs/DialogsRenderer'
 import DocumentationPage from '@/components/pages/DocumentationPage'
 import GearboxPage from '@/components/pages/GearboxPage'
 
@@ -34,6 +35,7 @@ const Router: FC = () => {
           <Route path="/documentation" component={DocumentationPage} />
         </Switch>
       </AppLayout>
+      <DialogsRenderer />
     </BrowserRouter>
   )
 }
