@@ -17,7 +17,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 
 import { findConfigs, setFilter, setInput } from '@/redux/gearbox'
-import { AppState } from '../../redux/types'
+import { AppState } from '@/redux/types'
 
 import { FILTERS, INPUTS, SYSTEMS } from '@/constants'
 

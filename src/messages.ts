@@ -32,6 +32,10 @@ const messages: MessagesLocale = {
       unique: 'unique',
     },
     table: {
+      a: 'a',
+      b: 'b',
+      c: 'c',
+      d: 'd',
       feed: 'feed',
       pmm: 'pitch',
       tpi: 'tpi',

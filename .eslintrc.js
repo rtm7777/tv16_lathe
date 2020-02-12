@@ -12,6 +12,7 @@ module.exports = {
   ],
   parserOptions: {
     useJSXTextNode: false,
+    project: "./tsconfig.json",
     tsconfigRootDir: "./",
     sourceType: 'module', // Allows for the use of imports
     ecmaFeatures: {
@@ -24,6 +25,8 @@ module.exports = {
       "allowExpressions": true,
     }],
     "@typescript-eslint/semi": ["error", "never"],
+    "@typescript-eslint/no-dupe-class-members": "off",
+    "@typescript-eslint/comma-spacing": "off",
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
           "delimiter": "none",
