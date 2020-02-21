@@ -23,6 +23,10 @@ const messages: MessagesLocale = {
         d: 'd gear',
       },
     },
+    docs: {
+      specs: 'specifications',
+      passports: 'passports',
+    },
     filters: {
       approx: 'approx',
       system: {
