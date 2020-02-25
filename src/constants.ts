@@ -48,3 +48,10 @@ export const INPUT_RANGES: { [key: string]: number[] } = {
   pmm: [0.15, 6],
   tpi: [4, 160],
 }
+
+export const PASSPORTS: { [key: string]: string } = {
+  almaty: 'TV-16_Almaty_1957.pdf',
+  almatyBushings: 'TV-16_Almaty_1958_bushings.pdf',
+  dubno: 'TV-16_Dubno_1971_ukr.pdf',
+  dubnoUkr: 'TV-16_Dubno_1972.pdf',
+}

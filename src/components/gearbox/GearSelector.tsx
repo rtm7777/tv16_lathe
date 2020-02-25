@@ -8,8 +8,8 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
 
-import CheckboxListItem from '@/components/gearbox/CheckboxListItem'
-import CollapsableList from '@/components/gearbox/CollapsableList'
+import CheckboxListItem from '@/components/List/CheckboxListItem'
+import CollapsableList from '@/components/List/CollapsableList'
 
 import { findConfigs, toggleGear } from '@/redux/gearbox'
 import { AppState } from '@/redux/types'

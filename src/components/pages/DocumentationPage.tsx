@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme: Theme) => {
       [theme.breakpoints.up('md')]: {
         display: 'flex',
         height: '100%',
-        width: '200px',
+        width: '300px',
         overflow: 'auto',
       },
     },
     content: {
       [theme.breakpoints.up('md')]: {
-        width: 'calc(100% - 200px)',
+        width: 'calc(100% - 300px)',
         height: '100%',
       },
     },

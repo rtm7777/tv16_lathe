@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => {
       [theme.breakpoints.up('xs')]: { height: 'auto' },
       [theme.breakpoints.up('md')]: { height: `calc(100% - ${minHeight}px)` },
     },
-    gears: {
+    navigation: {
       [theme.breakpoints.up('xs')]: { display: 'none' },
       [theme.breakpoints.up('md')]: {
         display: 'flex',
@@ -46,7 +46,7 @@ const GearboxPage: FC = () => {
 
   return (
     <Grid direction="row" container className={classes.root}>
-      <Grid item className={classes.gears}>
+      <Grid item className={classes.navigation}>
         <GearSelector />
       </Grid>
       <Grid item className={classes.content}>

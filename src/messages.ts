@@ -27,6 +27,12 @@ const messages: MessagesLocale = {
       specs: 'specifications',
       passports: 'passports',
     },
+    files: {
+      almaty: 'Almaty 1957',
+      almatyBushings: 'Almaty 1958 bushings',
+      dubno: 'Dubno 1971 Ukrainian',
+      dubnoUkr: 'Dubno 1972',
+    },
     filters: {
       approx: 'approx',
       system: {
