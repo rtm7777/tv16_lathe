@@ -1,7 +1,7 @@
 import Dexie from 'dexie'
 
 import {
-  ADD_GEAR,
+  ADD_GEAR_SUCCESS,
   FIND_CONFIGS_SUCCESS,
   LOAD_FILTERS_SUCCESS,
   LOAD_GEARS_SUCCESS,
@@ -20,7 +20,7 @@ export const addGear = (gear: number, asD = false): ThunkResult<void> => async (
   try {
     await db.addGear(gear, asD)
     dispatch({
-      type: ADD_GEAR,
+      type: ADD_GEAR_SUCCESS,
       payload: gear,
     })
   } catch (err) {
@@ -130,7 +130,7 @@ const initialState: GearboxState = {
 
 export default (state = initialState, action: GearboxActionTypes): GearboxState => {
   switch (action.type) {
-    case ADD_GEAR:
+    case ADD_GEAR_SUCCESS:
       return {
         ...state,
         customGears: [...state.customGears, action.payload],
@@ -156,6 +156,13 @@ export default (state = initialState, action: GearboxActionTypes): GearboxState 
         ...state,
         customGears: action.payload.filter(({ z }) => !defaultGears.includes(z)).map(({ z }) => z),
         selectedGears: action.payload.filter(({ active }) => active).map(({ z }) => z),
+      }
+
+    case REMOVE_GEAR_SUCCESS:
+      return {
+        ...state,
+        customGears: state.customGears.filter((g) => g !== action.payload),
+        selectedGears: state.selectedGears.filter((g) => g !== action.payload),
       }
 
     case SET_FILTER_SUCCESS:

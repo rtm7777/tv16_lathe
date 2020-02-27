@@ -11,7 +11,7 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import CheckboxListItem from '@/components/List/CheckboxListItem'
 import CollapsableList from '@/components/List/CollapsableList'
 
-import { findConfigs, toggleGear } from '@/redux/gearbox'
+import { findConfigs, toggleGear, removeGear } from '@/redux/gearbox'
 import { AppState } from '@/redux/types'
 
 import { metricGears, imperialGears } from '@/constants'
@@ -33,6 +33,10 @@ const GearSelector: FC = () => {
   const customGears = useSelector(({ gearbox }: AppState) => gearbox.customGears)
   const handleGearSelect = useCallback((gear) => async () => {
     await dispatch(toggleGear(gear))
+    dispatch(findConfigs())
+  }, [dispatch])
+  const handleGearRemove = useCallback((gear) => async () => {
+    await dispatch(removeGear(gear))
     dispatch(findConfigs())
   }, [dispatch])
 
@@ -76,6 +80,7 @@ const GearSelector: FC = () => {
             checked={selectedGears.includes(gear)}
             key={gear}
             onClick={handleGearSelect(gear)}
+            onDelete={handleGearRemove(gear)}
             text={`z = ${gear}`}
           />
         ))}

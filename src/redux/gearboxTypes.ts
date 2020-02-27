@@ -2,7 +2,7 @@ import Gear from '@/db/gear'
 import GearConfig from '@/db/gearConfig'
 import GearFilter from '@/db/gearFilter'
 
-export const ADD_GEAR = 'ADD_GEAR'
+export const ADD_GEAR_SUCCESS = 'ADD_GEAR_SUCCESS'
 export const FIND_CONFIGS_SUCCESS = 'FIND_CONFIGS_SUCCESS'
 export const LOAD_FILTERS_SUCCESS = 'LOAD_FILTERS_SUCCESS'
 export const LOAD_GEARS_SUCCESS = 'LOAD_GEARS_SUCCESS'
@@ -11,8 +11,8 @@ export const SET_FILTER_SUCCESS = 'SET_FILTER_SUCCESS'
 export const SET_INPUT = 'SET_INPUT'
 export const TOGGLE_GEAR = 'TOGGLE_GEAR'
 
-interface AddGearAction {
-  type: typeof ADD_GEAR
+interface AddGearSuccessAction {
+  type: typeof ADD_GEAR_SUCCESS
   payload: number
 }
 
@@ -51,7 +51,7 @@ interface ToggleGearAction {
   payload: number
 }
 
-export type GearboxActionTypes = AddGearAction | GetConfigsSuccessAction | LoadFiltersSuccessAction
+export type GearboxActionTypes = AddGearSuccessAction | GetConfigsSuccessAction | LoadFiltersSuccessAction
 | LoadGearsSuccessAction | RemoveGearAction | SetFilterSucessAction | SetInputAction | ToggleGearAction
 
 export interface GearboxState {
