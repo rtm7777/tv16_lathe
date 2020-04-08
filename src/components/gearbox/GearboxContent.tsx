@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import GearConfig from '@/db/gearConfig'
 
 import GearboxFilter from '@/components/gearbox/GearboxFilter'
-import GearsTable from '@/components/Table/Table'
+import Table from '@/components/Table/Table'
 
 import { AppState } from '@/redux/types'
 import columns from '@/components/gearbox/gearsTableConfig'
@@ -45,7 +45,7 @@ const GearboxContent: FC = () => {
         <GearboxFilter />
       </Grid>
       <Grid className={classes.table} item xs={12}>
-        <GearsTable table={table} />
+        <Table table={table} />
       </Grid>
     </Grid>
   )
