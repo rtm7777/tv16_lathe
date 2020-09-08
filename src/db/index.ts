@@ -20,12 +20,12 @@ import {
 } from '@/constants'
 
 export class DataBase extends Dexie {
-  /* eslint-disable lines-between-class-members */
+  /* eslint-disable @typescript-eslint/lines-between-class-members */
   gears: Dexie.Table<Gear, number>
   dGears: Dexie.Table<DGear, number>
   gearConfigs: Dexie.Table<GearConfig, number>
   gearFilters: Dexie.Table<GearFilter, number>
-  /* eslint-enable lines-between-class-members */
+  /* eslint-enable @typescript-eslint/lines-between-class-members */
 
   constructor(name: string) {
     super(name)

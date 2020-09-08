@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const inputs = ['a', 'b', 'c', 'd']
 
-const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }) => {
+const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }: CalculatorDialogProps) => {
   const classes = useStyles({})
   const { formatMessage } = useIntl()
   const [gears, setGears] = useState({ a: 0, b: 0, c: 0, d: 0 }) // eslint-disable-line object-curly-newline

@@ -7,7 +7,8 @@ import Content from '@/components/documentation/Content'
 import Navigation from '@/components/documentation/Navigation'
 
 const useStyles = makeStyles((theme: Theme) => {
-  const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as {} & { minHeight: number }
+  const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as Record<string, unknown>
+  & { minHeight: number }
 
   return createStyles({
     root: {

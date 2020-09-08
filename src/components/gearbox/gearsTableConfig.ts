@@ -1,7 +1,6 @@
 import { CellProps, Column } from 'react-table'
 import { textCell, fixedNumberCell } from '@/components/Table/tableCells'
 
-
 const config: Column[] = [
   {
     accessor: 'a',

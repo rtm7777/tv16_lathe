@@ -11,7 +11,7 @@ import { DialogsType } from '@/components/providers/dialogs/Dialogs'
 
 export interface DialogsContextProps {
   opened: DialogsType
-  open: (name: string, props?: {}) => void
+  open: (name: string, props?: Record<string, unknown>) => void
   close: (name: string) => void
 }
 

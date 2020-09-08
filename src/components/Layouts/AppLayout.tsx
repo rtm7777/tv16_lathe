@@ -6,8 +6,9 @@ import Header from '@/components/Layouts/Panels/Header'
 import SideBar from '@/components/Layouts/Panels/Sidebar'
 
 const useStyles = makeStyles((theme: Theme) => {
-  const { width } = theme.overrides.MuiDrawer.paper as {} & { width: string }
-  const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as {} & { minHeight: number }
+  const { width } = theme.overrides.MuiDrawer.paper as Record<string, unknown> & { width: string }
+  const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as Record<string, unknown>
+  & { minHeight: number }
 
   return createStyles({
     toolbar: theme.mixins.toolbar,

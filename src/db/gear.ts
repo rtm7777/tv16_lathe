@@ -4,10 +4,10 @@ export interface GearType {
 }
 
 export default class Gear {
-  /* eslint-disable lines-between-class-members */
+  /* eslint-disable @typescript-eslint/lines-between-class-members */
   z: number
   active: number
-  /* eslint-enable lines-between-class-members */
+  /* eslint-enable @typescript-eslint/lines-between-class-members */
 
   constructor({ z, active }: GearType) {
     this.z = z

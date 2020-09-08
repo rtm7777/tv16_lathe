@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "esModuleInterop": true,
     "jsx": "react",
     "module": "commonjs",
@@ -12,8 +12,14 @@
     "sourceMap": true,
     "target": "es6"
   },
+  "include": [
+    "src",
+    ".eslintrc.js",
+    "webpack.config.js",
+    "react-table-extended.d.ts"
+  ],
   "exclude": [
     "dist",
-    "node_modules",
+    "node_modules"
   ],
 }

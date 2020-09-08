@@ -7,7 +7,6 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 
-
 const useStyles = makeStyles((theme: Theme) => createStyles({
   table: {
     tableLayout: 'fixed',

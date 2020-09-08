@@ -10,7 +10,8 @@ import GearboxContent from '@/components/gearbox/GearboxContent'
 import GearSelector from '@/components/gearbox/GearSelector'
 
 const useStyles = makeStyles((theme: Theme) => {
-  const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as {} & { minHeight: number }
+  const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as Record<string, unknown>
+  & { minHeight: number }
 
   return createStyles({
     root: {

@@ -9,7 +9,7 @@ export interface GearConfigType {
 }
 
 export default class GearConfig {
-  /* eslint-disable lines-between-class-members */
+  /* eslint-disable @typescript-eslint/lines-between-class-members */
   id: number
   a: number
   b: number
@@ -18,7 +18,7 @@ export default class GearConfig {
   pmm: number
   tpi: number
   feed: number
-  /* eslint-enable lines-between-class-members */
+  /* eslint-enable @typescript-eslint/lines-between-class-members */
 
   constructor({
     a,

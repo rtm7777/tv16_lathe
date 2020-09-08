@@ -13,7 +13,7 @@ import { FlattenMessages } from '@/utils/flat'
 export interface AppProps {
   store: Store
   locale: string
-  theme: object
+  theme: Record<string, unknown>
   messages: FlattenMessages
 }
 

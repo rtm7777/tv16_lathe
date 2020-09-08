@@ -9,7 +9,6 @@ import TuneIcon from '@material-ui/icons/Tune'
 
 import { useDialogs } from '@/components/providers/dialogs/DialogsProvider'
 
-
 const useStyles = makeStyles((theme: Theme) => ({
   desktopVisible: {
     [theme.breakpoints.up('xs')]: { display: 'none' },
