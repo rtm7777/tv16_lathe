@@ -1,11 +1,11 @@
 import { FC } from 'react'
 
-import AddGearDialog from '@/components/dialogs/addGear'
-import CalculatorDialog from '@/components/dialogs/calculator'
-import GearSelectorDialog from '@/components/dialogs/gearSelector'
+import AddGearDialog, { AddGearDialogProps } from '@/components/dialogs/addGear'
+import CalculatorDialog, { CalculatorDialogProps } from '@/components/dialogs/calculator'
+import GearSelectorDialog, { GearSelectorDialogProps } from '@/components/dialogs/gearSelector'
 
 export interface DialogsType {
-  [key: string]: FC<{ dialogs: Record<string, unknown> }>
+  [key: string]: FC<AddGearDialogProps | CalculatorDialogProps | GearSelectorDialogProps>
 }
 
 const DIALOGS: DialogsType = {

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
 import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { Theme } from '@material-ui/core/styles'
 
 import Providers from '@/components/Providers'
 import Router from '@/components/Router'
@@ -13,7 +14,7 @@ import { FlattenMessages } from '@/utils/flat'
 export interface AppProps {
   store: Store
   locale: string
-  theme: Record<string, unknown>
+  theme: Theme
   messages: FlattenMessages
 }
 

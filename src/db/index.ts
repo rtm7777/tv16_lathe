@@ -84,7 +84,7 @@ export class DataBase extends Dexie {
       throw new Error('gear_add_error')
     })
 
-  removeGear = (gearToRemove: number): Dexie.Promise<void> =>
+  removeGear = (gearToRemove: number): Dexie.Promise<boolean> =>
     this.transaction('rw', this.gears, this.dGears, this.gearConfigs, async () => {
       if (!defaultGears.includes(gearToRemove)) {
         this.gearConfigs
@@ -98,8 +98,12 @@ export class DataBase extends Dexie {
           .equals(gearToRemove)
           .delete()
         this.gears.where('z').equals(gearToRemove).delete()
-        this.dGears.where('z').equals(gearToRemove).delete()
+        const dGears = this.dGears.where('z').equals(gearToRemove)
+        const isD = await dGears.count()
+        dGears.delete()
+        return !!isD
       }
+      return false
     })
 
   toggleGear = (z: number): Dexie.Promise<void> =>

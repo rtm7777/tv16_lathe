@@ -6,6 +6,9 @@ export interface MessagesLocale {
 
 const messages: MessagesLocale = {
   'en-US': {
+    alerts: {
+      gearAdded: 'Gear added',
+    },
     dialogs: {
       addGear: {
         add: 'add gear',
@@ -26,6 +29,10 @@ const messages: MessagesLocale = {
     docs: {
       specs: 'specifications',
       passports: 'passports',
+    },
+    errors: {
+      general: 'Oops, some error happens',
+      gearDuplicate: 'Gear with this \'z\' value already exist',
     },
     files: {
       almaty: 'Almaty 1957',

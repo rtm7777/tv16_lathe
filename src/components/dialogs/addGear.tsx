@@ -18,6 +18,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormGroup from '@material-ui/core/FormGroup'
 import TextField from '@material-ui/core/TextField'
 
+import { useAlerts } from '@/components/providers/alerts/AlertsProvider'
 import { DialogsContextProps } from '@/components/providers/dialogs/DialogsProvider'
 
 import { addGear, findConfigs } from '@/redux/gearbox'
@@ -32,6 +33,7 @@ const re = /^[0-9\b]{1,2}$/
 
 const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }: AddGearDialogProps) => {
   const { formatMessage } = useIntl()
+  const { show } = useAlerts()
   const dispatch = useDispatch()
   const [zValue, setZValue] = useState('')
   const [isDChecked, setDChecked] = useState(false)
@@ -39,9 +41,14 @@ const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }: AddGearDi
   const dDisabled = Number(zValue) < DEFAULT_GEARS_PARAMS.minD
 
   const handleAddGear = useCallback(async () => {
-    await dispatch(addGear(Number(zValue), isDChecked))
-    dispatch(findConfigs())
-    close('addGear')
+    try {
+      await dispatch(addGear(Number(zValue), isDChecked))
+      dispatch(findConfigs())
+      close('addGear')
+      show({ message: formatMessage({ id: 'alerts.gearAdded' }) })
+    } catch (err) {
+      show({ type: 'error', message: formatMessage({ id: err.message }) })
+    }
   }, [dispatch, close, isDChecked, zValue])
 
   const handleChange = useCallback(({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {

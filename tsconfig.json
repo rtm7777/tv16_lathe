@@ -17,9 +17,5 @@
     ".eslintrc.js",
     "webpack.config.js",
     "react-table-extended.d.ts"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
+  ]
 }

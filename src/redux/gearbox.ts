@@ -12,11 +12,11 @@ import {
   GearboxActionTypes,
   GearboxState,
 } from '@/redux/gearboxTypes'
-import { ThunkResult } from '@/redux/types'
+import { ThunAction } from '@/redux/types'
 
 import { defaultGears, SYSTEMS } from '@/constants'
 
-export const addGear = (gear: number, asD = false): ThunkResult<void> => async (dispatch, _, db) => {
+export const addGear = (gear: number, asD = false): ThunAction<void> => async (dispatch, _, db) => {
   try {
     await db.addGear(gear, asD)
     dispatch({
@@ -29,7 +29,7 @@ export const addGear = (gear: number, asD = false): ThunkResult<void> => async (
   }
 }
 
-export const findConfigs = (): ThunkResult<void> => async (dispatch, getState, db) => {
+export const findConfigs = (): ThunAction<void> => async (dispatch, getState, db) => {
   const { inputValue } = getState().gearbox
 
   try {
@@ -44,7 +44,7 @@ export const findConfigs = (): ThunkResult<void> => async (dispatch, getState, d
   }
 }
 
-export const loadFilters = (): ThunkResult<void> => async (dispatch, _, db) => {
+export const loadFilters = (): ThunAction<void> => async (dispatch, _, db) => {
   try {
     const filters = await db.loadFilters()
     dispatch({
@@ -56,7 +56,7 @@ export const loadFilters = (): ThunkResult<void> => async (dispatch, _, db) => {
   }
 }
 
-export const loadGears = (): ThunkResult<void> => async (dispatch, _, db) => {
+export const loadGears = (): ThunAction<void> => async (dispatch, _, db) => {
   try {
     await db.initializeGears()
     const gears = await db.loadGears()
@@ -69,19 +69,16 @@ export const loadGears = (): ThunkResult<void> => async (dispatch, _, db) => {
   }
 }
 
-export const removeGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
-  try {
-    await db.removeGear(gear)
-    dispatch({
-      type: REMOVE_GEAR_SUCCESS,
-      payload: gear,
-    })
-  } catch (err) {
-    throw new Error('remove gear err')
-  }
+export const removeGear = (gear: number): ThunAction<Promise<boolean>> => async (dispatch, _, db) => {
+  const isD = await db.removeGear(gear)
+  dispatch({
+    type: REMOVE_GEAR_SUCCESS,
+    payload: gear,
+  })
+  return isD
 }
 
-export const setFilter = (filter: string, value: string | boolean): ThunkResult<void> => async (dispatch, _, db) => {
+export const setFilter = (filter: string, value: string | boolean): ThunAction<void> => async (dispatch, _, db) => {
   try {
     await db.setFilter(filter, value)
     dispatch({
@@ -98,7 +95,7 @@ export const setInput = (value: string): GearboxActionTypes => ({
   payload: value,
 })
 
-export const toggleGear = (gear: number): ThunkResult<void> => async (dispatch, _, db) => {
+export const toggleGear = (gear: number): ThunAction<void> => async (dispatch, _, db) => {
   try {
     await db.toggleGear(gear)
     dispatch({

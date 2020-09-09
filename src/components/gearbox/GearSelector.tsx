@@ -8,11 +8,17 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListSubheader from '@material-ui/core/ListSubheader'
 
+import { useAlerts } from '@/components/providers/alerts/AlertsProvider'
 import CheckboxListItem from '@/components/List/CheckboxListItem'
 import CollapsableList from '@/components/List/CollapsableList'
 
-import { findConfigs, toggleGear, removeGear } from '@/redux/gearbox'
-import { AppState } from '@/redux/types'
+import {
+  findConfigs,
+  toggleGear,
+  removeGear,
+  addGear,
+} from '@/redux/gearbox'
+import { AppState, ThunkDispatch } from '@/redux/types'
 
 import { metricGears, imperialGears } from '@/constants'
 
@@ -28,7 +34,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const GearSelector: FC = () => {
   const classes = useStyles({})
   const { formatMessage } = useIntl()
-  const dispatch = useDispatch()
+  const { show } = useAlerts()
+  const dispatch = useDispatch<ThunkDispatch>()
   const selectedGears = useSelector(({ gearbox }: AppState) => gearbox.selectedGears)
   const customGears = useSelector(({ gearbox }: AppState) => gearbox.customGears)
   const handleGearSelect = useCallback((gear) => async () => {
@@ -36,7 +43,18 @@ const GearSelector: FC = () => {
     dispatch(findConfigs())
   }, [dispatch])
   const handleGearRemove = useCallback((gear) => async () => {
-    await dispatch(removeGear(gear))
+    try {
+      const isD = await dispatch(removeGear(gear))
+      show({
+        message: 'gear deleted',
+        onUndo: async () => {
+          await dispatch(addGear(gear, isD))
+          dispatch(findConfigs())
+        },
+      })
+    } catch (err) {
+      show({ type: 'error', message: formatMessage(err.message) })
+    }
     dispatch(findConfigs())
   }, [dispatch])
 
