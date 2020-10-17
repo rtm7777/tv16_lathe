@@ -1,5 +1,10 @@
 import React, { useState, FC, useEffect } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loadGears, loadFilters } from '@/redux/gearbox'
 
@@ -30,7 +35,7 @@ const Router: FC = () => {
     <BrowserRouter>
       <AppLayout>
         <Switch>
-          <Route path="/" exact component={GearboxPage} />
+          <Redirect exact from="/" to="/gearbox" />
           <Route path="/gearbox" component={GearboxPage} />
           <Route path="/documentation" component={DocumentationPage} />
         </Switch>

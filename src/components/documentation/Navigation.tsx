@@ -1,5 +1,6 @@
 import React, { FC, useMemo } from 'react'
 import { useIntl } from 'react-intl'
+import { Link, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
 import List from '@material-ui/core/List'
@@ -18,16 +19,22 @@ const useStyles = makeStyles(() => ({
 const Navigation: FC = () => {
   const classes = useStyles({})
   const { formatMessage } = useIntl()
+  const { pathname } = useLocation()
   const passports = useMemo(() => Object.entries(PASSPORTS).map(([name, file]) => (
     {
       text: formatMessage({ id: `files.${name}` }),
-      path: `/files/${file}`,
+      path: `/data/passports/${file}`,
     }
   )), [])
 
   return (
     <List className={classes.list}>
-      <ListItem button>
+      <ListItem
+        button
+        component={Link}
+        selected={pathname.includes('/specs')}
+        to="specs"
+      >
         <ListItemText primary={formatMessage({ id: 'docs.specs' })} />
       </ListItem>
       <CollapsableList text={formatMessage({ id: 'docs.passports' })}>

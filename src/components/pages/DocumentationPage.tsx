@@ -1,4 +1,10 @@
 import React, { FC } from 'react'
+import {
+  Redirect,
+  Route,
+  Switch,
+  useRouteMatch,
+} from 'react-router-dom'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 
 import Grid from '@material-ui/core/Grid'
@@ -40,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
 const DcumentationPage: FC = () => {
   const classes = useStyles({})
+  const { path } = useRouteMatch()
 
   return (
     <Grid direction="row" container className={classes.root}>
@@ -47,7 +54,15 @@ const DcumentationPage: FC = () => {
         <Navigation />
       </Grid>
       <Grid item className={classes.content}>
-        <Content />
+        <Switch>
+          <Redirect exact from={path} to={`${path}/specs`} />
+          <Route path={`${path}/specs`}>
+            <h3>SPECS HEREEEEE</h3>
+          </Route>
+          <Route path={`${path}/lalal`}>
+            <div>sdggswd</div>
+          </Route>
+        </Switch>
       </Grid>
     </Grid>
   )

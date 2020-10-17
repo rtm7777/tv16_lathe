@@ -1,11 +1,9 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
-import { useTable, TableInstance } from 'react-table'
+import { useTable } from 'react-table'
 import { useIntl } from 'react-intl'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
-
-import GearConfig from '@/db/gearConfig'
 
 import GearboxFilter from '@/components/gearbox/GearboxFilter'
 import Table from '@/components/Table/Table'
@@ -33,11 +31,11 @@ const GearboxContent: FC = () => {
   const intl = useIntl()
   const { configs } = useSelector(({ gearbox }: AppState) => gearbox)
 
-  const table = useTable<any>({
+  const table = useTable({
     columns,
     data: configs,
     intl,
-  }) as TableInstance<GearConfig>
+  })
 
   return (
     <Grid className={classes.container} container>

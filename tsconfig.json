@@ -16,6 +16,6 @@
     "src",
     ".eslintrc.js",
     "webpack.config.js",
-    "react-table-extended.d.ts"
+    "react-table-config.d.ts"
   ]
 }

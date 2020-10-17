@@ -29,21 +29,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Specs: FC = () => {
   const classes = useStyles({})
   const intl = useIntl()
+  const data = []
 
   const table = useTable<any>({
     columns,
-    data: configs,
+    data,
     intl,
   }) as TableInstance<GearConfig>
 
   return (
     <Grid className={classes.container} container>
-      <Grid className={classes.controls} item xs={12}>
-        <GearboxFilter />
-      </Grid>
-      <Grid className={classes.table} item xs={12}>
-        <Table table={table} />
-      </Grid>
+      <Table table={table} />
     </Grid>
   )
 }

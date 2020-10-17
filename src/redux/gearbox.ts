@@ -24,8 +24,13 @@ export const addGear = (gear: number, asD = false): ThunAction<void> => async (d
       payload: gear,
     })
   } catch (err) {
-    console.log(err)
-    throw err
+    switch (err.name) {
+      case Dexie.errnames.Constraint:
+        console.log('already exist')
+        break
+      default:
+        console.log('other error')
+    }
   }
 }
 

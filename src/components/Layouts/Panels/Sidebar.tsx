@@ -63,21 +63,27 @@ const SideBar: FC<SideBarProps> = ({ open }: SideBarProps) => {
       <Divider />
       <List>
         <Tooltip title={formatMessage({ id: 'sidebar.gearbox' })} placement="right">
-          <ListItem button selected={pathname === '/gearbox'}>
-            <NavLink to="/gearbox">
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-            </NavLink>
+          <ListItem
+            button
+            component={Link}
+            selected={pathname === '/gearbox'}
+            to="/gearbox"
+          >
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
           </ListItem>
         </Tooltip>
         <Tooltip title={formatMessage({ id: 'sidebar.documentation' })} placement="right">
-          <ListItem button selected={pathname === '/documentation'}>
-            <Link to="/documentation">
-              <ListItemIcon>
-                <LibraryBooksIcon />
-              </ListItemIcon>
-            </Link>
+          <ListItem
+            button
+            component={Link}
+            selected={pathname.startsWith('/documentation')}
+            to="/documentation"
+          >
+            <ListItemIcon>
+              <LibraryBooksIcon />
+            </ListItemIcon>
           </ListItem>
         </Tooltip>
       </List>

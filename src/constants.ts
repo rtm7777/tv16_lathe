@@ -55,3 +55,22 @@ export const PASSPORTS: { [key: string]: string } = {
   dubno: 'TV-16_Dubno_1971_ukr.pdf',
   dubnoUkr: 'TV-16_Dubno_1972.pdf',
 }
+
+export const SPECS: string[] = [
+  'model',
+  'centreHeight',
+  'centreDistance',
+  'swingOverBed',
+  'swingOverCarriage',
+  'spindleBore',
+  'speedRange',
+  'feedRates',
+  'metricThreadPitches',
+  'possibleThreads',
+  'spindleCone',
+  'tailStockCone',
+  'weight',
+  'mainDrive',
+  'spindleBrake',
+  'coolantSystem',
+]

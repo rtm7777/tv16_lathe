@@ -1,46 +1,59 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
+  UseColumnOrderInstanceProps,
   UseColumnOrderState,
   UseExpandedHooks,
+  UseExpandedInstanceProps,
   UseExpandedOptions,
   UseExpandedRowProps,
   UseExpandedState,
+  UseFiltersColumnOptions,
   UseFiltersColumnProps,
+  UseFiltersInstanceProps,
   UseFiltersOptions,
   UseFiltersState,
+  UseGlobalFiltersColumnOptions,
+  UseGlobalFiltersInstanceProps,
   UseGlobalFiltersOptions,
   UseGlobalFiltersState,
   UseGroupByCellProps,
+  UseGroupByColumnOptions,
   UseGroupByColumnProps,
   UseGroupByHooks,
+  UseGroupByInstanceProps,
   UseGroupByOptions,
   UseGroupByRowProps,
   UseGroupByState,
+  UsePaginationInstanceProps,
   UsePaginationOptions,
   UsePaginationState,
+  UseResizeColumnsColumnOptions,
   UseResizeColumnsColumnProps,
   UseResizeColumnsOptions,
   UseResizeColumnsState,
   UseRowSelectHooks,
+  UseRowSelectInstanceProps,
   UseRowSelectOptions,
   UseRowSelectRowProps,
   UseRowSelectState,
   UseRowStateCellProps,
+  UseRowStateInstanceProps,
   UseRowStateOptions,
   UseRowStateRowProps,
   UseRowStateState,
+  UseSortByColumnOptions,
+  UseSortByColumnProps,
+  UseSortByHooks,
+  UseSortByInstanceProps,
+  UseSortByOptions,
+  UseSortByState,
 } from 'react-table'
 import { IntlShape } from 'react-intl'
 
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
 
-  export interface TableOptions<D extends Record<string, unknown>>
+  export interface TableOptions<D>
     extends UseExpandedOptions<D>,
-    UseFiltersOptions<D>,
-    UseFiltersOptions<D>,
-    UseGlobalFiltersOptions<D>,
     UseGroupByOptions<D>,
     UsePaginationOptions<D>,
     UseResizeColumnsOptions<D>,
@@ -50,19 +63,30 @@ declare module 'react-table' {
     // note that having Record here allows you to add anything to the options, this matches the spirit of the
     // underlying js library, but might be cleaner if it's replaced by a more specific type that matches your
     // feature set, this is a safe default.
-    Record<string, any> { }
+    Record<string, any> {}
 
-  export interface Hooks<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface Hooks<D>
     extends UseExpandedHooks<D>,
     UseGroupByHooks<D>,
     UseRowSelectHooks<D>,
-    UseSortByHooks<D> { }
+    UseSortByHooks<D> {}
 
-  export interface TableInstance<D extends Record<string, unknown> = Record<string, unknown>> {
-    intl: IntlShape
-  }
+  export interface TableInstance<D>
+    extends UseColumnOrderInstanceProps<D>,
+    UseExpandedInstanceProps<D>,
+    UseFiltersInstanceProps<D>,
+    UseGlobalFiltersInstanceProps<D>,
+    UseGroupByInstanceProps<D>,
+    UsePaginationInstanceProps<D>,
+    UseRowSelectInstanceProps<D>,
+    UseRowStateInstanceProps<D>,
+    UseSortByInstanceProps<D> {intl: IntlShape}
 
-  export interface TableState<D extends Record<string, unknown> = Record<string, unknown>>
+  // export interface TableInstance<D> {
+  //   intl: IntlShape
+  // }
+
+  export interface TableState<D>
     extends UseColumnOrderState<D>,
     UseExpandedState<D>,
     UseFiltersState<D>,
@@ -72,25 +96,28 @@ declare module 'react-table' {
     UseResizeColumnsState<D>,
     UseRowSelectState<D>,
     UseRowStateState<D>,
-    UseSortByState<D> { }
+    UseSortByState<D> {}
 
-  export interface Column<D extends Record<string, unknown> = Record<string, unknown>> {
-    className?: 'table' | 'gearCell'
-  }
+  export interface ColumnInterface<D>
+    extends UseFiltersColumnOptions<D>,
+    UseGlobalFiltersColumnOptions<D>,
+    UseGroupByColumnOptions<D>,
+    UseResizeColumnsColumnOptions<D>,
+    UseSortByColumnOptions<D> {className?: 'table' | 'gearCell'}
 
-  export interface ColumnInstance<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface ColumnInstance<D>
     extends UseFiltersColumnProps<D>,
     UseGroupByColumnProps<D>,
     UseResizeColumnsColumnProps<D>,
-    UseSortByColumnProps<D> { }
+    UseSortByColumnProps<D> {}
 
-  export interface Cell<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface Cell<D>
     extends UseGroupByCellProps<D>,
-    UseRowStateCellProps<D> { }
+    UseRowStateCellProps<D> {}
 
-  export interface Row<D extends Record<string, unknown> = Record<string, unknown>>
+  export interface Row<D>
     extends UseExpandedRowProps<D>,
     UseGroupByRowProps<D>,
     UseRowSelectRowProps<D>,
-    UseRowStateRowProps<D> { }
+    UseRowStateRowProps<D> {}
 }
