@@ -18,8 +18,8 @@ module.exports = {
   },
   output: {
     path: outPath,
-    filename: isProduction ? '[contenthash].js' : '[hash].js',
-    chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[hash].js',
+    filename: isProduction ? '[contenthash].js' : '[fullhash].js',
+    chunkFilename: isProduction ? '[name].[contenthash].js' : '[name].[fullhash].js',
     publicPath: '/',
   },
   resolve: {
@@ -51,7 +51,7 @@ module.exports = {
           isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
-            query: {
+            options: {
               modules: true,
               sourceMap: !isProduction,
               importLoaders: 1,
@@ -75,7 +75,7 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      name: true,
+      name: 'fullhash',
       cacheGroups: {
         commons: {
           chunks: 'initial',
@@ -84,12 +84,12 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
-          filename: isProduction ? 'vendor.[contenthash].js' : 'vendor.[hash].js',
+          filename: isProduction ? 'vendor.[contenthash].js' : 'vendor.[fullhash].js',
           priority: -10,
         },
       },
     },
-    runtimeChunk: true,
+    runtimeChunk: false,
   },
   plugins: [
     new webpack.EnvironmentPlugin({
@@ -98,10 +98,10 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[hash].css',
+      filename: '[fullhash].css',
       disable: !isProduction,
     }),
-    new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/]),
+    new webpack.WatchIgnorePlugin({ paths: [/\.js$/, /\.d\.ts$/] }),
     new HtmlWebpackPlugin({
       template: 'index.html',
       minify: {
@@ -134,11 +134,11 @@ module.exports = {
     host: '0.0.0.0',
   },
   // https://webpack.js.org/configuration/devtool/
-  devtool: isProduction ? 'hidden-source-map' : 'cheap-module-eval-source-map',
-  node: {
-    // workaround for webpack-dev-server issue
-    // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
-    fs: 'empty',
-    net: 'empty',
-  },
+  devtool: isProduction ? 'hidden-source-map' : 'cheap-module-source-map',
+  // node: {
+  //   // workaround for webpack-dev-server issue
+  //   // https://github.com/webpack/webpack-dev-server/issues/60#issuecomment-103411179
+  //   fs: 'empty',
+  //   net: 'empty',
+  // },
 }
