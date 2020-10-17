@@ -78,21 +78,59 @@ const messages: MessagesLocale = {
       info: 'Info',
     },
     specs: {
-      model: {
-        spec: 'Model',
-        value: 'TV-16',
+      tableHeaders: {
+        spec: 'Specification',
+        value: 'Value',
+      },
+    },
+    specsTable: {
+      centreDistance: {
+        spec: 'Centre distance',
+        value: '250 mm',
       },
       centreHeight: {
         spec: 'Centre height',
         value: '85 mm',
       },
-      centreDistance: {
-        spec: 'Centre distance',
-        value: '250 mm',
+      coolantSystem: {
+        spec: 'Coolant system',
+        value: 'No',
+      },
+      feedRates: {
+        spec: 'Feed rates',
+        value: '0.01 ... 0.15 mm/rev',
+      },
+      mainDrive: {
+        spec: 'Main drive',
+        value: '0.4 - 0.5 kW',
+      },
+      metricThreadPitches: {
+        spec: 'Metric thread pitches',
+        value: '0.2 ... 3',
+      },
+      model: {
+        spec: 'Model',
+        value: 'TV-16',
+      },
+      possibleThreads: {
+        spec: 'Possible threads',
+        value: 'Metric',
+      },
+      speedRange: {
+        spec: 'Speed range',
+        value: '160 ... 1600 rpm',
       },
       spindleBore: {
         spec: 'Spindle bore',
         value: '18 mm',
+      },
+      spindleBrake: {
+        spec: 'Spindle brake',
+        value: 'No',
+      },
+      spindleCone: {
+        spec: 'Spindle cone',
+        value: 'MT3',
       },
       swingOverBed: {
         spec: 'Swing over bed',
@@ -102,45 +140,13 @@ const messages: MessagesLocale = {
         spec: 'Swing over carriage',
         value: '90 mm',
       },
-      weight: {
-        spec: 'Weight',
-        value: '150 kg',
-      },
-      feedRates: {
-        spec: 'Feed rates',
-        value: '0.01 ... 0.15 mm/rev',
-      },
-      speedRange: {
-        spec: 'Speed range',
-        value: '160 ... 1600 rpm',
-      },
-      metricThreadPitches: {
-        spec: 'Metric thread pitches',
-        value: '0.2 ... 3',
-      },
-      possibleThreads: {
-        spec: 'Possible threads',
-        value: 'Metric',
-      },
-      spindleCone: {
-        spec: 'Spindle cone',
-        value: 'MT3',
-      },
       tailStockCone: {
         spec: 'Tail stock cone',
         value: 'MT1',
       },
-      mainDrive: {
-        spec: 'Main drive',
-        value: '',
-      },
-      spindleBrake: {
-        spec: 'Spindle brake',
-        value: 'No',
-      },
-      coolantSystem: {
-        spec: 'Coolant system',
-        value: 'No',
+      weight: {
+        spec: 'Weight',
+        value: '150 kg',
       },
     },
   },

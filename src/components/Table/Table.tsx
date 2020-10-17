@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   table: {
     tableLayout: 'fixed',
   },
+  headerCell: {
+    fontWeight: 'bold',
+  },
   gearCell: {
     [theme.breakpoints.up('xs')]: {
       width: 35,
@@ -51,7 +54,7 @@ const Table: FC<TableProps> = ({
                 <TableCell
                   key={key}
                   {...props}
-                  className={classes[column.className]}
+                  className={classes.headerCell}
                   align="center"
                 >
                   {column.render('Header')}

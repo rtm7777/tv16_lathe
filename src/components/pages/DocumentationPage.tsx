@@ -9,7 +9,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 
 import Grid from '@material-ui/core/Grid'
 
-import Content from '@/components/documentation/Content'
+import Specs from '@/components/documentation/Specs'
 import Navigation from '@/components/documentation/Navigation'
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -57,7 +57,7 @@ const DcumentationPage: FC = () => {
         <Switch>
           <Redirect exact from={path} to={`${path}/specs`} />
           <Route path={`${path}/specs`}>
-            <h3>SPECS HEREEEEE</h3>
+            <Specs />
           </Route>
           <Route path={`${path}/lalal`}>
             <div>sdggswd</div>
