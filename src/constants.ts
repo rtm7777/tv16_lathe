@@ -52,8 +52,8 @@ export const INPUT_RANGES: { [key: string]: number[] } = {
 export const PASSPORTS: { [key: string]: string } = {
   almaty: 'TV-16_Almaty_1957.pdf',
   almatyBushings: 'TV-16_Almaty_1958_bushings.pdf',
-  dubno: 'TV-16_Dubno_1971_ukr.pdf',
-  dubnoUkr: 'TV-16_Dubno_1972.pdf',
+  dubnoUA: 'TV-16_Dubno_1971_ukr.pdf',
+  dubno: 'TV-16_Dubno_1972.pdf',
 }
 
 export const SPECS: string[] = [

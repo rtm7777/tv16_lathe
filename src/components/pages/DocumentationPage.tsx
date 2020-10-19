@@ -59,7 +59,7 @@ const DcumentationPage: FC = () => {
           <Route path={`${path}/specs`}>
             <Specs />
           </Route>
-          <Route path={`${path}/lalal`}>
+          <Route path={`${path}/passport/:passport`}>
             <div>sdggswd</div>
           </Route>
         </Switch>
