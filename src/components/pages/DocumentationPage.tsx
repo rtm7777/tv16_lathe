@@ -6,11 +6,11 @@ import {
   useRouteMatch,
 } from 'react-router-dom'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-
 import Grid from '@material-ui/core/Grid'
 
-import Specs from '@/components/documentation/Specs'
 import Navigation from '@/components/documentation/Navigation'
+import Passport from '@/components/documentation/Passport'
+import Specs from '@/components/documentation/Specs'
 
 const useStyles = makeStyles((theme: Theme) => {
   const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as Record<string, unknown>
@@ -59,8 +59,8 @@ const DcumentationPage: FC = () => {
           <Route path={`${path}/specs`}>
             <Specs />
           </Route>
-          <Route path={`${path}/lalal`}>
-            <div>sdggswd</div>
+          <Route path={`${path}/passport/:passport`}>
+            <Passport />
           </Route>
         </Switch>
       </Grid>

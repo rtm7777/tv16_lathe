@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import clsx from 'clsx'
 import { useLocation } from 'react-router'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { makeStyles } from '@material-ui/core/styles'
 

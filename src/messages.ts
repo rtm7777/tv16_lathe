@@ -37,8 +37,8 @@ const messages: MessagesLocale = {
     files: {
       almaty: 'Almaty 1957',
       almatyBushings: 'Almaty 1958 bushings',
-      dubno: 'Dubno 1971 Ukrainian',
-      dubnoUkr: 'Dubno 1972',
+      dubno: 'Dubno 1972',
+      dubnoUA: 'Dubno 1971 Ukrainian',
     },
     filters: {
       approx: 'approx',
@@ -69,6 +69,10 @@ const messages: MessagesLocale = {
     },
     pages: {
       documentation: 'Documentation',
+      'documentation/passport/almaty': 'Passport: Almaty 1957',
+      'documentation/passport/almatyBushings': 'Passport: Almaty 1958 bushings',
+      'documentation/passport/dubno': 'Passport: Dubno 1972',
+      'documentation/passport/dubnoUA': 'Passport: Dubno 1971 Ukrainian',
       'documentation/specs': 'Specifications',
       gearbox: 'Gearbox',
     },
