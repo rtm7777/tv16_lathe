@@ -1,4 +1,4 @@
-import React, { useState, FC, ReactNode } from 'react'
+import { useState, FC, ReactNode } from 'react'
 
 import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'

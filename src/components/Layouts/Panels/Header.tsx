@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import clsx from 'clsx'
 import { useLocation } from 'react-router'
 import { FormattedMessage } from 'react-intl'

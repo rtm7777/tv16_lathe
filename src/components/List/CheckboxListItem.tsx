@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 import Checkbox from '@material-ui/core/Checkbox'

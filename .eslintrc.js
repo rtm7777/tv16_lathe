@@ -42,6 +42,8 @@ module.exports = {
     'object-curly-newline': ['error', { minProperties: 4, consistent: true }],
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-max-props-per-line': [2, { maximum: 3, when: 'always' }],
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
     'import/no-unresolved': 0,
     'import/extensions': 0,
   },

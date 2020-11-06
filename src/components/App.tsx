@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'

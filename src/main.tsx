@@ -1,5 +1,4 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 
 import App from '@/components/App'
 
@@ -13,7 +12,7 @@ const locale = (window.navigator.languages && window.navigator.languages[0]) || 
 
 declare let module: any // eslint-disable-line
 
-ReactDOM.render(
+render(
   <App
     store={store}
     locale={messages[locale] ? locale : 'en-US'}

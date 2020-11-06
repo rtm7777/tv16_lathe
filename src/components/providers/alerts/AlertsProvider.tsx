@@ -1,4 +1,5 @@
-import React, {
+import {
+  createContext,
   FC,
   ReactNode,
   useCallback,
@@ -28,7 +29,7 @@ export interface AlertsProviderProps {
   children: ReactNode
 }
 
-export const AlertsContext = React.createContext<AlertsContextProps>({
+export const AlertsContext = createContext<AlertsContextProps>({
   show: () => {},
 })
 
