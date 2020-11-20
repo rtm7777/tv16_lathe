@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import { FC, ReactNode, useState } from 'react'
 import clsx from 'clsx'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
@@ -40,7 +40,7 @@ export interface AppLayoutProps {
 
 const AppLayout: FC = ({ children }: AppLayoutProps) => {
   const classes = useStyles({})
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   return (
     <>
       <Header open={open} onClick={setOpen} />

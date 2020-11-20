@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useIntl } from 'react-intl'
 import { makeStyles, Theme } from '@material-ui/core/styles'

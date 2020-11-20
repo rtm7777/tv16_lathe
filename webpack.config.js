@@ -99,7 +99,6 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[fullhash].css',
-      disable: !isProduction,
     }),
     new webpack.WatchIgnorePlugin({ paths: [/\.js$/, /\.d\.ts$/] }),
     new HtmlWebpackPlugin({

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 
 import { useDialogs } from '@/components/providers/dialogs/DialogsProvider'
 import DIALOGS from '@/components/providers/dialogs/Dialogs'

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 import DialogsProvider from '@/components/providers/dialogs/DialogsProvider'
 import AlertsProvider from '@/components/providers/alerts/AlertsProvider'

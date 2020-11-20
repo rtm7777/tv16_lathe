@@ -1,5 +1,3 @@
-import React from 'react'
-
 type CellFunc = (arg0: string | number) => void
 type FixedNumericCellFunc = (arg0: number) => void
 

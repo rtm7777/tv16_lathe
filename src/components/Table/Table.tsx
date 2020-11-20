@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { TableInstance } from 'react-table'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import MuiTable from '@material-ui/core/Table'

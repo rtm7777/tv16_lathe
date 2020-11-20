@@ -1,4 +1,5 @@
-import React, {
+import {
+  createContext,
   FC,
   ReactNode,
   useCallback,
@@ -19,7 +20,7 @@ export interface DialogsProviderProps {
   children: ReactNode
 }
 
-export const DialogsContext = React.createContext<DialogsContextProps>({
+export const DialogsContext = createContext<DialogsContextProps>({
   opened: {},
   open: () => {},
   close: () => {},
