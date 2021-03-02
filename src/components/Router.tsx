@@ -6,16 +6,22 @@ import {
   Switch,
 } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { loadGears, loadFilters } from '@/redux/gearbox'
+import { useIntl } from 'react-intl'
 
+import { useAlerts } from '@/components/providers/alerts/AlertsProvider'
 import AppLayout from '@/components/Layouts/AppLayout'
 import DialogsRenderer from '@/components/providers/dialogs/DialogsRenderer'
 import DocumentationPage from '@/components/pages/DocumentationPage'
 import GearboxPage from '@/components/pages/GearboxPage'
 
+import { loadGears, loadFilters } from '@/redux/gearbox'
+import { ROOT, GEARBOX, DOCUMENTATION } from '@/routes'
+
 const Router: FC = () => {
-  const [isLoading, setLoading] = useState(true)
+  const { formatMessage } = useIntl()
   const dispatch = useDispatch()
+  const { show } = useAlerts()
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
     const load = async (): Promise<void> => {
@@ -24,7 +30,7 @@ const Router: FC = () => {
         await dispatch(loadFilters())
         setLoading(false)
       } catch (err) {
-        console.log(err)
+        show({ type: 'error', message: formatMessage({ id: err.message }) })
       }
     }
     load()
@@ -35,9 +41,10 @@ const Router: FC = () => {
     <BrowserRouter>
       <AppLayout>
         <Switch>
-          <Redirect exact from="/" to="/gearbox" />
-          <Route path="/gearbox" component={GearboxPage} />
-          <Route path="/documentation" component={DocumentationPage} />
+          <Redirect exact from={ROOT} to={GEARBOX} />
+          <Route path={GEARBOX} component={GearboxPage} />
+          <Route path={DOCUMENTATION} component={DocumentationPage} />
+          <Redirect from="*" to={GEARBOX} />
         </Switch>
       </AppLayout>
       <DialogsRenderer />

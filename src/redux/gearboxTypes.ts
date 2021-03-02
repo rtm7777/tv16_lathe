@@ -57,7 +57,7 @@ export type GearboxActionTypes = AddGearSuccessAction | GetConfigsSuccessAction 
 export interface GearboxState {
   configs: GearConfig[]
   customGears: number[]
-  filters: {[key: string]: string | boolean}
+  filters: { [key: string]: string | boolean }
   inputValue: string
   selectedGears: number[]
 }

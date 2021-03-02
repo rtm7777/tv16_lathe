@@ -33,7 +33,7 @@ export const INPUTS: { [key: string]: { [key: string]: number } } = {
   },
 }
 
-export const DEFAULT_RANGES: { [key: string]: {[key: string]: number} } = {
+export const DEFAULT_RANGES: { [key: string]: { [key: string]: number } } = {
   pmm: {
     default: 0,
     approx: 0.02,

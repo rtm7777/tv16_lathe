@@ -34,7 +34,7 @@ const Passport: FC = () => {
 
   const file = useMemo(() => `/data/passports/${PASSPORTS[passport]}`, [passport])
 
-  const onDocumentLoadSuccess = ({ numPages }: {numPages: number}): void => setPagesCount(numPages)
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void => setPagesCount(numPages)
 
   return (
     <Grid className={classes.container} container>

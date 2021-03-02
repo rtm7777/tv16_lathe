@@ -44,7 +44,7 @@ const Header: FC<SideBarProps> = ({ open, onClick }: SideBarProps) => {
           {open ? <ChevronLeftIcon /> : <MenuIcon />}
         </IconButton>
         <Typography variant="h6" noWrap>
-          <FormattedMessage id={`pages.${pathname.slice(1)}`} />
+          <FormattedMessage id={`pages.${pathname}`} />
         </Typography>
         <div className={classes.grow} />
         {pathname === '/gearbox' && <HeaderActions />}

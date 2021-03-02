@@ -44,8 +44,7 @@ export const findConfigs = (): ThunAction<void> => async (dispatch, getState, db
       payload: configs,
     })
   } catch (err) {
-    console.log(err)
-    throw new Error('load filters err')
+    throw new Error('search err')
   }
 }
 
@@ -70,7 +69,7 @@ export const loadGears = (): ThunAction<void> => async (dispatch, _, db) => {
       payload: gears,
     })
   } catch (err) {
-    throw new Error('load gears err')
+    throw new Error('loading error')
   }
 }
 
