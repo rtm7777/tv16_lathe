@@ -130,7 +130,6 @@ module.exports = {
     stats: 'minimal',
     clientLogLevel: 'warning',
     publicPath: '/',
-    host: '0.0.0.0',
   },
   // https://webpack.js.org/configuration/devtool/
   devtool: isProduction ? 'hidden-source-map' : 'cheap-module-source-map',
