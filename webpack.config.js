@@ -121,15 +121,16 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    contentBase: sourcePath,
-    hot: true,
-    inline: true,
     historyApiFallback: {
       disableDotRule: true,
     },
-    stats: 'minimal',
-    clientLogLevel: 'warning',
-    publicPath: '/',
+    // clientLogLevel: 'warning',
+    static: {
+      staticOptions: {
+        contentBase: sourcePath,
+      },
+      publicPath: '/',
+    },
   },
   // https://webpack.js.org/configuration/devtool/
   devtool: isProduction ? 'hidden-source-map' : 'cheap-module-source-map',
