@@ -68,8 +68,11 @@ module.exports = {
       },
       { test: /\.(a?png|svg)$/, use: 'url-loader?limit=10000' },
       {
-        test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2)$/,
-        use: 'file-loader',
+        test: /\.(jpe?g|gif|bmp|mp3|mp4|ogg|wav|eot|ttf|woff|woff2|pdf)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+        },
       },
     ],
   },
@@ -118,14 +121,14 @@ module.exports = {
         title: 'TV-16',
       },
     }),
-    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     historyApiFallback: {
       disableDotRule: true,
     },
-    // clientLogLevel: 'warning',
+    compress: true,
     static: {
+      directory: path.join(__dirname, 'src/data'),
       staticOptions: {
         contentBase: sourcePath,
       },

@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import clsx from 'clsx'
 import { NavLink } from 'react-router-dom'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
@@ -26,9 +27,9 @@ const DownloadListItem: FC<DownloadListItemProps> = ({ filePath, route, text }: 
     <ListItem
       button
       className={classes.nested}
-      component={NavLink}
-      activeClassName="Mui-selected"
-      to={route}
+      component={({ className, ...props }) => (
+        <NavLink to={route} className={({ isActive }) => clsx(className, isActive && 'Mui-selected')} {...props}/>
+      )}
     >
       <ListItemIcon>
         <PictureAsPdfIcon />

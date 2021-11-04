@@ -8,10 +8,6 @@ import Pagination from '@/components/Pagination/Pagination'
 
 import { PASSPORTS } from '@/constants'
 
-interface ParamTypes {
-  passport: string
-}
-
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     [theme.breakpoints.up('md')]: {
@@ -27,12 +23,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Passport: FC = () => {
   const classes = useStyles({})
-  const { passport } = useParams<ParamTypes>()
+  const { passport } = useParams()
 
   const [pagesCount, setPagesCount] = useState(0)
   const [page, setPage] = useState(1)
 
-  const file = useMemo(() => `/data/passports/${PASSPORTS[passport]}`, [passport])
+  const file = useMemo(() => `/passports/${PASSPORTS[passport]}`, [passport])
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void => setPagesCount(numPages)
 
