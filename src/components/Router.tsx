@@ -1,9 +1,9 @@
 import { useState, FC, useEffect } from 'react'
 import {
   BrowserRouter,
-  Redirect,
+  Navigate,
   Route,
-  Switch,
+  Routes,
 } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useIntl } from 'react-intl'
@@ -40,12 +40,12 @@ const Router: FC = () => {
   return (
     <BrowserRouter>
       <AppLayout>
-        <Switch>
-          <Redirect exact from={ROOT} to={GEARBOX} />
-          <Route path={GEARBOX} component={GearboxPage} />
-          <Route path={DOCUMENTATION} component={DocumentationPage} />
-          <Redirect from="*" to={GEARBOX} />
-        </Switch>
+        <Routes>
+          <Route path={GEARBOX} element={<GearboxPage />} />
+          <Route path={DOCUMENTATION} element={<DocumentationPage />} />
+          <Route path={ROOT} element={<Navigate replace to={GEARBOX} />} />
+          <Route path={'*'} element={<Navigate replace to={GEARBOX} />} />
+        </Routes>
       </AppLayout>
       <DialogsRenderer />
     </BrowserRouter>
