@@ -129,7 +129,7 @@ const initialState: GearboxState = {
   selectedGears: [],
 }
 
-export default (state = initialState, action: GearboxActionTypes): GearboxState => {
+export default (state = initialState, action: GearboxActionTypes = {}): GearboxState => {
   switch (action.type) {
     case ADD_GEAR_SUCCESS:
       return {
