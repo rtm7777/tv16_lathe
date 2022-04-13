@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import {  Navigate, Route, Routes } from 'react-router-dom'
-import { makeStyles, createStyles, Theme } from '@mui/material/styles'
+import { makeStyles, createStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 import Grid from '@mui/material/Grid'
 
 import Navigation from '@/components/documentation/Navigation'

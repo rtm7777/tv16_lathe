@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 import usePagination from '@/hooks/usePagination'
 

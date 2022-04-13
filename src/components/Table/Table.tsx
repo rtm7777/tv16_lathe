@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { TableInstance } from 'react-table'
-import { createStyles, Theme, makeStyles } from '@mui/material/styles'
+import { createStyles, makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 import MuiTable from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'

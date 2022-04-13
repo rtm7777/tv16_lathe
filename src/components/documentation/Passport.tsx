@@ -1,7 +1,8 @@
 import { FC, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
-import { makeStyles, Theme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 import Grid from '@mui/material/Grid'
 
 import Pagination from '@/components/Pagination/Pagination'

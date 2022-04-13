@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Store } from 'redux'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
-import { ThemeProvider, Theme } from '@mui/material/styles'
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
 
 import Providers from '@/components/Providers'
@@ -26,13 +26,16 @@ const App: FC<AppProps> = ({
   <ThemeProvider theme={theme}>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
-    <Provider store={store}>
-      <IntlProvider locale={locale} messages={messages}>
-        <Providers>
-          <Router />
-        </Providers>
-      </IntlProvider>
-    </Provider>
+    <StyledEngineProvider injectFirst>
+      <Provider store={store}>
+        <IntlProvider locale={locale} messages={messages}>
+          <Providers>
+            <Router />
+          </Providers>
+        </IntlProvider>
+      </Provider>
+
+    </StyledEngineProvider>
   </ThemeProvider>
 )
 

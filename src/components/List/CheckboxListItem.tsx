@@ -1,5 +1,6 @@
 import { FC } from 'react'
-import { createStyles, makeStyles, Theme } from '@mui/material/styles'
+import { createStyles, makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
 import Checkbox from '@mui/material/Checkbox'
 import DeleteIcon from '@mui/icons-material/Delete'

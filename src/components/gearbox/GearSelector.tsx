@@ -1,7 +1,8 @@
 import { FC, useCallback } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { Theme, makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'

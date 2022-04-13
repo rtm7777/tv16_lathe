@@ -3,7 +3,8 @@ import clsx from 'clsx'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
@@ -15,7 +16,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import SettingsIcon from '@mui/icons-material/Settings'
 import Tooltip from '@mui/material/Tooltip'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   drawerOpen: {
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,

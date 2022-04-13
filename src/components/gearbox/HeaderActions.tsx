@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { makeStyles, Theme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'

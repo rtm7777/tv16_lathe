@@ -6,7 +6,8 @@ import {
 } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useIntl } from 'react-intl'
-import { Theme, makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'

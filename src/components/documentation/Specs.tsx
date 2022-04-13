@@ -1,7 +1,8 @@
 import { FC, useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useIntl } from 'react-intl'
-import { makeStyles, Theme } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 import Grid from '@mui/material/Grid'
 
 import Table from '@/components/Table/Table'

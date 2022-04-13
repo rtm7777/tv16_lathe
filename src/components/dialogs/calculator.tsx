@@ -6,7 +6,8 @@ import {
   useState,
 } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { Theme, makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
 import Chip from '@mui/material/Chip'
 import Dialog from '@mui/material/Dialog'

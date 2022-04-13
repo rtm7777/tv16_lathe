@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { Link, useLocation } from 'react-router-dom'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'

@@ -1,12 +1,13 @@
 import { FC, ReactNode, useState } from 'react'
 import clsx from 'clsx'
-import { createStyles, makeStyles, Theme } from '@mui/material/styles'
+import { createStyles, makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
 import Header from '@/components/Layouts/Panels/Header'
 import SideBar from '@/components/Layouts/Panels/Sidebar'
 
 const useStyles = makeStyles((theme: Theme) => {
-  const { width } = theme.overrides.MuiDrawer.paper as Record<string, unknown> & { width: string }
+  const { width } = theme.components.MuiDrawer.defaultProps.PaperProps.sx as Record<string, unknown> & { width: string }
   const { minHeight } = theme.mixins.toolbar['@media (min-width:600px)'] as Record<string, unknown>
   & { minHeight: number }
 
