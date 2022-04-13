@@ -1,12 +1,12 @@
 import { FC, useCallback } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { Theme, makeStyles } from '@material-ui/core/styles'
+import { Theme, makeStyles } from '@mui/material/styles'
 
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListSubheader from '@material-ui/core/ListSubheader'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import ListSubheader from '@mui/material/ListSubheader'
 
 import { useAlerts } from '@/components/providers/alerts/AlertsProvider'
 import CheckboxListItem from '@/components/List/CheckboxListItem'

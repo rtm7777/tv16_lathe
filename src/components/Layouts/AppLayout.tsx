@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from 'react'
 import clsx from 'clsx'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { createStyles, makeStyles, Theme } from '@mui/material/styles'
 
 import Header from '@/components/Layouts/Panels/Header'
 import SideBar from '@/components/Layouts/Panels/Sidebar'

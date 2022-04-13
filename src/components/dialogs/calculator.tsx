@@ -6,14 +6,14 @@ import {
   useState,
 } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { Theme, makeStyles } from '@material-ui/core/styles'
+import { Theme, makeStyles } from '@mui/material/styles'
 
-import Chip from '@material-ui/core/Chip'
-import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
+import Chip from '@mui/material/Chip'
+import Dialog from '@mui/material/Dialog'
+import DialogContent from '@mui/material/DialogContent'
+import DialogTitle from '@mui/material/DialogTitle'
+import Grid from '@mui/material/Grid'
+import TextField from '@mui/material/TextField'
 
 import { DialogsContextProps } from '@/components/providers/dialogs/DialogsProvider'
 

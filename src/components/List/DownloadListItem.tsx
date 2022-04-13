@@ -1,16 +1,16 @@
 import { FC } from 'react'
 import clsx from 'clsx'
 import { NavLink } from 'react-router-dom'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { createStyles, makeStyles, Theme } from '@mui/material/styles'
 
-import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
-import IconButton from '@material-ui/core/IconButton'
-import Link from '@material-ui/core/Link'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItemText from '@material-ui/core/ListItemText'
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf'
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload'
+import IconButton from '@mui/material/IconButton'
+import Link from '@mui/material/Link'
+import ListItem from '@mui/material/ListItem'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+import ListItemText from '@mui/material/ListItemText'
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({ nested: { paddingLeft: theme.spacing(4) } }))
 

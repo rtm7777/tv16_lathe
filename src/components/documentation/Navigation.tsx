@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { Link, useLocation } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/material/styles'
 
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
 
 import CollapsableList from '@/components/List/CollapsableList'
 import DownloadListItem from '@/components/List/DownloadListItem'
