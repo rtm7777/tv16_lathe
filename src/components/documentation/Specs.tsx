@@ -1,8 +1,9 @@
 import { FC, useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useIntl } from 'react-intl'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
+import Grid from '@mui/material/Grid'
 
 import Table from '@/components/Table/Table'
 import columns from '@/components/documentation/specsTableConfig'

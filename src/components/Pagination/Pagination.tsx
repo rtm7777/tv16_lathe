@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import Button from '@material-ui/core/Button'
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft'
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import { makeStyles } from '@material-ui/core/styles'
+import Button from '@mui/material/Button'
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import { makeStyles } from '@mui/styles'
 
 import usePagination from '@/hooks/usePagination'
 

@@ -7,9 +7,9 @@ import {
   useMemo,
   useState,
 } from 'react'
-import Snackbar from '@material-ui/core/Snackbar'
-import Button from '@material-ui/core/Button'
-import MuiAlert from '@material-ui/lab/Alert'
+import Snackbar from '@mui/material/Snackbar'
+import Button from '@mui/material/Button'
+import Alert from '@mui/material/Alert'
 
 export type AlertType = 'error' | 'info' | 'success' | 'warning'
 
@@ -58,7 +58,7 @@ const AlertsProvider: FC = ({ children }: AlertsProviderProps) => {
     <AlertsContext.Provider value={value}>
       {children}
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <MuiAlert
+        <Alert
           action={alertProps.onUndo && (
             <Button onClick={handleUndo} color="inherit" size="small">
               UNDO
@@ -70,7 +70,7 @@ const AlertsProvider: FC = ({ children }: AlertsProviderProps) => {
           variant="filled"
         >
           {alertProps.message}
-        </MuiAlert>
+        </Alert>
       </Snackbar>
     </AlertsContext.Provider>
   )

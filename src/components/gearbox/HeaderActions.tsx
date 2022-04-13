@@ -1,11 +1,12 @@
 import { FC } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { makeStyles, Theme } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
+import { Theme } from '@mui//material/styles'
 
-import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import FunctionsIcon from '@material-ui/icons/Functions'
-import TuneIcon from '@material-ui/icons/Tune'
+import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+import FunctionsIcon from '@mui/icons-material/Functions'
+import TuneIcon from '@mui/icons-material/Tune'
 
 import { useDialogs } from '@/components/providers/dialogs/DialogsProvider'
 
