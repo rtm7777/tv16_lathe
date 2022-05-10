@@ -5,6 +5,8 @@ import CalculatorDialog, { CalculatorDialogProps } from '@/components/dialogs/ca
 import GearSelectorDialog, { GearSelectorDialogProps } from '@/components/dialogs/gearSelector'
 import InfoDialog, { InfoDialogProps } from '@/components/dialogs/info'
 
+export type DialogsProps = AddGearDialogProps | CalculatorDialogProps | GearSelectorDialogProps | InfoDialogProps
+
 export interface DialogsType {
   [key: string]: FC<AddGearDialogProps | CalculatorDialogProps | GearSelectorDialogProps | InfoDialogProps>
 }

@@ -18,7 +18,7 @@ import RadioGroup from '@mui/material/RadioGroup'
 import TextField from '@mui/material/TextField'
 
 import { findConfigs, setFilter, setInput } from '@/redux/gearbox'
-import { AppState } from '@/redux/types'
+import { AppState, ThunkDispatch } from '@/redux/types'
 
 import { FILTERS, INPUTS, SYSTEMS } from '@/constants'
 
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const GearboxFilter: FC = () => {
   const classes = useStyles({})
   const { formatMessage } = useIntl()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<ThunkDispatch>()
   const { system, approx, unique } = useSelector(({ gearbox }: AppState) => gearbox.filters)
   const inputValue = useSelector(({ gearbox }: AppState) => gearbox.inputValue)
   const inputProps = useMemo(() => INPUTS[system as string], [system])

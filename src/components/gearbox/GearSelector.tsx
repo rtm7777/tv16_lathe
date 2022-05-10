@@ -39,11 +39,11 @@ const GearSelector: FC = () => {
   const dispatch = useDispatch<ThunkDispatch>()
   const selectedGears = useSelector(({ gearbox }: AppState) => gearbox.selectedGears)
   const customGears = useSelector(({ gearbox }: AppState) => gearbox.customGears)
-  const handleGearSelect = useCallback((gear) => async () => {
+  const handleGearSelect = useCallback((gear: number) => async () => {
     await dispatch(toggleGear(gear))
     dispatch(findConfigs())
   }, [dispatch])
-  const handleGearRemove = useCallback((gear) => async () => {
+  const handleGearRemove = useCallback((gear: number) => async () => {
     try {
       const isD = await dispatch(removeGear(gear))
       show({

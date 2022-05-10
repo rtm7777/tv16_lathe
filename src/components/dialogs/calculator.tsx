@@ -57,7 +57,7 @@ const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }: Cal
   const [gears, setGears] = useState({ a: 0, b: 0, c: 0, d: 0 }) // eslint-disable-line object-curly-newline
   const [pitch, setPitch] = useState(0)
 
-  const handleChange = useCallback((gear) => ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = useCallback((gear: string) => ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
     const number = Number(value)
     if (number) {
       setGears({ ...gears, [gear]: number })

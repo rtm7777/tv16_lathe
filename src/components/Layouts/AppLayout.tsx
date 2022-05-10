@@ -39,7 +39,7 @@ export interface AppLayoutProps {
   children: ReactNode
 }
 
-const AppLayout: FC = ({ children }: AppLayoutProps) => {
+const AppLayout: FC<AppLayoutProps> = ({ children }: AppLayoutProps) => {
   const classes = useStyles({})
   const [open, setOpen] = useState(false)
   return (
