@@ -14,12 +14,13 @@ import DialogsRenderer from '@/components/providers/dialogs/DialogsRenderer'
 import DocumentationPage from '@/components/pages/DocumentationPage'
 import GearboxPage from '@/components/pages/GearboxPage'
 
+import { ThunkDispatch } from '@/redux/types'
 import { loadGears, loadFilters } from '@/redux/gearbox'
 import { ROOT, GEARBOX, DOCUMENTATION } from '@/routes'
 
 const Router: FC = () => {
   const { formatMessage } = useIntl()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<ThunkDispatch>()
   const { show } = useAlerts()
   const [isLoading, setLoading] = useState(true)
 

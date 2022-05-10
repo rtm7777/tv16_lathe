@@ -1,5 +1,7 @@
-type CellFunc = (arg0: string | number) => void
-type FixedNumericCellFunc = (arg0: number) => void
+import { ReactElement } from 'react'
+
+type CellFunc = (arg0: string | number) => ReactElement
+type FixedNumericCellFunc = (arg0: number) => ReactElement
 
 export const textCell: CellFunc = (value) => <div>{value}</div>
 

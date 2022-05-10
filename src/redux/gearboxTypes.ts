@@ -16,7 +16,7 @@ interface AddGearSuccessAction {
   payload: number
 }
 
-interface GetConfigsSuccessAction {
+export interface GetConfigsSuccessAction {
   type: typeof FIND_CONFIGS_SUCCESS
   payload: GearConfig[]
 }
@@ -53,7 +53,6 @@ interface ToggleGearAction {
 
 export type GearboxActionTypes = AddGearSuccessAction | GetConfigsSuccessAction | LoadFiltersSuccessAction
 | LoadGearsSuccessAction | RemoveGearAction | SetFilterSucessAction | SetInputAction | ToggleGearAction
-| Record<string, never>
 
 export interface GearboxState {
   configs: GearConfig[]

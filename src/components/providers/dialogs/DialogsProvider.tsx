@@ -8,11 +8,16 @@ import {
   useState,
 } from 'react'
 
-import { DialogsType } from '@/components/providers/dialogs/Dialogs'
+import { DialogsProps } from '@/components/providers/dialogs/Dialogs'
+
+interface DialogsType {
+  [key: string]: DialogsProps
+}
+
 
 export interface DialogsContextProps {
   opened: DialogsType
-  open: (name: string, props?: Record<string, unknown>) => void
+  open: (name: string, props?: DialogsProps) => void
   close: (name: string) => void
 }
 
@@ -27,10 +32,12 @@ export const DialogsContext = createContext<DialogsContextProps>({
 })
 export const useDialogs = (): DialogsContextProps => useContext(DialogsContext)
 
-const DialogsProvider: FC = ({ children }: DialogsProviderProps) => {
+const DialogsProvider: FC<DialogsProviderProps> = ({ children }: DialogsProviderProps) => {
   const [opened, setOpened] = useState<DialogsType>({})
-  const open = useCallback((name, props) => setOpened((current) => ({ ...current, [name]: { ...props } })), [])
-  const close = useCallback((name) => setOpened(({ [name]: _, ...rest }) => rest), [])
+  const open = useCallback(
+    (name: string, props: DialogsProps) => setOpened((current) => ({ ...current, [name]: { ...props } })),
+    [])
+  const close = useCallback((name: string) => setOpened(({ [name]: _, ...rest }) => rest), [])
   const value = useMemo(() => ({ opened, open, close }), [opened])
 
   return (

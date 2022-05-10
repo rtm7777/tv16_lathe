@@ -1,4 +1,4 @@
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 
 import App from '@/components/App'
 
@@ -12,14 +12,15 @@ const locale = (window.navigator.languages && window.navigator.languages[0]) || 
 
 declare let module: any // eslint-disable-line
 
-render(
+const root = createRoot(document.querySelector('#root'))
+
+root.render(
   <App
     store={store}
     locale={messages[locale] ? locale : 'en-US'}
     theme={theme}
     messages={messages[locale] ? flattenMessages(messages[locale]) : flattenMessages(messages['en-US'])}
   />,
-  document.querySelector('#root'),
 )
 
 if (module.hot) {

@@ -21,6 +21,7 @@ import TextField from '@mui/material/TextField'
 import { useAlerts } from '@/components/providers/alerts/AlertsProvider'
 import { DialogsContextProps } from '@/components/providers/dialogs/DialogsProvider'
 
+import { ThunkDispatch } from '@/redux/types'
 import { addGear, findConfigs } from '@/redux/gearbox'
 
 import { DEFAULT_GEARS_PARAMS } from '@/constants'
@@ -34,7 +35,7 @@ const re = /^[0-9\b]{1,2}$/
 const AddGearDialog: FC<AddGearDialogProps> = ({ dialogs: { close } }: AddGearDialogProps) => {
   const { formatMessage } = useIntl()
   const { show } = useAlerts()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<ThunkDispatch>()
   const [zValue, setZValue] = useState('')
   const [isDChecked, setDChecked] = useState(false)
   const addDisabled = Number(zValue) < DEFAULT_GEARS_PARAMS.minZ

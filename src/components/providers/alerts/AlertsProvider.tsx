@@ -35,11 +35,11 @@ export const AlertsContext = createContext<AlertsContextProps>({
 
 export const useAlerts = (): AlertsContextProps => useContext(AlertsContext)
 
-const AlertsProvider: FC = ({ children }: AlertsProviderProps) => {
+const AlertsProvider: FC<AlertsProviderProps> = ({ children }: AlertsProviderProps) => {
   const [open, setOpen] = useState(false)
   const [alertProps, setAlertProps] = useState<AlertProps>({ type: 'success', message: '' })
 
-  const show = useCallback((props) => {
+  const show = useCallback((props: AlertProps) => {
     setOpen(true)
     setAlertProps(props)
   }, [])

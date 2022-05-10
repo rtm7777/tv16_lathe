@@ -12,11 +12,11 @@ import {
   GearboxActionTypes,
   GearboxState,
 } from '@/redux/gearboxTypes'
-import { ThunAction } from '@/redux/types'
+import { ThunkAction } from '@/redux/types'
 
 import { defaultGears, SYSTEMS } from '@/constants'
 
-export const addGear = (gear: number, asD = false): ThunAction<void> => async (dispatch, _, db) => {
+export const addGear = (gear: number, asD = false): ThunkAction<void> => async (dispatch, _, db) => {
   try {
     await db.addGear(gear, asD)
     dispatch({
@@ -34,7 +34,7 @@ export const addGear = (gear: number, asD = false): ThunAction<void> => async (d
   }
 }
 
-export const findConfigs = (): ThunAction<void> => async (dispatch, getState, db) => {
+export const findConfigs = (): ThunkAction<Promise<void>> => async (dispatch, getState, db) => {
   const { inputValue } = getState().gearbox
 
   try {
@@ -48,7 +48,7 @@ export const findConfigs = (): ThunAction<void> => async (dispatch, getState, db
   }
 }
 
-export const loadFilters = (): ThunAction<void> => async (dispatch, _, db) => {
+export const loadFilters = (): ThunkAction<void> => async (dispatch, _, db) => {
   try {
     const filters = await db.loadFilters()
     dispatch({
@@ -60,7 +60,7 @@ export const loadFilters = (): ThunAction<void> => async (dispatch, _, db) => {
   }
 }
 
-export const loadGears = (): ThunAction<void> => async (dispatch, _, db) => {
+export const loadGears = (): ThunkAction<void> => async (dispatch, _, db) => {
   try {
     await db.initializeGears()
     const gears = await db.loadGears()
@@ -73,7 +73,7 @@ export const loadGears = (): ThunAction<void> => async (dispatch, _, db) => {
   }
 }
 
-export const removeGear = (gear: number): ThunAction<Promise<boolean>> => async (dispatch, _, db) => {
+export const removeGear = (gear: number): ThunkAction<Promise<boolean>> => async (dispatch, _, db) => {
   const isD = await db.removeGear(gear)
   dispatch({
     type: REMOVE_GEAR_SUCCESS,
@@ -82,7 +82,7 @@ export const removeGear = (gear: number): ThunAction<Promise<boolean>> => async 
   return isD
 }
 
-export const setFilter = (filter: string, value: string | boolean): ThunAction<void> => async (dispatch, _, db) => {
+export const setFilter = (filter: string, value: string | boolean): ThunkAction<void> => async (dispatch, _, db) => {
   try {
     await db.setFilter(filter, value)
     dispatch({
@@ -99,7 +99,7 @@ export const setInput = (value: string): GearboxActionTypes => ({
   payload: value,
 })
 
-export const toggleGear = (gear: number): ThunAction<void> => async (dispatch, _, db) => {
+export const toggleGear = (gear: number): ThunkAction<void> => async (dispatch, _, db) => {
   try {
     await db.toggleGear(gear)
     dispatch({
@@ -129,18 +129,18 @@ const initialState: GearboxState = {
   selectedGears: [],
 }
 
-export default (state = initialState, action: GearboxActionTypes = {}): GearboxState => {
-  switch (action.type) {
+export default (state = initialState, { type, payload }: GearboxActionTypes | undefined = undefined): GearboxState => {
+  switch (type) {
     case ADD_GEAR_SUCCESS:
       return {
         ...state,
-        customGears: [...state.customGears, action.payload],
-        selectedGears: [...state.selectedGears, action.payload],
+        customGears: [...state.customGears, payload],
+        selectedGears: [...state.selectedGears, payload],
       }
     case FIND_CONFIGS_SUCCESS:
       return {
         ...state,
-        configs: action.payload,
+        configs: payload,
       }
 
     case LOAD_FILTERS_SUCCESS:
@@ -148,22 +148,22 @@ export default (state = initialState, action: GearboxActionTypes = {}): GearboxS
         ...state,
         filters: {
           ...state.filters,
-          ...Object.assign({}, ...action.payload.map(({ filter, value }) => ({ [filter]: value }))),
+          ...Object.assign({}, ...payload.map(({ filter, value }) => ({ [filter]: value }))),
         },
       }
 
     case LOAD_GEARS_SUCCESS:
       return {
         ...state,
-        customGears: action.payload.filter(({ z }) => !defaultGears.includes(z)).map(({ z }) => z),
-        selectedGears: action.payload.filter(({ active }) => active).map(({ z }) => z),
+        customGears: payload.filter(({ z }) => !defaultGears.includes(z)).map(({ z }) => z),
+        selectedGears: payload.filter(({ active }) => active).map(({ z }) => z),
       }
 
     case REMOVE_GEAR_SUCCESS:
       return {
         ...state,
-        customGears: state.customGears.filter((g) => g !== action.payload),
-        selectedGears: state.selectedGears.filter((g) => g !== action.payload),
+        customGears: state.customGears.filter((g) => g !== payload),
+        selectedGears: state.selectedGears.filter((g) => g !== payload),
       }
 
     case SET_FILTER_SUCCESS:
@@ -171,22 +171,22 @@ export default (state = initialState, action: GearboxActionTypes = {}): GearboxS
         ...state,
         filters: {
           ...state.filters,
-          ...action.payload,
+          ...payload,
         },
       }
 
     case SET_INPUT:
       return {
         ...state,
-        inputValue: action.payload,
+        inputValue: payload,
       }
 
     case TOGGLE_GEAR:
       return {
         ...state,
-        selectedGears: state.selectedGears.includes(action.payload)
-          ? state.selectedGears.filter((g) => g !== action.payload)
-          : [...state.selectedGears, action.payload],
+        selectedGears: state.selectedGears.includes(payload)
+          ? state.selectedGears.filter((g) => g !== payload)
+          : [...state.selectedGears, payload],
       }
 
     default:

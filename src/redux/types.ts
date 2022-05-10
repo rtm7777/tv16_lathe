@@ -7,8 +7,6 @@ export type AppState = {
   gearbox: GearboxState
 }
 
-export type ActionTypes = GearboxActionTypes
+export type ThunkAction<R> = ThunkActionType<R, AppState, DataBase, GearboxActionTypes>
 
-export type ThunAction<R> = ThunkActionType<R, AppState, DataBase, ActionTypes>
-
-export type ThunkDispatch = ThunkDispatchType<AppState, DataBase, ActionTypes>
+export type ThunkDispatch = ThunkDispatchType<AppState, DataBase, GearboxActionTypes>
