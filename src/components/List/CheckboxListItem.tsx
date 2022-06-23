@@ -1,6 +1,4 @@
 import { FC } from 'react'
-import { createStyles, makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 
 import Checkbox from '@mui/material/Checkbox'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -10,7 +8,6 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 import ListItemText from '@mui/material/ListItemText'
 
-const useStyles = makeStyles((theme: Theme) => createStyles({ nested: { paddingLeft: theme.spacing(4) } }))
 
 export interface CheckboxListItemProps {
   checked?: boolean
@@ -25,10 +22,8 @@ const CheckboxListItem: FC<CheckboxListItemProps> = ({
   onDelete,
   text,
 }: CheckboxListItemProps) => {
-  const classes = useStyles({})
-
   return (
-    <ListItem button className={classes.nested} onClick={onClick}>
+    <ListItem button onClick={onClick} sx={{ paddingLeft: 4 }}>
       <ListItemIcon>
         <Checkbox
           checked={checked}

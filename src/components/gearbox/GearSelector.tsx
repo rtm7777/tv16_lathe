@@ -1,8 +1,6 @@
 import { FC, useCallback } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -23,17 +21,7 @@ import { AppState, ThunkDispatch } from '@/redux/types'
 
 import { metricGears, imperialGears } from '@/constants'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  list: { width: '100%' },
-  subHeader: {
-    backgroundColor: 'white',
-    [theme.breakpoints.up('xs')]: { display: 'none' },
-    [theme.breakpoints.up('sm')]: { display: 'inherit' },
-  },
-}))
-
 const GearSelector: FC = () => {
-  const classes = useStyles({})
   const { formatMessage } = useIntl()
   const { show } = useAlerts()
   const dispatch = useDispatch<ThunkDispatch>()
@@ -61,12 +49,12 @@ const GearSelector: FC = () => {
 
   return (
     <List
-      className={classes.list}
       subheader={(
-        <ListSubheader className={classes.subHeader}>
+        <ListSubheader sx={{ backgroundColor: 'white', display: { xs: 'none', sm: 'inherit' } }}>
           <FormattedMessage id="gearSelector.gearConfiguration" />
         </ListSubheader>
       )}
+      sx={{ width: '100%' }}
     >
       <CollapsableList text={formatMessage({ id: 'gearSelector.metric' })}>
         {metricGears.map((gear) => (

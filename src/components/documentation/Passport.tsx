@@ -1,29 +1,13 @@
 import { FC, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 import Grid from '@mui/material/Grid'
 
 import Pagination from '@/components/Pagination/Pagination'
 
 import { PASSPORTS } from '@/constants'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    [theme.breakpoints.up('md')]: {
-      height: '100%',
-      overflow: 'auto',
-      justifyContent: 'center',
-    },
-  },
-  controls: {
-    [theme.breakpoints.up('sm')]: { height: '100px' },
-  },
-}))
-
 const Passport: FC = () => {
-  const classes = useStyles({})
   const { passport } = useParams()
 
   const [pagesCount, setPagesCount] = useState(0)
@@ -34,7 +18,12 @@ const Passport: FC = () => {
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }): void => setPagesCount(numPages)
 
   return (
-    <Grid className={classes.container} container>
+    <Grid container sx={{
+      height: { md: '100%' },
+      overflow: { md: 'auto' },
+      justifyContent: { md: 'center' },
+    }}
+    >
       <Document
         file={file}
         onLoadSuccess={onDocumentLoadSuccess}

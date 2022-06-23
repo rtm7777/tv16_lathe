@@ -1,7 +1,5 @@
 import { FC } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { createStyles, makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload'
 import IconButton from '@mui/material/IconButton'
@@ -12,8 +10,6 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 
-const useStyles = makeStyles((theme: Theme) => createStyles({ nested: { paddingLeft: theme.spacing(4) } }))
-
 export interface DownloadListItemProps {
   filePath: string
   route: string
@@ -21,14 +17,12 @@ export interface DownloadListItemProps {
 }
 
 const DownloadListItem: FC<DownloadListItemProps> = ({ filePath, route, text }: DownloadListItemProps) => {
-  const classes = useStyles({})
   const location = useLocation()
   const navigate = useNavigate()
 
   return (
     <ListItem
       disablePadding
-      className={classes.nested}
       secondaryAction={(
         <Link href={filePath} download>
           <IconButton edge="end" aria-label="download">
@@ -36,6 +30,7 @@ const DownloadListItem: FC<DownloadListItemProps> = ({ filePath, route, text }: 
           </IconButton>
         </Link>
       )}
+      sx={{ paddingLeft: 4 }}
     >
       <ListItemButton selected={location.pathname === route} onClick={() => navigate(route)}>
         <ListItemIcon>
