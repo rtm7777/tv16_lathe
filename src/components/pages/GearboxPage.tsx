@@ -16,12 +16,12 @@ const GearboxPage: FC = () => {
     <Grid
       direction="row"
       container
-      sx={{ height: { xs: 'auto', md: '100%' } }}
+      sx={{ height: { xs: 'auto', sm: 'auto', md: '100%' } }}
     >
       <Grid
         item
         sx={{
-          display: { xs: 'none', md: 'flex' },
+          display: { xs: 'none', sm: 'none', md: 'flex' },
           height: { md: '100%' },
           width: { md: '200px' },
           overflow: { md: 'auto' },

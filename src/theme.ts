@@ -1,7 +1,7 @@
 import { red } from '@mui/material/colors'
-import { createTheme } from '@mui/material/styles'
+import { createTheme, Theme } from '@mui/material/styles'
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#556cd6',
@@ -18,12 +18,10 @@ const theme = createTheme({
   },
   components: {
     MuiDrawer: {
-      defaultProps: {
-        PaperProps: {
-          sx: {
-            width: '58px',
-            overflowX: 'hidden',
-          },
+      styleOverrides: {
+        paper: {
+          width: '58px',
+          overflowX: 'hidden',
         },
       },
     },

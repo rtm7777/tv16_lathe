@@ -14,12 +14,12 @@ const HeaderActions: FC = () => {
 
   return (
     <>
-      <Box sx={{ display: { xs: 'none', sm: 'initial' } }}>
+      <Box sx={{ display: { xs: 'none', sm: 'none', md: 'initial' } }}>
         <Button color="inherit" startIcon={<FunctionsIcon />} onClick={() => dialogs.open('calculator')}>
           <FormattedMessage id="header.calculator" />
         </Button>
       </Box>
-      <Box sx={{ display: { sm: 'none' } }}>
+      <Box sx={{ display: { md: 'none' } }}>
         <IconButton aria-label="open calculator" color="inherit" onClick={() => dialogs.open('calculator')}>
           <FunctionsIcon />
         </IconButton>

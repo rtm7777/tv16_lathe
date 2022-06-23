@@ -23,15 +23,15 @@ const AppLayout: FC<AppLayoutProps> = ({ children }: AppLayoutProps) => {
           display: 'flex',
           flexDirection: 'column',
           height: theme => ({
-            lg: `calc(100vh - ${theme.mixins.toolbar['@media (min-width:600px)'].minHeight}px)`,
-            md: '100vh',
+            md: `calc(100vh - ${theme.mixins.toolbar['@media (min-width:600px)'].minHeight}px)`,
+            sm: '100vh',
           }),
           flexGrow: 1,
           transition: theme => theme.transitions.create('margin', {
             easing: open ? theme.transitions.easing.easeOut : theme.transitions.easing.sharp,
             duration: open ? theme.transitions.duration.enteringScreen : theme.transitions.duration.leavingScreen,
           }),
-          marginLeft: theme => open ? theme.components.MuiDrawer.defaultProps.PaperProps.sx.width : 0,
+          marginLeft: theme => open ? theme.components.MuiDrawer.styleOverrides.paper.width : 0,
         }}
       >
         <Offset />
