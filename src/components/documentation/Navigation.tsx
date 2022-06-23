@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { Link, useLocation } from 'react-router-dom'
-import { makeStyles } from '@mui/styles'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -12,10 +11,7 @@ import DownloadListItem from '@/components/List/DownloadListItem'
 
 import { PASSPORTS } from '@/constants'
 
-const useStyles = makeStyles(() => ({ list: { width: '100%' } }))
-
 const Navigation: FC = () => {
-  const classes = useStyles({})
   const { formatMessage } = useIntl()
   const { pathname } = useLocation()
   const passports = useMemo(() => Object.entries(PASSPORTS).map(([name, file]) => (
@@ -27,7 +23,7 @@ const Navigation: FC = () => {
   )), [])
 
   return (
-    <List className={classes.list}>
+    <List sx={{ width: '100%' }}>
       <ListItem
         button
         component={Link}

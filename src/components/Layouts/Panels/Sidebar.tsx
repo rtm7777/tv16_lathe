@@ -1,11 +1,10 @@
 import { FC } from 'react'
-import clsx from 'clsx'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
+import { styled, Theme } from '@mui/material/styles'
 
+import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Drawer from '@mui/material/Drawer'
 import InfoIcon from '@mui/icons-material/Info'
@@ -16,51 +15,22 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import SettingsIcon from '@mui/icons-material/Settings'
 import Tooltip from '@mui/material/Tooltip'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  drawerOpen: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: 0,
-  },
-  toolbar: {
-    display: 'flex',
-    ...theme.mixins.toolbar,
-  },
-}))
+const Offset = styled(Box)(({ theme }: { theme: Theme }) => ({ display: 'flex', ...theme.mixins.toolbar }))
 
 interface SideBarProps {
   open: boolean
 }
 
 const SideBar: FC<SideBarProps> = ({ open }: SideBarProps) => {
-  const classes = useStyles({})
   const { pathname } = useLocation()
   const { formatMessage } = useIntl()
 
   return (
     <Drawer
-      variant="permanent"
-      className={clsx({
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
-      })}
-      classes={{
-        paper: clsx({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        }),
-      }}
+      variant="persistent"
       open={open}
     >
-      <div className={classes.toolbar} />
+      <Offset />
       <Divider />
       <List>
         <Tooltip title={formatMessage({ id: 'sidebar.gearbox' })} placement="right">

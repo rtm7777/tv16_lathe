@@ -1,28 +1,18 @@
 import { FC } from 'react'
 import { TableInstance } from 'react-table'
-import { createStyles, makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 import MuiTable from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  table: {
-    tableLayout: 'fixed',
-  },
-  headerCell: {
-    fontWeight: 'bold',
-  },
+const cellStyles = {
+  table: {},
   gearCell: {
-    [theme.breakpoints.up('xs')]: {
-      width: 35,
-      padding: '6px 1px 6px 1px;',
-    },
-    [theme.breakpoints.up('md')]: { width: 70 },
+    width: { xs: 35, md: 70 },
+    padding: { xs: '6px 1px 6px 1px;' },
   },
-}))
+}
 
 interface TableProps {
   table: TableInstance
@@ -37,14 +27,12 @@ const Table: FC<TableProps> = ({
     rows,
   },
 }: TableProps) => {
-  const classes = useStyles({})
-
   return (
     <MuiTable
       {...getTableProps()}
-      className={classes.table}
       stickyHeader
       size="small"
+      sx={{ tableLayout: 'fixed' }}
     >
       <TableHead>
         <TableRow>
@@ -55,8 +43,8 @@ const Table: FC<TableProps> = ({
                 <TableCell
                   key={key}
                   {...props}
-                  className={classes.headerCell}
                   align="center"
+                  sx={{ fontWeight: 'bold' }}
                 >
                   {column.render('Header')}
                 </TableCell>
@@ -77,8 +65,8 @@ const Table: FC<TableProps> = ({
                   <TableCell
                     key={cellKey}
                     {...cellProps}
-                    className={classes[cell.column.className]}
                     align="center"
+                    sx={cellStyles[cell.column.className]}
                   >
                     {cell.render('Cell')}
                   </TableCell>

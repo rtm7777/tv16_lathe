@@ -22,7 +22,3 @@ root.render(
     messages={messages[locale] ? flattenMessages(messages[locale]) : flattenMessages(messages['en-US'])}
   />,
 )
-
-if (module.hot) {
-  module.hot.accept()
-}

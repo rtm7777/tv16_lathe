@@ -6,8 +6,6 @@ import {
   useState,
 } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 
 import Chip from '@mui/material/Chip'
 import Dialog from '@mui/material/Dialog'
@@ -22,37 +20,9 @@ export interface CalculatorDialogProps {
   dialogs: DialogsContextProps
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  inputsWrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-    marginBottom: '10px',
-  },
-  displayWrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    '& > div': {
-      width: '80%',
-      marginTop: '5px',
-      marginBottom: '10px',
-    },
-  },
-  input: {
-    [theme.breakpoints.down('sm')]: {
-      flexBasis: '80%',
-      margin: '10px 0 10px 0',
-    },
-    flexBasis: 'calc(50% - 30px)',
-    margin: '5px 15px 10px 15px',
-  },
-}))
-
 const inputs = ['a', 'b', 'c', 'd']
 
 const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }: CalculatorDialogProps) => {
-  const classes = useStyles({})
   const { formatMessage } = useIntl()
   const [gears, setGears] = useState({ a: 0, b: 0, c: 0, d: 0 }) // eslint-disable-line object-curly-newline
   const [pitch, setPitch] = useState(0)
@@ -83,13 +53,21 @@ const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }: Cal
         <Grid container>
           <Grid
             item
-            className={classes.inputsWrapper}
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-evenly',
+              marginBottom: '10px',
+            }}
             xs={12}
             sm={8}
           >
             { inputs.map((i) => (
               <TextField
-                className={classes.input}
+                sx={{
+                  flexBasis: { sm: '80%', lg: 'calc(50% - 30px)' },
+                  margin: { sm: '10px 0 10px 0', lg: '5px 15px 10px 15px' },
+                }}
                 inputProps={{ step: 1 }}
                 label={formatMessage({ id: `dialogs.calculator.${i}` })}
                 key={i}
@@ -101,7 +79,16 @@ const CalculatorDialog: FC<CalculatorDialogProps> = ({ dialogs: { close } }: Cal
           </Grid>
           <Grid
             item
-            className={classes.displayWrapper}
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              '& > div': {
+                width: '80%',
+                marginTop: '5px',
+                marginBottom: '10px',
+              },
+            }}
             xs={12}
             sm={4}
           >
