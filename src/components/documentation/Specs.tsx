@@ -1,8 +1,6 @@
 import { FC, useMemo } from 'react'
 import { useTable } from 'react-table'
 import { useIntl } from 'react-intl'
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 import Grid from '@mui/material/Grid'
 
 import Table from '@/components/Table/Table'
@@ -10,23 +8,7 @@ import columns from '@/components/documentation/specsTableConfig'
 
 import { SPECS } from '@/constants'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    [theme.breakpoints.up('md')]: { height: '100%' },
-  },
-  controls: {
-    [theme.breakpoints.up('sm')]: { height: '100px' },
-  },
-  table: {
-    [theme.breakpoints.up('sm')]: {
-      height: 'calc(100% - 100px)',
-      overflow: 'auto',
-    },
-  },
-}))
-
 const Specs: FC = () => {
-  const classes = useStyles({})
   const intl = useIntl()
   const data = useMemo(() => SPECS.map((s) => ({
     spec: intl.formatMessage({ id: `specsTable.${s}.spec` }),
@@ -40,7 +22,7 @@ const Specs: FC = () => {
   })
 
   return (
-    <Grid className={classes.container} container>
+    <Grid container sx={{ height: { md: '100%' } }}>
       <Table table={table} />
     </Grid>
   )

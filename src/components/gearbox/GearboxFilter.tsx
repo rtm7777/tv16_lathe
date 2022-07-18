@@ -6,8 +6,6 @@ import {
 } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useIntl } from 'react-intl'
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -22,25 +20,14 @@ import { AppState, ThunkDispatch } from '@/redux/types'
 
 import { FILTERS, INPUTS, SYSTEMS } from '@/constants'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  filter: {
-    display: 'flex',
-    marginLeft: '15px',
-    [theme.breakpoints.up('xs')]: { width: '100%' },
-    [theme.breakpoints.up('sm')]: { width: '150px' },
-    [theme.breakpoints.up('md')]: { width: '200px' },
-  },
-  input: {
-    width: '150px',
-  },
-  group: {
-    flexDirection: 'row',
-    [theme.breakpoints.up('sm')]: { flexDirection: 'column' },
-  },
-}))
+const filterSX = {
+  display: 'flex',
+  marginLeft: '15px',
+  width: { xs: '100%', sm: '150px', md: '200px' },
+}
+const groupSX = { flexDirection: { sm: 'column', lg: 'row' } }
 
 const GearboxFilter: FC = () => {
-  const classes = useStyles({})
   const { formatMessage } = useIntl()
   const dispatch = useDispatch<ThunkDispatch>()
   const { system, approx, unique } = useSelector(({ gearbox }: AppState) => gearbox.filters)
@@ -51,13 +38,13 @@ const GearboxFilter: FC = () => {
 
   return (
     <Grid direction="row" container>
-      <Grid item className={classes.filter}>
+      <Grid item sx={filterSX}>
         <RadioGroup
           aria-label="gender"
-          className={classes.group}
           name="thread"
           onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setFilter(FILTERS.system, e.target.value))}
           value={system}
+          sx={groupSX}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -71,8 +58,8 @@ const GearboxFilter: FC = () => {
           />
         </RadioGroup>
       </Grid>
-      <Grid item className={classes.filter}>
-        <FormGroup aria-label="position" className={classes.group}>
+      <Grid item sx={filterSX}>
+        <FormGroup aria-label="position" sx={groupSX}>
           <FormControlLabel
             value="top"
             control={(
@@ -97,15 +84,15 @@ const GearboxFilter: FC = () => {
           />
         </FormGroup>
       </Grid>
-      <Grid item className={classes.filter}>
+      <Grid item sx={filterSX}>
         <TextField
-          className={classes.input}
           inputProps={inputProps}
           label={`${formatMessage({ id: `filters.system.${system}` })}: ${inputProps.min} ... ${inputProps.max}`}
           margin="normal"
           onChange={(e: ChangeEvent<HTMLInputElement>) => dispatch(setInput(e.target.value))}
           type="number"
           value={inputValue}
+          sx={{ width: '150px' }}
         />
       </Grid>
     </Grid>

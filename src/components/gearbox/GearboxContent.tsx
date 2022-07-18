@@ -2,8 +2,6 @@ import { FC } from 'react'
 import { useSelector } from 'react-redux'
 import { useTable } from 'react-table'
 import { useIntl } from 'react-intl'
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui//material/styles'
 import Grid from '@mui/material/Grid'
 
 import GearboxFilter from '@/components/gearbox/GearboxFilter'
@@ -12,23 +10,8 @@ import Table from '@/components/Table/Table'
 import { AppState } from '@/redux/types'
 import columns from '@/components/gearbox/gearsTableConfig'
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    [theme.breakpoints.up('md')]: { height: '100%' },
-  },
-  controls: {
-    [theme.breakpoints.up('sm')]: { height: '100px' },
-  },
-  table: {
-    [theme.breakpoints.up('sm')]: {
-      height: 'calc(100% - 100px)',
-      overflow: 'auto',
-    },
-  },
-}))
 
 const GearboxContent: FC = () => {
-  const classes = useStyles({})
   const intl = useIntl()
   const { configs } = useSelector(({ gearbox }: AppState) => gearbox)
 
@@ -39,11 +22,17 @@ const GearboxContent: FC = () => {
   })
 
   return (
-    <Grid className={classes.container} container>
-      <Grid className={classes.controls} item xs={12}>
+    <Grid container sx={{ height: { md: '100%' } }}>
+      <Grid item xs={12} sx={{ height: { sm: '100px' } }}>
         <GearboxFilter />
       </Grid>
-      <Grid className={classes.table} item xs={12}>
+      <Grid
+        item xs={12}
+        sx={{
+          height: { sm: 'calc(100% - 100px)' },
+          overflow: { sm: 'auto' },
+        }}
+      >
         <Table table={table} />
       </Grid>
     </Grid>
